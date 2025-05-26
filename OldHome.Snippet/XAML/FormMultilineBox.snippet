@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippet Format="1.0.0" xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+	<Header>
+		<SnippetTypes>
+			<SnippetType>Expansion</SnippetType>
+		</SnippetTypes>
+		<Title>FormMultilineBox</Title>
+		<Shortcut>fmb</Shortcut>
+		<Author>justable</Author>
+		<HelpUrl>
+		</HelpUrl>
+		<Description>添加表单项多行文本框</Description>
+	</Header>
+	<Snippet>
+		<Declarations>
+			<Literal>
+				<ID>RowNum</ID>
+				<ToolTip>表单项所在行号</ToolTip>
+				<Default>1</Default>
+				<Function>
+				</Function>
+			</Literal>
+			<Literal>
+				<ID>BindPath</ID>
+				<ToolTip>绑定路径</ToolTip>
+				<Default>Path</Default>
+				<Function>
+				</Function>
+			</Literal>
+		</Declarations>
+		<Code Language="XAML">
+			<![CDATA[<TextBox
+			Grid.Row="$RowNum$"
+            Grid.Column="1"
+            Style="{StaticResource FormMultilineBox}"
+            Text="{Binding $BindPath$, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}">
+            <i:Interaction.Behaviors>
+                <bhs:ValidationErrorBehavior />
+            </i:Interaction.Behaviors>
+        </TextBox>$end$]]>
+		</Code>
+	</Snippet>
+</CodeSnippet>

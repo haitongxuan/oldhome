@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippet Format="1.0.0" xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+	<Header>
+		<SnippetTypes>
+			<SnippetType>Expansion</SnippetType>
+		</SnippetTypes>
+		<Title>Prism Async Delegate Command</Title>
+		<Shortcut>acmd</Shortcut>
+		<Author>justable</Author>
+		<HelpUrl>
+		</HelpUrl>
+		<Description>Define a async delegate command</Description>
+	</Header>
+	<Snippet>
+		<Declarations>
+			<Literal>
+				<ID>fieldName</ID>
+				<ToolTip>Replace with the field name</ToolTip>
+				<Default>_fieldName</Default>
+				<Function>
+				</Function>
+			</Literal>
+			<Literal>
+				<ID>CommandName</ID>
+				<ToolTip>Replace with the command name</ToolTip>
+				<Default>CommandName</Default>
+				<Function>
+				</Function>
+			</Literal>
+		</Declarations>
+		<Code Language="CSharp">
+			<![CDATA[
+		private AsyncDelegateCommand $fieldName$;
+        public AsyncDelegateCommand $CommandName$ =>
+            $fieldName$ ?? ($fieldName$ = new AsyncDelegateCommand(Execute$CommandName$));
+
+        async Task Execute$CommandName$()
+        {
+
+        }$end$]]>
+		</Code>
+	</Snippet>
+</CodeSnippet>

@@ -1,0 +1,15 @@
+﻿@OldHome.Service_HostAddress = http://localhost:5185
+
+###
+
+GET {{OldHome.Service_HostAddress}}/profile
+
+###
+
+POST {{OldHome.Service_HostAddress}}/register
+
+###
+
+POST {{OldHome.Service_HostAddress}}/login
+
+###

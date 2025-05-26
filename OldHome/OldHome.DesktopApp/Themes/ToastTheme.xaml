@@ -1,0 +1,50 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:pu="https://opensource.panuon.com/wpf-ui">
+
+    <pu:ToastSettings x:Key="informationToast" Spacing="25">
+        <pu:ToastSettings.LabelStyle>
+            <Style BasedOn="{StaticResource {x:Static pu:Toast.LabelStyleKey}}" TargetType="Label">
+                <Setter Property="Background" Value="#80BEE8" />
+                <Setter Property="Foreground" Value="#FFFFFF" />
+                <Setter Property="pu:LabelHelper.CornerRadius" Value="15" />
+                <Setter Property="pu:LabelHelper.ShadowColor" Value="#80BEE8" />
+                <Setter Property="pu:ShadowHelper.Opacity" Value="0.5" />
+            </Style>
+        </pu:ToastSettings.LabelStyle>
+    </pu:ToastSettings>
+    <pu:ToastSettings x:Key="errorToast" Spacing="25">
+        <pu:ToastSettings.LabelStyle>
+            <Style BasedOn="{StaticResource {x:Static pu:Toast.LabelStyleKey}}" TargetType="Label">
+                <Setter Property="Background" Value="#FF476D" />
+                <Setter Property="Foreground" Value="#fff" />
+                <Setter Property="pu:LabelHelper.CornerRadius" Value="15" />
+                <Setter Property="pu:LabelHelper.ShadowColor" Value="#FF476D" />
+                <Setter Property="pu:ShadowHelper.Opacity" Value="0.5" />
+            </Style>
+        </pu:ToastSettings.LabelStyle>
+    </pu:ToastSettings>
+    <pu:ToastSettings x:Key="successToast" Spacing="25">
+        <pu:ToastSettings.LabelStyle>
+            <Style BasedOn="{StaticResource {x:Static pu:Toast.LabelStyleKey}}" TargetType="Label">
+                <Setter Property="Background" Value="#10FF84" />
+                <Setter Property="Foreground" Value="#fff" />
+                <Setter Property="pu:LabelHelper.CornerRadius" Value="15" />
+                <Setter Property="pu:LabelHelper.ShadowColor" Value="#10FF84" />
+                <Setter Property="pu:ShadowHelper.Opacity" Value="0.5" />
+            </Style>
+        </pu:ToastSettings.LabelStyle>
+    </pu:ToastSettings>
+    <pu:ToastSettings x:Key="warnToast" Spacing="25">
+        <pu:ToastSettings.LabelStyle>
+            <Style BasedOn="{StaticResource {x:Static pu:Toast.LabelStyleKey}}" TargetType="Label">
+                <Setter Property="Background" Value="#FFBB19" />
+                <Setter Property="Foreground" Value="#fff" />
+                <Setter Property="pu:LabelHelper.CornerRadius" Value="15" />
+                <Setter Property="pu:LabelHelper.ShadowColor" Value="#FFBB19" />
+                <Setter Property="pu:ShadowHelper.Opacity" Value="0.5" />
+            </Style>
+        </pu:ToastSettings.LabelStyle>
+    </pu:ToastSettings>
+</ResourceDictionary>

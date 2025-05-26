@@ -1,0 +1,17 @@
+﻿<prism:PrismApplication
+    x:Class="OldHome.DesktopApp.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:OldHome.DesktopApp"
+    xmlns:prism="http://prismlibrary.com/"
+    xmlns:pu="https://opensource.panuon.com/wpf-ui">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <pu:StyleDictionary Includes="All" />
+                <ResourceDictionary Source="Themes/DefaultTheme.xaml" />
+                <ResourceDictionary Source="Themes/ToastTheme.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+</prism:PrismApplication>

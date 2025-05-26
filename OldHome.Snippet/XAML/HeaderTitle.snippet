@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippet Format="1.0.0" xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+	<Header>
+		<SnippetTypes>
+			<SnippetType>Expansion</SnippetType>
+		</SnippetTypes>
+		<Title>Header</Title>
+		<Shortcut>hdt</Shortcut>
+		<Author>justable</Author>
+		<HelpUrl>
+		</HelpUrl>
+		<Description>添加表单项标题</Description>
+	</Header>
+	<Snippet>
+		<Declarations>
+			<Literal>
+				<ID>RowNum</ID>
+				<ToolTip>表单项所在行号</ToolTip>
+				<Default>1</Default>
+				<Function>
+				</Function>
+			</Literal>
+			<Literal>
+				<ID>Title</ID>
+				<ToolTip>标题</ToolTip>
+				<Default>Title</Default>
+				<Function>
+				</Function>
+			</Literal>
+		</Declarations>
+		<Code Language="XAML">
+			<![CDATA[<TextBlock Grid.Row="$RowNum$" Style="{StaticResource Header}" Text="$Title$" />$end$]]>
+		</Code>
+	</Snippet>
+</CodeSnippet>

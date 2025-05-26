@@ -1,0 +1,259 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup />
+  <ItemGroup>
+    <ApplicationDefinition Update="App.xaml">
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Components\MedicineSearchBox.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Login.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="ViewModels\BedFormViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="ViewModels\BedFormViewModelValidator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="ViewModels\BedPagedListViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="ViewModels\DepartmentFormViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="ViewModels\DepartmentFormViewModelValidator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="ViewModels\DepartmentListViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="ViewModels\EmergencyContactFormViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="ViewModels\EmergencyContactFormViewModelValidator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="ViewModels\EmergencyContactPagedListViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="ViewModels\MedicineFormViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="ViewModels\MedicineFormViewModelValidator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="ViewModels\MedicineInventoryFormViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="ViewModels\MedicineInventoryFormViewModelValidator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="ViewModels\MedicineInventoryPagedListViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="ViewModels\MedicinePagedListViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="ViewModels\OrgAreaFormViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="ViewModels\OrgAreaFormViewModelValidator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="ViewModels\OrgAreaListViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="ViewModels\ResidentFormViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="ViewModels\ResidentFormViewModelValidator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="ViewModels\ResidentPagedListViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="ViewModels\RoomFormViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="ViewModels\RoomFormViewModelValidator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="ViewModels\RoomPagedListViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="ViewModels\StaffFormViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="ViewModels\StaffFormViewModelValidator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="ViewModels\StaffPagedListViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\BedForm.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\BedPagedList.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\DepartmentForm.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\DepartmentList.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\EmergencyContactForm.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\EmergencyContactPagedList.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\FormOrg.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\FormRole.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\FormUser.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\MedicineForm.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\MedicineInventoryForm.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\MedicineInventoryPagedList.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\MedicinePagedList.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\OrgAreaForm.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\OrgAreaList.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\ResidentForm.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\ResidentPagedList.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\RoomForm.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\RoomPagedList.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\SettingOrgs.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\SettingRoles.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\SettingUsers.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\StaffForm.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\StaffPagedList.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Components\MedicineSearchBox.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Login.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="MainWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Themes\DefaultTheme.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Themes\ToastTheme.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\BedForm.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\BedPagedList.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\DepartmentForm.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\DepartmentList.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\EmergencyContactForm.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\EmergencyContactPagedList.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\FormOrg.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\FormRole.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\FormUser.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\MedicineForm.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\MedicineInventoryForm.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\MedicineInventoryPagedList.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\MedicinePagedList.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\OrgAreaForm.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\OrgAreaList.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\ResidentForm.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\ResidentPagedList.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\RoomForm.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\RoomPagedList.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\SettingOrgs.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\SettingRoles.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\SettingUsers.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\StaffForm.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\StaffPagedList.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+</Project>

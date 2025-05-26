@@ -1,0 +1,245 @@
+﻿<local:BaseUserControl
+    x:Class="OldHome.DesktopApp.Views.ResidentForm"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:bhs="clr-namespace:OldHome.DesktopApp.Behaviors"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+    xmlns:local="clr-namespace:OldHome.DesktopApp.Views"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:pu="https://opensource.panuon.com/wpf-ui"
+    xmlns:w="clr-namespace:OldHome.DesktopApp.Converters"
+    d:Background="White"
+    d:DesignHeight="800"
+    d:DesignWidth="400"
+    Validation.ErrorTemplate="{x:Null}"
+    mc:Ignorable="d">
+    <ScrollViewer>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="140" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <!--#region 添加表单数据项-->
+            <TextBlock Style="{StaticResource Header}" Text="长者姓名:" />
+            <TextBox
+                Grid.Column="1"
+                d:Text="111"
+                Style="{StaticResource FormBox}"
+                Text="{Binding Name, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}">
+                <i:Interaction.Behaviors>
+                    <bhs:ValidationErrorBehavior />
+                </i:Interaction.Behaviors>
+            </TextBox>
+            <TextBlock
+                Grid.Row="1"
+                Style="{StaticResource Header}"
+                Text="性别" />
+            <ComboBox
+                Grid.Row="1"
+                Grid.Column="1"
+                VerticalAlignment="Bottom"
+                ItemsSource="{Binding AllGenders}"
+                SelectedValue="{Binding SelectedGender, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}"
+                Style="{StaticResource FormEnumComboBox}">
+                <i:Interaction.Behaviors>
+                    <bhs:ValidationErrorBehavior />
+                </i:Interaction.Behaviors>
+            </ComboBox>
+            <TextBlock
+                Grid.Row="2"
+                Style="{StaticResource Header}"
+                Text="生日" />
+            <pu:DateTimePicker
+                Grid.Row="2"
+                Grid.Column="1"
+                Width="150"
+                Height="26"
+                SelectedDateTime="{Binding BirthDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                Style="{StaticResource FormDatePicker}" />
+            <TextBlock
+                Grid.Row="3"
+                Style="{StaticResource Header}"
+                Text="身份证号码" />
+            <TextBox
+                Grid.Row="3"
+                Grid.Column="1"
+                Style="{StaticResource FormBox}"
+                Text="{Binding IdCardNumber, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}">
+                <i:Interaction.Behaviors>
+                    <bhs:ValidationErrorBehavior />
+                </i:Interaction.Behaviors>
+            </TextBox>
+            <TextBlock
+                Grid.Row="4"
+                Style="{StaticResource Header}"
+                Text="电话号码" />
+            <TextBox
+                Grid.Row="4"
+                Grid.Column="1"
+                Style="{StaticResource FormBox}"
+                Text="{Binding PhoneNumber, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}">
+                <i:Interaction.Behaviors>
+                    <bhs:ValidationErrorBehavior />
+                </i:Interaction.Behaviors>
+            </TextBox>
+            <TextBlock
+                Grid.Row="5"
+                Style="{StaticResource Header}"
+                Text="居住地址" />
+            <TextBox
+                Grid.Row="5"
+                Grid.Column="1"
+                Style="{StaticResource FormMultilineBox}"
+                Text="{Binding Address, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}">
+                <i:Interaction.Behaviors>
+                    <bhs:ValidationErrorBehavior />
+                </i:Interaction.Behaviors>
+            </TextBox>
+            <TextBlock
+                Grid.Row="6"
+                Style="{StaticResource Header}"
+                Text="入院日期" />
+            <pu:DateTimePicker
+                Grid.Row="6"
+                Grid.Column="1"
+                Width="150"
+                Height="26"
+                SelectedDateTime="{Binding AdmissionDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                Style="{StaticResource FormDatePicker}" />
+            <TextBlock
+                Grid.Row="7"
+                Style="{StaticResource Header}"
+                Text="区域" />
+            <ComboBox
+                Grid.Row="7"
+                Grid.Column="1"
+                VerticalAlignment="Bottom"
+                DisplayMemberPath="OrgAreaName"
+                ItemsSource="{Binding AllOrgAreas}"
+                SelectedValue="{Binding SelectedOrgAreaId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}"
+                SelectedValuePath="Id"
+                Style="{StaticResource FormComboBox}">
+                <i:Interaction.Behaviors>
+                    <bhs:ValidationErrorBehavior />
+                </i:Interaction.Behaviors>
+            </ComboBox>
+            <TextBlock
+                Grid.Row="8"
+                Style="{StaticResource Header}"
+                Text="楼层" />
+            <ComboBox
+                Grid.Row="8"
+                Grid.Column="1"
+                VerticalAlignment="Bottom"
+                ItemsSource="{Binding AllFloors}"
+                SelectedValue="{Binding SelectedFloor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}"
+                Style="{StaticResource FormComboBox}">
+                <i:Interaction.Behaviors>
+                    <bhs:ValidationErrorBehavior />
+                </i:Interaction.Behaviors>
+            </ComboBox>
+            <TextBlock
+                Grid.Row="9"
+                Style="{StaticResource Header}"
+                Text="房间" />
+            <ComboBox
+                Grid.Row="9"
+                Grid.Column="1"
+                VerticalAlignment="Bottom"
+                DisplayMemberPath="RoomName"
+                ItemsSource="{Binding Rooms}"
+                SelectedValue="{Binding SelectedRoomId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}"
+                SelectedValuePath="Id"
+                Style="{StaticResource FormComboBox}">
+                <i:Interaction.Behaviors>
+                    <bhs:ValidationErrorBehavior />
+                </i:Interaction.Behaviors>
+            </ComboBox>
+            <TextBlock
+                Grid.Row="10"
+                Style="{StaticResource Header}"
+                Text="床位" />
+            <ComboBox
+                Grid.Row="10"
+                Grid.Column="1"
+                VerticalAlignment="Bottom"
+                DisplayMemberPath="BedNum"
+                ItemsSource="{Binding Beds}"
+                SelectedValue="{Binding SelectedBedId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}"
+                SelectedValuePath="Id"
+                Style="{StaticResource FormComboBox}">
+                <i:Interaction.Behaviors>
+                    <bhs:ValidationErrorBehavior />
+                </i:Interaction.Behaviors>
+            </ComboBox>
+            <TextBlock
+                Grid.Row="11"
+                Style="{StaticResource Header}"
+                Text="健康状态" />
+            <ComboBox
+                Grid.Row="11"
+                Grid.Column="1"
+                VerticalAlignment="Bottom"
+                ItemsSource="{Binding AllHealthStatuses}"
+                SelectedValue="{Binding HealthStatus, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}"
+                Style="{StaticResource FormEnumComboBox}">
+                <i:Interaction.Behaviors>
+                    <bhs:ValidationErrorBehavior />
+                </i:Interaction.Behaviors>
+            </ComboBox>
+            <TextBlock
+                Grid.Row="12"
+                Style="{StaticResource Header}"
+                Text="备注" />
+            <TextBox
+                Grid.Row="12"
+                Grid.Column="1"
+                Style="{StaticResource FormMultilineBox}"
+                Text="{Binding HealthDescription, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}">
+                <i:Interaction.Behaviors>
+                    <bhs:ValidationErrorBehavior />
+                </i:Interaction.Behaviors>
+            </TextBox>
+            <TextBlock
+                Grid.Row="14"
+                Style="{StaticResource Header}"
+                Text="创建时间:" />
+            <TextBox
+                Grid.Row="14"
+                Grid.Column="1"
+                Style="{StaticResource ReadonlyBox}"
+                Text="{Binding CreateAt}" />
+            <!--#endregion-->
+            <StackPanel
+                Grid.Row="15"
+                Grid.Column="1"
+                Style="{StaticResource FormButtonPanel}">
+                <Button Command="{Binding SaveCommand}" Style="{StaticResource SaveButton}" />
+                <Button Command="{Binding ClearCommand}" Style="{StaticResource ClearButton}" />
+            </StackPanel>
+            <Grid Grid.Row="16" Grid.ColumnSpan="2">
+                <DataGrid ItemsSource="{Binding Contacts}" />
+            </Grid>
+        </Grid>
+    </ScrollViewer>
+</local:BaseUserControl>

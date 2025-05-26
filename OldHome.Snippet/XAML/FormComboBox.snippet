@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippet Format="1.0.0" xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+	<Header>
+		<SnippetTypes>
+			<SnippetType>Expansion</SnippetType>
+		</SnippetTypes>
+		<Title>FormComboBox</Title>
+		<Shortcut>fcb</Shortcut>
+		<Author>justable</Author>
+		<HelpUrl>
+		</HelpUrl>
+		<Description>添加表单项文本框</Description>
+	</Header>
+	<Snippet>
+		<Declarations>
+			<Literal>
+				<ID>RowNum</ID>
+				<ToolTip>表单项所在行号</ToolTip>
+				<Default>1</Default>
+				<Function>
+				</Function>
+			</Literal>
+			<Literal>
+				<ID>BindPath</ID>
+				<ToolTip>绑定路径</ToolTip>
+				<Default>Path</Default>
+				<Function>
+				</Function>
+			</Literal>
+			<Literal>
+				<ID>DisplayPath</ID>
+				<ToolTip>显示成员路径</ToolTip>
+				<Default>DisplayPath</Default>
+				<Function>
+				</Function>
+			</Literal>
+			<Literal>
+				<ID>BindItems</ID>
+				<ToolTip>绑定项目组</ToolTip>
+				<Default>BindItems</Default>
+				<Function>
+				</Function>
+			</Literal>
+			<Literal>
+				<ID>ValuePath</ID>
+				<ToolTip>选择值路径</ToolTip>
+				<Default>ValuePath</Default>
+				<Function>
+				</Function>
+			</Literal>
+		</Declarations>
+		<Code Language="XAML">
+			<![CDATA[<ComboBox
+            Grid.Row="$RowNum$"
+            Grid.Column="1"
+            VerticalAlignment="Bottom"
+            DisplayMemberPath="$DisplayPath$"
+            ItemsSource="{Binding $BindItems$}"
+            SelectedValue="{Binding $BindPath$, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}"
+            SelectedValuePath="$ValuePath$"
+            Style="{StaticResource FormComboBox}">
+            <i:Interaction.Behaviors>
+                <bhs:ValidationErrorBehavior />
+            </i:Interaction.Behaviors>
+        </ComboBox>$end$]]>
+		</Code>
+	</Snippet>
+</CodeSnippet>

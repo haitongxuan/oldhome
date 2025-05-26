@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippet Format="1.0.0" xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+	<Header>
+		<SnippetTypes>
+			<SnippetType>Expansion</SnippetType>
+		</SnippetTypes>
+		<Title>API Code Block</Title>
+		<Shortcut>acb</Shortcut>
+		<Author>justable</Author>
+		<HelpUrl>
+		</HelpUrl>
+		<Description>Define functions for entity</Description>
+	</Header>
+	<Snippet>
+		<Declarations>
+			<Literal>
+				<ID>EntityName</ID>
+				<ToolTip>Replace with the entity name</ToolTip>
+				<Default>EntityName</Default>
+				<Function>
+				</Function>
+			</Literal>
+			<Literal>
+				<ID>UrlHeader</ID>
+				<ToolTip>Replace with the urlheader</ToolTip>
+				<Default>UrlHeader</Default>
+				<Function>
+				</Function>
+			</Literal>
+		</Declarations>
+		<Code Language="CSharp">
+			<![CDATA[
+		public async Task<BaseResponse<PagedResult<$EntityName$Dto>>> GetPaged$EntityName$s(int pageIndex, int pageSize, string name = "")
+        {
+            var urlBuilder = new StringBuilder("$UrlHeader$/paged?pageIndex="+pageIndex+"&pageSize="+pageSize);
+            if (!string.IsNullOrEmpty(name))
+            {
+                urlBuilder.Append("&Name_like="+name);
+            }
+            var response = await _apiClient.GetAsync<PagedResult<$EntityName$Dto>>(urlBuilder.ToString());
+            return response;
+        }
+		
+		
+        public async Task<BaseResponse<List<$EntityName$Dto>>> GetAll$EntityName$s()
+        {
+            var response = await _apiClient.GetAsync<List<$EntityName$Dto>>("$UrlHeader$");
+            return response;
+        }
+
+        public async Task<BaseResponse<$EntityName$Dto>> Create$EntityName$($EntityName$Create create)
+        {
+            var response = await _apiClient.PostAsync<$EntityName$Create, $EntityName$Dto>("$UrlHeader$/create", create);
+            return response;
+        }
+
+        public async Task<BaseResponse> Modify$EntityName$($EntityName$Modify modify)
+        {
+            var response = await _apiClient.PostAsync("$UrlHeader$/modify", modify);
+            return response;
+        }
+
+        public async Task<BaseResponse<List<$EntityName$Sample>>> GetAll$EntityName$Samples()
+        {
+            var response = await _apiClient.GetAsync<List<$EntityName$Sample>>("$UrlHeader$/samples");
+            return response;
+        }
+
+        public async Task<BaseResponse<List<$EntityName$Sample>>> GetTop10$EntityName$Samples(string name)
+        {
+            var urlBuilder = new StringBuilder("$UrlHeader$/top10samples");
+            if (!string.IsNullOrEmpty(name))
+            {
+                urlBuilder.Append("&Name_like="+name);
+            }
+            var response = await _apiClient.GetAsync<List<$EntityName$Sample>>(urlBuilder.ToString());
+            return response;
+        }
+
+        public async Task<BaseResponse> Delete$EntityName$(int id)
+        {
+            var response = await _apiClient.GetAsync("$UrlHeader$/delete?id="+id);
+            return response;
+        }
+		$end$]]>
+		</Code>
+	</Snippet>
+</CodeSnippet>

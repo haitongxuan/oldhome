@@ -1,0 +1,19 @@
+<VSTemplate Version="3.0.0" Type="Item" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005">
+	<TemplateData>
+		<Name>OldHomePagedList</Name>
+		<Description>分页列表视图</Description>
+		<ProjectType>CSharp</ProjectType>
+		<DefaultName>NewFunction</DefaultName>
+		<ProvideDefaultName>true</ProvideDefaultName>
+		<SortOrder>10</SortOrder>
+	</TemplateData>
+	<TemplateContent>
+		<ProjectItem TargetFileName="\Views\$fileinputname$PagedList.xaml" SubType="Designer" ReplaceParameters="true">NewFunctionPagedList.xaml</ProjectItem>
+		<ProjectItem TargetFileName="\Views\$fileinputname$PagedList.xaml.cs" SubType="Code" ReplaceParameters="true">NewFunctionPagedList.xaml.cs</ProjectItem>
+		<ProjectItem TargetFileName="\Views\$fileinputname$Form.xaml" SubType="Designer" ReplaceParameters="true">NewFunctionForm.xaml</ProjectItem>
+		<ProjectItem TargetFileName="\Views\$fileinputname$Form.xaml.cs" SubType="Code" ReplaceParameters="true">NewFunctionForm.xaml.cs</ProjectItem>
+		<ProjectItem TargetFileName="\ViewModels\$fileinputname$PagedListViewModel.cs" SubType="Code" ReplaceParameters="true">NewFunctionPagedListViewModel.cs</ProjectItem>
+		<ProjectItem TargetFileName="\ViewModels\$fileinputname$FormViewModel.cs" SubType="Code" ReplaceParameters="true">NewFunctionFormViewModel.cs</ProjectItem>
+		<ProjectItem TargetFileName="\ViewModels\$fileinputname$FormViewModelValidator.cs" SubType="Code" ReplaceParameters="true">NewFunctionFormViewModelValidator.cs</ProjectItem>
+	</TemplateContent>
+</VSTemplate>

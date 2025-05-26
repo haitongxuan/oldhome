@@ -1,0 +1,189 @@
+﻿<local:BaseUserControl
+    x:Class="OldHome.DesktopApp.Views.MedicineInventoryForm"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:acb="http://wpfcontrols.com/"
+    xmlns:bhs="clr-namespace:OldHome.DesktopApp.Behaviors"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+    xmlns:local="clr-namespace:OldHome.DesktopApp.Views"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:prs="clr-namespace:OldHome.DesktopApp.Providers"
+    xmlns:pu="https://opensource.panuon.com/wpf-ui"
+    xmlns:w="clr-namespace:OldHome.DesktopApp.Converters"
+    d:Background="White"
+    d:DesignHeight="800"
+    d:DesignWidth="400"
+    Validation.ErrorTemplate="{x:Null}"
+    mc:Ignorable="d">
+    <UserControl.Resources>
+        <TextBlock
+            x:Key="LoadingContent"
+            Margin="5"
+            FontSize="14"
+            Text="Loading..." />
+        <prs:MedicineProvider x:Key="MedicineProvider" AllowEmptyFilter="True" />
+        <prs:ResidentProvider x:Key="ResidentProvider" AllowEmptyFilter="False" />
+    </UserControl.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="140" />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <!--#region 添加表单数据项-->
+        <TextBlock Style="{StaticResource Header}" Text="批次号:" />
+        <TextBox
+            Grid.Column="1"
+            d:Text="111"
+            Style="{StaticResource FormBox}"
+            Text="{Binding BatchNumber, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}">
+            <i:Interaction.Behaviors>
+                <bhs:ValidationErrorBehavior />
+            </i:Interaction.Behaviors>
+        </TextBox>
+        <TextBlock
+            Grid.Row="1"
+            Style="{StaticResource Header}"
+            Text="药品" />
+
+        <acb:AutoCompleteTextBox
+            Grid.Row="1"
+            Grid.Column="1"
+            DisplayMember="FullName"
+            ItemTemplate="{StaticResource MedicineItemTemplate}"
+            MaxLength="20"
+            Provider="{StaticResource MedicineProvider}"
+            SelectedItem="{Binding SelectedMedicine, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}">
+            <acb:AutoCompleteTextBox.Style>
+                <Style BasedOn="{StaticResource PanuonLargerAutoCompleteTextBox}" TargetType="acb:AutoCompleteTextBox">
+                    <Setter Property="IsEnabled" Value="True" />
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding State, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Value="View">
+                            <Setter Property="IsEnabled" Value="False" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </acb:AutoCompleteTextBox.Style>
+            <i:Interaction.Behaviors>
+                <bhs:ValidationErrorBehavior />
+            </i:Interaction.Behaviors>
+        </acb:AutoCompleteTextBox>
+        <TextBlock
+            Grid.Row="2"
+            Style="{StaticResource Header}"
+            Text="长者" />
+
+        <acb:AutoCompleteTextBox
+            Grid.Row="2"
+            Grid.Column="1"
+            DisplayMember="Name"
+            ItemTemplate="{StaticResource ResidentItemTemplate}"
+            MaxLength="20"
+            Provider="{StaticResource ResidentProvider}"
+            SelectedItem="{Binding SelectedResident, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}"
+            Style="{StaticResource PanuonNormalAutoCompleteTextBox}">
+            <i:Interaction.Behaviors>
+                <bhs:ValidationErrorBehavior />
+            </i:Interaction.Behaviors>
+        </acb:AutoCompleteTextBox>
+        <TextBlock
+            Grid.Row="3"
+            Style="{StaticResource Header}"
+            Text="有效期" />
+        <pu:DateTimePicker
+            Grid.Row="3"
+            Grid.Column="1"
+            SelectedDateTime="{Binding ExpirationDate, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}"
+            Style="{StaticResource FormDatePicker}">
+            <i:Interaction.Behaviors>
+                <bhs:ValidationErrorBehavior />
+            </i:Interaction.Behaviors>
+        </pu:DateTimePicker>
+        <TextBlock
+            Grid.Row="4"
+            Style="{StaticResource Header}"
+            Text="入库包装数量" />
+        <pu:NumberInput
+            Grid.Row="4"
+            Grid.Column="1"
+            Style="{StaticResource FormNumberInput}"
+            Value="{Binding PackageCount, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}">
+            <i:Interaction.Behaviors>
+                <bhs:ValidationErrorBehavior />
+            </i:Interaction.Behaviors>
+        </pu:NumberInput>
+        <TextBlock
+            Grid.Row="5"
+            Style="{StaticResource Header}"
+            Text="入库数量" />
+        <pu:NumberInput
+            Grid.Row="5"
+            Grid.Column="1"
+            Style="{StaticResource FormNumberInput}"
+            Value="{Binding QtyTotal, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}">
+            <i:Interaction.Behaviors>
+                <bhs:ValidationErrorBehavior />
+            </i:Interaction.Behaviors>
+        </pu:NumberInput>
+        <TextBlock
+            Grid.Row="6"
+            Style="{StaticResource Header}"
+            Text="剩余数量" />
+        <pu:NumberInput
+            Grid.Row="6"
+            Grid.Column="1"
+            Style="{StaticResource FormNumberInput}"
+            Value="{Binding QtyRemaining, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}">
+            <i:Interaction.Behaviors>
+                <bhs:ValidationErrorBehavior />
+            </i:Interaction.Behaviors>
+        </pu:NumberInput>
+        <TextBlock
+            Grid.Row="7"
+            Style="{StaticResource Header}"
+            Text="状态" />
+        <ComboBox
+            Grid.Row="7"
+            Grid.Column="1"
+            Width="120"
+            VerticalAlignment="Bottom"
+            ItemsSource="{Binding AllStatuses}"
+            SelectedValue="{Binding SelectedStatus, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}"
+            Style="{StaticResource FormEnumComboBox}">
+            <i:Interaction.Behaviors>
+                <bhs:ValidationErrorBehavior />
+            </i:Interaction.Behaviors>
+        </ComboBox>
+        <TextBlock
+            Grid.Row="9"
+            Style="{StaticResource Header}"
+            Text="创建时间:" />
+        <TextBox
+            Grid.Row="9"
+            Grid.Column="1"
+            Style="{StaticResource ReadonlyBox}"
+            Text="{Binding CreatedAt}" />
+        <!--#endregion-->
+        <StackPanel
+            Grid.Row="10"
+            Grid.Column="1"
+            Style="{StaticResource FormButtonPanel}">
+            <Button Command="{Binding SaveCommand}" Style="{StaticResource SaveButton}" />
+            <Button Command="{Binding ClearCommand}" Style="{StaticResource ClearButton}" />
+        </StackPanel>
+    </Grid>
+</local:BaseUserControl>
