@@ -40,6 +40,15 @@
     <Compile Update="ViewModels\EmergencyContactPagedListViewModel.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="ViewModels\MedicationPrescriptionFormViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="ViewModels\MedicationPrescriptionFormViewModelValidator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="ViewModels\MediciationPrescriptionPagedListViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="ViewModels\MedicineFormViewModel.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -121,6 +130,12 @@
     <Compile Update="Views\FormUser.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\MedicationPrescriptionForm.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\MedicationPrescriptionPagedList.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\MedicineForm.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -164,6 +179,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\StaffPagedList.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Windows\MedicationPrescriptionItemWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>

@@ -488,6 +488,7 @@
                                     Visibility="Collapsed" />
                                 <TextBox
                                     x:Name="PART_Editor"
+                                    Margin="5,5,0,0"
                                     Padding="0"
                                     HorizontalAlignment="Left"
                                     VerticalAlignment="Center"

@@ -1,0 +1,83 @@
+<#@ template debug="false" hostspecific="true" language="C#" #>
+<#@ include file="EntityAnalyzer.tt" #>
+<#@ output extension=".cs" #>
+<#
+    // 直接在这里指定要生成的实体文件路径
+    var entityPath = "Resident.cs"; // 修改这里的文件名
+    var entity = ParseEntity(entityPath);
+    var entityName = entity.Name;
+    var dtoNamespace = entity.Namespace.Replace(".Entities", ".DTO");
+#>
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using OldHome.Core;
+using OldHome.DTO.Base;
+
+namespace <#= dtoNamespace #>
+{
+    public class <#= entityName #>Dto : <#= GetBaseDtoClass(entity) #>
+    {
+<# foreach(var prop in entity.Properties.Where(p => p.ShouldIncludeInDto)) { #>
+        public <#= GetDtoTypeName(entityName, prop) #> <#= prop.Name #> { get; set; }<#= GetDefaultValue(prop, true) #>
+<# if(IsNavigationIdProperty(prop)) { #>
+        public string <#= GetNavigationPropertyName(prop) #> { get; set; } = string.Empty;
+<# } #>
+<# } #>
+    }
+
+    public class <#= entityName #>Create : <#= GetBaseDtoClass(entity) #>
+    {
+<# foreach(var prop in entity.Properties.Where(p => p.ShouldIncludeInCreate)) { #>
+        public <#= prop.RawType #> <#= prop.Name #> { get; set; }<#= GetDefaultValue(prop, false) #>
+<# } #>
+    }
+
+    public class <#= entityName #>Modify : <#= GetBaseDtoClass(entity) #>
+    {
+<# foreach(var prop in entity.Properties.Where(p => p.ShouldIncludeInModify)) { #>
+        public <#= prop.RawType #> <#= prop.Name #> { get; set; }<#= GetDefaultValue(prop, false) #>
+<# } #>
+    }
+
+    public class <#= entityName #>Sample : <#= GetBaseDtoClass(entity) #>
+    {
+<# foreach(var prop in entity.Properties.Where(p => p.ShouldIncludeInSample)) { #>
+        public <#= prop.RawType #> <#= prop.Name #> { get; set; }<#= GetDefaultValue(prop, false) #>
+<# } #>
+    }
+}
+
+<#+
+private string GetBaseDtoClass(EntityInfo entity)
+{
+    if (entity.HasOrgBy)
+        return "BaseOrgByDto";
+    if (entity.HasBaseEntity)
+        return "BaseDto";
+    return "object";
+}
+
+private string GetDefaultValue(PropertyInfo prop, bool isDto)
+{
+    if (string.IsNullOrEmpty(prop.DefaultValue))
+        return "";
+    return $" = {prop.DefaultValue}";
+}
+
+private bool IsNavigationIdProperty(PropertyInfo prop)
+{
+    return prop.Name.EndsWith("Id") && 
+           !prop.Name.Equals("Id", StringComparison.OrdinalIgnoreCase);
+}
+
+private string GetNavigationPropertyName(PropertyInfo prop)
+{
+    if (prop.Name.EndsWith("Id"))
+    {
+        var baseName = prop.Name.Substring(0, prop.Name.Length - 2);
+        return baseName + "Name";
+    }
+    return prop.Name + "Name";
+}
+#>

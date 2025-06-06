@@ -68,6 +68,11 @@ namespace OldHome.DesktopApp.ViewModels
             set
             {
                 SetProperty(ref _packageCount, value);
+                if (SelectedMedicine != null && value.HasValue)
+                {
+                    QtyTotal = value * SelectedMedicine.QtyPerPackage;
+                    QtyRemaining = value * SelectedMedicine.QtyPerPackage;
+                }
                 ValidateProperty(nameof(PackageCount));
             }
         }
@@ -115,6 +120,7 @@ namespace OldHome.DesktopApp.ViewModels
 
         public override async Task LoadDataAsync()
         {
+            AllStatuses.Clear();
             foreach (MedicineInventoryStatus item in Enum.GetValues(typeof(MedicineInventoryStatus)))
             {
                 AllStatuses.Add(item);

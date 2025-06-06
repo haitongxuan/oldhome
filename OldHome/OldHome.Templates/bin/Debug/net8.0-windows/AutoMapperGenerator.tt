@@ -1,0 +1,79 @@
+﻿<#@ template debug="false" hostspecific="true" language="C#" #>
+<#@ include file="EntityAnalyzer.tt" #>
+<#@ parameter name="EntityPath" type="System.String" #>
+<#@ output extension=".cs" #>
+<#
+    var entity = ParseEntity(EntityPath);
+    var entityName = entity.Name;
+#>
+using AutoMapper;
+using OldHome.Entities;
+using OldHome.DTO;
+
+namespace OldHome.Application.Mappings
+{
+    /// <summary>
+    /// <#= entityName #> AutoMapper 配置
+    /// 自动生成于 <#= DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") #>
+    /// </summary>
+    public class <#= entityName #>MappingProfile : Profile
+    {
+        public <#= entityName #>MappingProfile()
+        {
+            // Entity -> Dto
+            CreateMap<<#= entityName #>, <#= entityName #>Dto>()
+<# foreach(var prop in entity.Properties.Where(p => IsNavigationProperty(p))) { #>
+                .ForMember(dest => dest.<#= GetNavigationPropertyName(prop) #>, 
+                          opt => opt.MapFrom(src => src.<#= prop.Name.Substring(0, prop.Name.Length - 2) #> != null ? src.<#= prop.Name.Substring(0, prop.Name.Length - 2) #>.Name : ""))
+<# } #>
+                ;
+
+            // Create -> Entity
+            CreateMap<<#= entityName #>Create, <#= entityName #>>()
+                .ForMember(dest => dest.Id, opt => opt.Ignore())
+<# if(entity.HasBaseEntity) { #>
+                .ForMember(dest => dest.CreatedAt, opt => opt.Ignore())
+                .ForMember(dest => dest.CreatedBy, opt => opt.Ignore())
+                .ForMember(dest => dest.UpdatedAt, opt => opt.Ignore())
+                .ForMember(dest => dest.UpdatedBy, opt => opt.Ignore())
+                .ForMember(dest => dest.IsDeleted, opt => opt.Ignore())
+<# } #>
+<# foreach(var prop in entity.Properties.Where(p => p.IsNavigation && !p.Name.EndsWith("Id"))) { #>
+                .ForMember(dest => dest.<#= prop.Name #>, opt => opt.Ignore())
+<# } #>
+                ;
+
+            // Modify -> Entity
+            CreateMap<<#= entityName #>Modify, <#= entityName #>>()
+<# if(entity.HasBaseEntity) { #>
+                .ForMember(dest => dest.CreatedAt, opt => opt.Ignore())
+                .ForMember(dest => dest.CreatedBy, opt => opt.Ignore())
+<# } #>
+<# foreach(var prop in entity.Properties.Where(p => p.IsNavigation && !p.Name.EndsWith("Id"))) { #>
+                .ForMember(dest => dest.<#= prop.Name #>, opt => opt.Ignore())
+<# } #>
+                ;
+
+            // Entity -> Sample
+            CreateMap<<#= entityName #>, <#= entityName #>Sample>();
+        }
+    }
+}
+
+<#+
+private bool IsNavigationProperty(PropertyInfo prop)
+{
+    return prop.Name.EndsWith("Id") && 
+           !prop.Name.Equals("Id", StringComparison.OrdinalIgnoreCase);
+}
+
+private string GetNavigationPropertyName(PropertyInfo prop)
+{
+    if (prop.Name.EndsWith("Id"))
+    {
+        var baseName = prop.Name.Substring(0, prop.Name.Length - 2);
+        return baseName + "Name";
+    }
+    return prop.Name + "Name";
+}
+#>

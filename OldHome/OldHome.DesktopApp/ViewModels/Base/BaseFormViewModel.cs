@@ -13,8 +13,8 @@ namespace OldHome.DesktopApp.ViewModels.Base
     {
         public int? Id { get; set; } = null;
 
-        private DateTime _createdAt;
-        public DateTime CreatedAt
+        private DateTime? _createdAt;
+        public DateTime? CreatedAt
         {
             get { return _createdAt; }
             set { SetProperty(ref _createdAt, value); }
@@ -39,6 +39,10 @@ namespace OldHome.DesktopApp.ViewModels.Base
         public virtual async Task ChangeState(T detail, FormState state)
         {
             State = state;
+            if (detail != null && (state.Equals(FormState.Edit) || state.Equals(FormState.View)))
+                CreatedAt = detail.CreatedAt;
+            else
+                CreatedAt = null;
             await Task.CompletedTask;
         }
 

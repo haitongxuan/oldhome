@@ -38,6 +38,16 @@ namespace OldHome.DAL
         public DbSet<Staff> Staffs { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<ResidentSeq> ResidentSeqs { get; set; }
-        
+        public DbSet<FamilyMedicineDelivery> FamilyMedicineDeliveries { get; set; }
+        public DbSet<FamilyMedicineDeliveryItem> FamilyMedicineDeliveryItems { get; set; }
+        public DbSet<InventoryInbound> InventoryInbounds { get; set; }
+        public DbSet<InventoryInboundItem> InventoryInboundItems { get; set; }
+        public DbSet<InventoryStocktake> InventoryStocktakes { get; set; }
+        public DbSet<InventoryStocktakeItem> InventoryStocktakeItems { get; set; }
+        public DbSet<MedicationOutbound> MedicationOutbounds { get; set; }
+        public DbSet<MedicationOutboundItem> MedicationOutboundItems { get; set; }
+        public DbSet<MedicationPrescription> MedicationPrescriptions { get; set; }
+        public DbSet<MedicationPrescriptionItem> MedicationPrescriptionItems { get; set; }
+        public DbSet<MedicationSchedule> MedicationSchedules { get; set; }
     }
 }

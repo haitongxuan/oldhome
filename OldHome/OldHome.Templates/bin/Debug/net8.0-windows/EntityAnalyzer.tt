@@ -1,0 +1,179 @@
+<#@ template debug="false" hostspecific="true" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Text.RegularExpressions" #>
+<#@ import namespace="System.Collections.Generic" #>
+
+<#+
+public class EntityInfo
+{
+    public string Name { get; set; }
+    public string Namespace { get; set; }
+    public string BaseClass { get; set; }
+    public List<PropertyInfo> Properties { get; set; } = new List<PropertyInfo>();
+    public List<string> UsingStatements { get; set; } = new List<string>();
+    public bool HasBaseEntity => BaseClass == "BaseEntity" || BaseClass == "BaseOrgByEntity";
+    public bool HasOrgBy => BaseClass == "BaseOrgByEntity";
+}
+
+public class PropertyInfo
+{
+    public string Name { get; set; }
+    public string Type { get; set; }
+    public string RawType { get; set; }
+    public bool IsNullable { get; set; }
+    public bool IsCollection { get; set; }
+    public bool IsNavigation { get; set; }
+    public string DefaultValue { get; set; }
+    public List<string> Attributes { get; set; } = new List<string>();
+    
+    public bool ShouldIncludeInDto => !IsCollection && !IsComplexNavigation;
+    public bool ShouldIncludeInCreate => !IsCollection && !IsComplexNavigation && Name != "Id";
+    public bool ShouldIncludeInModify => !IsCollection && !IsComplexNavigation && Name != "Id";
+    public bool ShouldIncludeInSample => !IsCollection && !IsComplexNavigation && (IsKeyProperty || IsDisplayProperty);
+    
+    private bool IsComplexNavigation => IsNavigation && !Type.EndsWith("Id");
+    private bool IsKeyProperty => Name == "Id" || Name == "Name" || Name.EndsWith("Number") || Name.EndsWith("Code") || Name.EndsWith("Num");
+    private bool IsDisplayProperty => Name == "Name" || Name == "Title" || Name.Contains("Name") || Name.Contains("Number");
+}
+
+public EntityInfo ParseEntity(string filePath)
+{
+    var content = File.ReadAllText(Host.ResolvePath(filePath));
+    var entity = new EntityInfo();
+    
+    // 解析命名空间
+    var namespaceMatch = Regex.Match(content, @"namespace\s+([\w\.]+)");
+    if (namespaceMatch.Success)
+    {
+        entity.Namespace = namespaceMatch.Groups[1].Value;
+    }
+    
+    // 解析using语句
+    var usingMatches = Regex.Matches(content, @"using\s+([\w\.]+);");
+    foreach (Match match in usingMatches)
+    {
+        entity.UsingStatements.Add(match.Groups[1].Value);
+    }
+    
+    // 解析类名和基类
+    var classMatch = Regex.Match(content, @"public\s+class\s+(\w+)(?:\s*:\s*(\w+))?");
+    if (classMatch.Success)
+    {
+        entity.Name = classMatch.Groups[1].Value;
+        if (classMatch.Groups[2].Success)
+        {
+            entity.BaseClass = classMatch.Groups[2].Value;
+        }
+    }
+    
+    // 解析属性
+    var propertyPattern = @"(?:\[([^\]]+)\]\s*)*public\s+([\w\?<>,\s]+)\s+(\w+)\s*\{\s*get;\s*set;\s*\}(?:\s*=\s*([^;]+);)?";
+    var propertyMatches = Regex.Matches(content, propertyPattern, RegexOptions.Multiline);
+    
+    foreach (Match match in propertyMatches)
+    {
+        var attributes = match.Groups[1].Value;
+        var type = match.Groups[2].Value.Trim();
+        var name = match.Groups[3].Value;
+        var defaultValue = match.Groups[4].Success ? match.Groups[4].Value.Trim() : "";
+        
+        var prop = new PropertyInfo
+        {
+            Name = name,
+            RawType = type,
+            Type = GetCleanTypeName(type),
+            IsNullable = type.Contains("?"),
+            IsCollection = IsCollectionType(type),
+            IsNavigation = IsNavigationType(type, name, entity.Name),
+            DefaultValue = defaultValue
+        };
+        
+        // 解析特性
+        if (!string.IsNullOrEmpty(attributes))
+        {
+            var attrMatches = Regex.Matches(attributes, @"(\w+)(?:\([^\)]*\))?");
+            foreach (Match attrMatch in attrMatches)
+            {
+                prop.Attributes.Add(attrMatch.Groups[1].Value);
+            }
+        }
+        
+        entity.Properties.Add(prop);
+    }
+    
+    return entity;
+}
+
+private string GetCleanTypeName(string rawType)
+{
+    // 移除泛型参数，如 List<User> -> List, User -> User
+    if (rawType.Contains("<"))
+    {
+        return rawType.Substring(0, rawType.IndexOf("<"));
+    }
+    return rawType.Replace("?", "").Trim();
+}
+
+private bool IsCollectionType(string typeName)
+{
+    return typeName.StartsWith("List<") || 
+           typeName.StartsWith("ICollection<") || 
+           typeName.StartsWith("IEnumerable<");
+}
+
+private bool IsNavigationType(string typeName, string propertyName, string entityName)
+{
+    // 如果是集合类型，肯定是导航属性
+    if (IsCollectionType(typeName))
+        return true;
+    
+    // 如果类型名以大写字母开头且不是基础类型，可能是导航属性
+    var cleanType = GetCleanTypeName(typeName);
+    if (char.IsUpper(cleanType[0]) && 
+        !IsBasicType(cleanType) && 
+        cleanType != entityName)
+    {
+        return true;
+    }
+    
+    return false;
+}
+
+private bool IsBasicType(string typeName)
+{
+    var basicTypes = new[] { 
+        "string", "int", "decimal", "bool", "DateTime", "DateOnly", "Guid", "float", "double", "long"
+    };
+    return basicTypes.Contains(typeName) || 
+           typeName.EndsWith("Status") || 
+           typeName.EndsWith("Type") || 
+           typeName.EndsWith("Level") ||
+           typeName.EndsWith("Unit") ||
+           Regex.IsMatch(typeName, @"^[A-Z]\w*[A-Z]\w*$"); // 枚举模式
+}
+
+public string GetDtoTypeName(string entityType, PropertyInfo prop)
+{
+    if (IsBasicType(prop.Type))
+        return prop.RawType;
+        
+    if (prop.IsCollection)
+    {
+        // List<User> -> List<UserSample>
+        var match = Regex.Match(prop.RawType, @"List<(\w+)>");
+        if (match.Success)
+        {
+            return $"List<{match.Groups[1].Value}Sample>";
+        }
+    }
+    else if (prop.IsNavigation && !prop.Name.EndsWith("Id"))
+    {
+        // User -> UserSample
+        return $"{prop.Type}Sample";
+    }
+    
+    return prop.RawType;
+}
+#>

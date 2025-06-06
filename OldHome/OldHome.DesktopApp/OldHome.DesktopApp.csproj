@@ -32,4 +32,8 @@
     <ProjectReference Include="..\OldHome.ODT\OldHome.DTO.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="ViewModels\WindowViewModels\" />
+  </ItemGroup>
+
 </Project>

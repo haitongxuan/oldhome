@@ -8,7 +8,7 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <pu:StyleDictionary Includes="All" />
+                <pu:StyleDictionary Excludes="ProgressBar" />
                 <ResourceDictionary Source="Themes/DefaultTheme.xaml" />
                 <ResourceDictionary Source="Themes/ToastTheme.xaml" />
             </ResourceDictionary.MergedDictionaries>

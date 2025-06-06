@@ -228,7 +228,7 @@
                 Grid.Row="14"
                 Grid.Column="1"
                 Style="{StaticResource ReadonlyBox}"
-                Text="{Binding CreateAt}" />
+                Text="{Binding CreatedAt}" />
             <!--#endregion-->
             <StackPanel
                 Grid.Row="15"

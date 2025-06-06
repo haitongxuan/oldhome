@@ -430,6 +430,1049 @@ namespace OldHome.DAL.Migrations
                     b.ToTable("EmergencyContacts");
                 });
 
+            modelBuilder.Entity("OldHome.Entities.FamilyMedicineDelivery", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateOnly>("DeliveryDate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("DeliveryNumber")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("DeliveryPersonName")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("DeliveryPersonPhone")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("IdentityCardNumber")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int?>("InboundId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Notes")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("OrgId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("ReceivedById")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("ReceivedTime")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("RelationshipToResident")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("ResidentId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("UpdatedBy")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("InboundId");
+
+                    b.HasIndex("OrgId");
+
+                    b.HasIndex("ReceivedById");
+
+                    b.HasIndex("ResidentId");
+
+                    b.ToTable("FamilyMedicineDeliveries");
+                });
+
+            modelBuilder.Entity("OldHome.Entities.FamilyMedicineDeliveryItem", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("BatchNumber")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("CheckNotes")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("CheckStatus")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("DeliveryId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateOnly>("ExpirationDate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("MedicineId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("MedicineName")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Notes")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateOnly>("ProductionDate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("PurchaseLocation")
+                        .HasColumnType("TEXT");
+
+                    b.Property<decimal?>("PurchasePrice")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Specification")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Unit")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("UpdatedBy")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DeliveryId");
+
+                    b.HasIndex("MedicineId");
+
+                    b.ToTable("FamilyMedicineDeliveryItems");
+                });
+
+            modelBuilder.Entity("OldHome.Entities.InventoryInbound", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("CheckedById")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateOnly?>("CheckedDate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<int?>("InboundById")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateOnly>("InboundDate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("InboundNumber")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("InboundType")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Notes")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("OrgId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("ProviderInfo")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int?>("ProviderRelationship")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("PurchaseReference")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int?>("ResidentId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("SourceDetails")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("SourceType")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<decimal?>("TotalValue")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("UpdatedBy")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CheckedById");
+
+                    b.HasIndex("InboundById");
+
+                    b.HasIndex("OrgId");
+
+                    b.HasIndex("ResidentId");
+
+                    b.ToTable("InventoryInbounds");
+                });
+
+            modelBuilder.Entity("OldHome.Entities.InventoryInboundItem", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("BatchNumber")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("CheckNotes")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("CheckStatus")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("CheckedQuantity")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateOnly>("ExpirationDate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("InboundId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("InventoryId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("InventoryType")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("MedicineId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Notes")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("PackageQuantity")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateOnly>("ProductionDate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("StorageLocation")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<decimal?>("TotalPrice")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal?>("UnitPrice")
+                        .HasColumnType("decimal(18,4)");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("UpdatedBy")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("InboundId");
+
+                    b.HasIndex("InventoryId");
+
+                    b.HasIndex("MedicineId");
+
+                    b.ToTable("InventoryInboundItems");
+                });
+
+            modelBuilder.Entity("OldHome.Entities.InventoryOutbound", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("ApprovedById")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateOnly?>("ApprovedDate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Notes")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("OrgId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("OutboundById")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateOnly>("OutboundDate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("OutboundNumber")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("OutboundType")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("PrescriptionId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("ReceiverSignature")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int?>("RequesterId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("ResidentId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<decimal>("TotalAmount")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("UpdatedBy")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ApprovedById");
+
+                    b.HasIndex("OrgId");
+
+                    b.HasIndex("OutboundById");
+
+                    b.HasIndex("RequesterId");
+
+                    b.HasIndex("ResidentId");
+
+                    b.ToTable("InventoryOutbound");
+                });
+
+            modelBuilder.Entity("OldHome.Entities.InventoryOutboundItem", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("ActualQuantity")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("BatchNumber")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateOnly>("ExpirationDate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("InventoryId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("MedicineId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Notes")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("OutboundId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("RequestedQuantity")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<decimal>("TotalCost")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("UnitCost")
+                        .HasColumnType("decimal(18,4)");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("UpdatedBy")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("InventoryId");
+
+                    b.HasIndex("MedicineId");
+
+                    b.HasIndex("OutboundId");
+
+                    b.ToTable("InventoryOutboundItem");
+                });
+
+            modelBuilder.Entity("OldHome.Entities.InventoryStocktake", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Notes")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("OrgId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("ScopeDescription")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateOnly>("StocktakeDate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("StocktakeNumber")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("StocktakePersons")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("StocktakeType")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("SupervisorId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<decimal>("TotalDifferenceAmount")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("UpdatedBy")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OrgId");
+
+                    b.HasIndex("SupervisorId");
+
+                    b.ToTable("InventoryStocktakes");
+                });
+
+            modelBuilder.Entity("OldHome.Entities.InventoryStocktakeItem", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("ActualQuantity")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("BatchNumber")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("BookQuantity")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<decimal>("DifferenceAmount")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("DifferenceQuantity")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("DifferenceReason")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("InventoryId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("MedicineId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Notes")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("StocktakeId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("TreatmentMethod")
+                        .HasColumnType("TEXT");
+
+                    b.Property<decimal>("UnitCost")
+                        .HasColumnType("decimal(18,4)");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("UpdatedBy")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("InventoryId");
+
+                    b.HasIndex("MedicineId");
+
+                    b.HasIndex("StocktakeId");
+
+                    b.ToTable("InventoryStocktakeItems");
+                });
+
+            modelBuilder.Entity("OldHome.Entities.MedicationOutbound", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("CheckedById")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime?>("CheckedTime")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime?>("DispensedTime")
+                        .HasColumnType("TEXT");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("MedicineTime")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Notes")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("OrgId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateOnly>("OutboundDate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("OutboundNumber")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("OutboundType")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("PharmacistId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("PreparedTime")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<decimal>("TotalAmount")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("TotalItemCount")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("UpdatedBy")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CheckedById");
+
+                    b.HasIndex("OrgId");
+
+                    b.HasIndex("PharmacistId");
+
+                    b.ToTable("MedicationOutbounds");
+                });
+
+            modelBuilder.Entity("OldHome.Entities.MedicationOutboundItem", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<decimal>("ActualQuantity")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("BatchNumber")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("DispenseStatus")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateOnly>("ExpirationDate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Instructions")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("InventoryId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("MedicineId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Notes")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("OutboundId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<decimal>("PlannedQuantity")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("RefusalReason")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime?>("ResidentConfirmedTime")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("ResidentId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("ScheduleId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("SpecialInstructions")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<decimal>("TotalCost")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("UnitCost")
+                        .HasColumnType("decimal(18,4)");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("UpdatedBy")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("InventoryId");
+
+                    b.HasIndex("MedicineId");
+
+                    b.HasIndex("OutboundId");
+
+                    b.HasIndex("ResidentId");
+
+                    b.HasIndex("ScheduleId");
+
+                    b.ToTable("MedicationOutboundItems");
+                });
+
+            modelBuilder.Entity("OldHome.Entities.MedicationPrescription", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Diagnosis")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("DoctorId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateOnly?>("EndDate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Notes")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("OrgId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateOnly>("PrescriptionDate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("PrescriptionNumber")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("PrescriptionType")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("ResidentId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("ReviewedById")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateOnly?>("ReviewedDate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateOnly>("StartDate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("UpdatedBy")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DoctorId");
+
+                    b.HasIndex("OrgId");
+
+                    b.HasIndex("ResidentId");
+
+                    b.HasIndex("ReviewedById");
+
+                    b.ToTable("MedicationPrescriptions");
+                });
+
+            modelBuilder.Entity("OldHome.Entities.MedicationPrescriptionItem", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Dosage")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<decimal>("DosageAmount")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("Frequency")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Instructions")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool>("IsPRN")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<decimal?>("MaxDailyDose")
+                        .HasColumnType("TEXT");
+
+                    b.PrimitiveCollection<string>("MedicationTimes")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("MedicationType")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("MedicineId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Notes")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("PRNCondition")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("PrescriptionId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("SpecialInstructions")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("TimesPerDay")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("UpdatedBy")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MedicineId");
+
+                    b.HasIndex("PrescriptionId");
+
+                    b.ToTable("MedicationPrescriptionItems");
+                });
+
+            modelBuilder.Entity("OldHome.Entities.MedicationSchedule", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<decimal?>("ActualDosage")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("DelayReason")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int?>("ExecutedById")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime?>("ExecutedTime")
+                        .HasColumnType("TEXT");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("MedicineId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("MedicineTime")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Notes")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("OrgId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("OutboundItemId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<decimal>("PlannedDosage")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("PrescriptionItemId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("ResidentId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateOnly>("ScheduleDate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("ScheduleNumber")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<TimeOnly>("ScheduleTime")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("ScheduleType")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("SkipReason")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("UpdatedBy")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ExecutedById");
+
+                    b.HasIndex("MedicineId");
+
+                    b.HasIndex("OrgId");
+
+                    b.HasIndex("OutboundItemId");
+
+                    b.HasIndex("PrescriptionItemId");
+
+                    b.HasIndex("ResidentId");
+
+                    b.ToTable("MedicationSchedules");
+                });
+
             modelBuilder.Entity("OldHome.Entities.MedicationTemplate", b =>
                 {
                     b.Property<int>("Id")
@@ -1693,6 +2736,385 @@ namespace OldHome.DAL.Migrations
                     b.Navigation("Org");
                 });
 
+            modelBuilder.Entity("OldHome.Entities.FamilyMedicineDelivery", b =>
+                {
+                    b.HasOne("OldHome.Entities.InventoryInbound", "Inbound")
+                        .WithMany()
+                        .HasForeignKey("InboundId");
+
+                    b.HasOne("OldHome.Entities.Org", "Org")
+                        .WithMany()
+                        .HasForeignKey("OrgId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("OldHome.Entities.User", "ReceivedBy")
+                        .WithMany()
+                        .HasForeignKey("ReceivedById")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("OldHome.Entities.Resident", "Resident")
+                        .WithMany()
+                        .HasForeignKey("ResidentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Inbound");
+
+                    b.Navigation("Org");
+
+                    b.Navigation("ReceivedBy");
+
+                    b.Navigation("Resident");
+                });
+
+            modelBuilder.Entity("OldHome.Entities.FamilyMedicineDeliveryItem", b =>
+                {
+                    b.HasOne("OldHome.Entities.FamilyMedicineDelivery", "Delivery")
+                        .WithMany("Items")
+                        .HasForeignKey("DeliveryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("OldHome.Entities.Medicine", "Medicine")
+                        .WithMany()
+                        .HasForeignKey("MedicineId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Delivery");
+
+                    b.Navigation("Medicine");
+                });
+
+            modelBuilder.Entity("OldHome.Entities.InventoryInbound", b =>
+                {
+                    b.HasOne("OldHome.Entities.User", "CheckedBy")
+                        .WithMany()
+                        .HasForeignKey("CheckedById");
+
+                    b.HasOne("OldHome.Entities.User", "InboundBy")
+                        .WithMany()
+                        .HasForeignKey("InboundById");
+
+                    b.HasOne("OldHome.Entities.Org", "Org")
+                        .WithMany()
+                        .HasForeignKey("OrgId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("OldHome.Entities.Resident", "Resident")
+                        .WithMany()
+                        .HasForeignKey("ResidentId");
+
+                    b.Navigation("CheckedBy");
+
+                    b.Navigation("InboundBy");
+
+                    b.Navigation("Org");
+
+                    b.Navigation("Resident");
+                });
+
+            modelBuilder.Entity("OldHome.Entities.InventoryInboundItem", b =>
+                {
+                    b.HasOne("OldHome.Entities.InventoryInbound", "Inbound")
+                        .WithMany("Items")
+                        .HasForeignKey("InboundId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("OldHome.Entities.MedicineInventory", "Inventory")
+                        .WithMany()
+                        .HasForeignKey("InventoryId");
+
+                    b.HasOne("OldHome.Entities.Medicine", "Medicine")
+                        .WithMany()
+                        .HasForeignKey("MedicineId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Inbound");
+
+                    b.Navigation("Inventory");
+
+                    b.Navigation("Medicine");
+                });
+
+            modelBuilder.Entity("OldHome.Entities.InventoryOutbound", b =>
+                {
+                    b.HasOne("OldHome.Entities.User", "ApprovedBy")
+                        .WithMany()
+                        .HasForeignKey("ApprovedById");
+
+                    b.HasOne("OldHome.Entities.Org", "Org")
+                        .WithMany()
+                        .HasForeignKey("OrgId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("OldHome.Entities.User", "OutboundBy")
+                        .WithMany()
+                        .HasForeignKey("OutboundById");
+
+                    b.HasOne("OldHome.Entities.User", "Requester")
+                        .WithMany()
+                        .HasForeignKey("RequesterId");
+
+                    b.HasOne("OldHome.Entities.Resident", "Resident")
+                        .WithMany()
+                        .HasForeignKey("ResidentId");
+
+                    b.Navigation("ApprovedBy");
+
+                    b.Navigation("Org");
+
+                    b.Navigation("OutboundBy");
+
+                    b.Navigation("Requester");
+
+                    b.Navigation("Resident");
+                });
+
+            modelBuilder.Entity("OldHome.Entities.InventoryOutboundItem", b =>
+                {
+                    b.HasOne("OldHome.Entities.MedicineInventory", "Inventory")
+                        .WithMany()
+                        .HasForeignKey("InventoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("OldHome.Entities.Medicine", "Medicine")
+                        .WithMany()
+                        .HasForeignKey("MedicineId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("OldHome.Entities.InventoryOutbound", "Outbound")
+                        .WithMany("Items")
+                        .HasForeignKey("OutboundId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Inventory");
+
+                    b.Navigation("Medicine");
+
+                    b.Navigation("Outbound");
+                });
+
+            modelBuilder.Entity("OldHome.Entities.InventoryStocktake", b =>
+                {
+                    b.HasOne("OldHome.Entities.Org", "Org")
+                        .WithMany()
+                        .HasForeignKey("OrgId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("OldHome.Entities.User", "Supervisor")
+                        .WithMany()
+                        .HasForeignKey("SupervisorId");
+
+                    b.Navigation("Org");
+
+                    b.Navigation("Supervisor");
+                });
+
+            modelBuilder.Entity("OldHome.Entities.InventoryStocktakeItem", b =>
+                {
+                    b.HasOne("OldHome.Entities.MedicineInventory", "Inventory")
+                        .WithMany()
+                        .HasForeignKey("InventoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("OldHome.Entities.Medicine", "Medicine")
+                        .WithMany()
+                        .HasForeignKey("MedicineId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("OldHome.Entities.InventoryStocktake", "Stocktake")
+                        .WithMany("Items")
+                        .HasForeignKey("StocktakeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Inventory");
+
+                    b.Navigation("Medicine");
+
+                    b.Navigation("Stocktake");
+                });
+
+            modelBuilder.Entity("OldHome.Entities.MedicationOutbound", b =>
+                {
+                    b.HasOne("OldHome.Entities.Staff", "CheckedBy")
+                        .WithMany()
+                        .HasForeignKey("CheckedById");
+
+                    b.HasOne("OldHome.Entities.Org", "Org")
+                        .WithMany()
+                        .HasForeignKey("OrgId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("OldHome.Entities.Staff", "Pharmacist")
+                        .WithMany()
+                        .HasForeignKey("PharmacistId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("CheckedBy");
+
+                    b.Navigation("Org");
+
+                    b.Navigation("Pharmacist");
+                });
+
+            modelBuilder.Entity("OldHome.Entities.MedicationOutboundItem", b =>
+                {
+                    b.HasOne("OldHome.Entities.MedicineInventory", "Inventory")
+                        .WithMany()
+                        .HasForeignKey("InventoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("OldHome.Entities.Medicine", "Medicine")
+                        .WithMany()
+                        .HasForeignKey("MedicineId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("OldHome.Entities.MedicationOutbound", "Outbound")
+                        .WithMany("Items")
+                        .HasForeignKey("OutboundId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("OldHome.Entities.Resident", "Resident")
+                        .WithMany()
+                        .HasForeignKey("ResidentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("OldHome.Entities.MedicationSchedule", "Schedule")
+                        .WithMany()
+                        .HasForeignKey("ScheduleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Inventory");
+
+                    b.Navigation("Medicine");
+
+                    b.Navigation("Outbound");
+
+                    b.Navigation("Resident");
+
+                    b.Navigation("Schedule");
+                });
+
+            modelBuilder.Entity("OldHome.Entities.MedicationPrescription", b =>
+                {
+                    b.HasOne("OldHome.Entities.Staff", "Doctor")
+                        .WithMany()
+                        .HasForeignKey("DoctorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("OldHome.Entities.Org", "Org")
+                        .WithMany()
+                        .HasForeignKey("OrgId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("OldHome.Entities.Resident", "Resident")
+                        .WithMany()
+                        .HasForeignKey("ResidentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("OldHome.Entities.Staff", "ReviewedBy")
+                        .WithMany()
+                        .HasForeignKey("ReviewedById");
+
+                    b.Navigation("Doctor");
+
+                    b.Navigation("Org");
+
+                    b.Navigation("Resident");
+
+                    b.Navigation("ReviewedBy");
+                });
+
+            modelBuilder.Entity("OldHome.Entities.MedicationPrescriptionItem", b =>
+                {
+                    b.HasOne("OldHome.Entities.Medicine", "Medicine")
+                        .WithMany()
+                        .HasForeignKey("MedicineId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("OldHome.Entities.MedicationPrescription", "Prescription")
+                        .WithMany("Items")
+                        .HasForeignKey("PrescriptionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Medicine");
+
+                    b.Navigation("Prescription");
+                });
+
+            modelBuilder.Entity("OldHome.Entities.MedicationSchedule", b =>
+                {
+                    b.HasOne("OldHome.Entities.Staff", "ExecutedBy")
+                        .WithMany()
+                        .HasForeignKey("ExecutedById");
+
+                    b.HasOne("OldHome.Entities.Medicine", "Medicine")
+                        .WithMany()
+                        .HasForeignKey("MedicineId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("OldHome.Entities.Org", "Org")
+                        .WithMany()
+                        .HasForeignKey("OrgId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("OldHome.Entities.InventoryOutboundItem", "OutboundItem")
+                        .WithMany()
+                        .HasForeignKey("OutboundItemId");
+
+                    b.HasOne("OldHome.Entities.MedicationPrescriptionItem", "PrescriptionItem")
+                        .WithMany()
+                        .HasForeignKey("PrescriptionItemId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("OldHome.Entities.Resident", "Resident")
+                        .WithMany()
+                        .HasForeignKey("ResidentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ExecutedBy");
+
+                    b.Navigation("Medicine");
+
+                    b.Navigation("Org");
+
+                    b.Navigation("OutboundItem");
+
+                    b.Navigation("PrescriptionItem");
+
+                    b.Navigation("Resident");
+                });
+
             modelBuilder.Entity("OldHome.Entities.MedicationTemplateItem", b =>
                 {
                     b.HasOne("OldHome.Entities.MedicationTemplate", null)
@@ -2102,6 +3524,36 @@ namespace OldHome.DAL.Migrations
                     b.Navigation("Residents");
 
                     b.Navigation("StaffMembers");
+                });
+
+            modelBuilder.Entity("OldHome.Entities.FamilyMedicineDelivery", b =>
+                {
+                    b.Navigation("Items");
+                });
+
+            modelBuilder.Entity("OldHome.Entities.InventoryInbound", b =>
+                {
+                    b.Navigation("Items");
+                });
+
+            modelBuilder.Entity("OldHome.Entities.InventoryOutbound", b =>
+                {
+                    b.Navigation("Items");
+                });
+
+            modelBuilder.Entity("OldHome.Entities.InventoryStocktake", b =>
+                {
+                    b.Navigation("Items");
+                });
+
+            modelBuilder.Entity("OldHome.Entities.MedicationOutbound", b =>
+                {
+                    b.Navigation("Items");
+                });
+
+            modelBuilder.Entity("OldHome.Entities.MedicationPrescription", b =>
+                {
+                    b.Navigation("Items");
                 });
 
             modelBuilder.Entity("OldHome.Entities.MedicationTemplate", b =>

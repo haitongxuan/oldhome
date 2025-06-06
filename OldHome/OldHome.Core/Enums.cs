@@ -271,6 +271,358 @@ namespace OldHome.Core
         Other,
     }
 
+    /// <summary>
+    /// 处方类型
+    /// </summary>
+    public enum PrescriptionType
+    {
+        [Display(Name = "常规处方")]
+        Regular,
+        [Display(Name = "慢性病处方")]
+        Chronic,
+        [Display(Name = "临时处方")]
+        Temporary
+    }
+
+    /// <summary>
+    /// 处方状态
+    /// </summary>
+    public enum PrescriptionStatus
+    {
+        [Display(Name = "有效")]
+        Active,
+        [Display(Name = "暂停")]
+        Suspended,
+        [Display(Name = "已完成")]
+        Completed,
+        [Display(Name = "已取消")]
+        Cancelled,
+        [Display(Name = "待审核")]
+        PendingReview
+    }
+
+    /// <summary>
+    /// 处方明细状态
+    /// </summary>
+    public enum PrescriptionItemStatus
+    {
+        [Display(Name = "有效")]
+        Active,
+        [Display(Name = "暂停")]
+        Suspended,
+        [Display(Name = "已停药")]
+        Discontinued,
+        [Display(Name = "已完成")]
+        Completed
+    }
+
+    /// <summary>
+    /// 用药频次
+    /// </summary>
+    public enum MedicationFrequency
+    {
+        [Display(Name = "每日一次")]
+        OnceDaily,
+        [Display(Name = "每日两次")]
+        TwiceDaily,
+        [Display(Name = "每日三次")]
+        ThreeTimes,
+        [Display(Name = "每日四次")]
+        FourTimes,
+        [Display(Name = "每12小时")]
+        Every12Hours,
+        [Display(Name = "每8小时")]
+        Every8Hours,
+        [Display(Name = "每6小时")]
+        Every6Hours,
+        [Display(Name = "每4小时")]
+        Every4Hours,
+        [Display(Name = "按需用药")]
+        PRN,
+        [Display(Name = "单次用药")]
+        Once,
+        [Display(Name = "隔日一次")]
+        EveryOtherDay,
+        [Display(Name = "每周一次")]
+        Weekly
+    }
+
+    /// <summary>
+    /// 计划状态
+    /// </summary>
+    public enum ScheduleStatus
+    {
+        [Display(Name = "已计划")]
+        Scheduled,
+        [Display(Name = "已准备")]
+        Prepared,
+        [Display(Name = "已发放")]
+        Dispensed,
+        [Display(Name = "已服用")]
+        Administered,
+        [Display(Name = "已跳过")]
+        Skipped,
+        [Display(Name = "拒绝服药")]
+        Refused,
+        [Display(Name = "延迟")]
+        Delayed,
+        [Display(Name = "已取消")]
+        Cancelled
+    }
+
+    /// <summary>
+    /// 计划类型
+    /// </summary>
+    public enum ScheduleType
+    {
+        [Display(Name = "常规用药")]
+        Regular,
+        [Display(Name = "按需用药")]
+        PRN,
+        [Display(Name = "临时用药")]
+        Temporary,
+        [Display(Name = "补服")]
+        Makeup
+    }
+
+    /// <summary>
+    /// 发药出库类型
+    /// </summary>
+    public enum MedicationOutboundType
+    {
+        [Display(Name = "常规发药")]
+        Regular,
+        [Display(Name = "紧急发药")]
+        Emergency,
+        [Display(Name = "补发药品")]
+        Makeup,
+        [Display(Name = "PRN发药")]
+        PRN
+    }
+
+    /// <summary>
+    /// 发药出库状态
+    /// </summary>
+    public enum MedicationOutboundStatus
+    {
+        [Display(Name = "草稿")]
+        Draft,
+        [Display(Name = "已准备")]
+        Prepared,
+        [Display(Name = "已核对")]
+        Checked,
+        [Display(Name = "已发放")]
+        Dispensed,
+        [Display(Name = "已完成")]
+        Completed,
+        [Display(Name = "已取消")]
+        Cancelled
+    }
+
+    /// <summary>
+    /// 发药状态
+    /// </summary>
+    public enum DispenseStatus
+    {
+        [Display(Name = "已准备")]
+        Prepared,
+        [Display(Name = "已核对")]
+        Checked,
+        [Display(Name = "已发放")]
+        Dispensed,
+        [Display(Name = "拒绝接收")]
+        Refused,
+        [Display(Name = "已退回")]
+        Returned
+    }
+
+    /// <summary>
+    /// 用药执行状态
+    /// </summary>
+    public enum AdministrationStatus
+    {
+        [Display(Name = "已计划")]
+        Scheduled,
+        [Display(Name = "已准备")]
+        Prepared,
+        [Display(Name = "进行中")]
+        InProgress,
+        [Display(Name = "已完成")]
+        Completed,
+        [Display(Name = "部分完成")]
+        PartiallyCompleted,
+        [Display(Name = "已跳过")]
+        Skipped,
+        [Display(Name = "拒绝用药")]
+        Refused,
+        [Display(Name = "延迟")]
+        Delayed,
+        [Display(Name = "中止")]
+        Discontinued
+    }
+    /// <summary>
+    /// 送药状态
+    /// </summary>
+    public enum DeliveryStatus
+    {
+        [Display(Name = "已接收")]
+        Received,
+        [Display(Name = "已验收")]
+        Checked,
+        [Display(Name = "已入库")]
+        Stored,
+        [Display(Name = "有问题")]
+        Problematic
+    }/// <summary>
+     /// 供应商等级
+     /// </summary>
+    public enum SupplierGrade
+    {
+        [Display(Name = "普通")]
+        Regular,
+        [Display(Name = "优质")]
+        Premium,
+        [Display(Name = "战略")]
+        Strategic,
+        [Display(Name = "黑名单")]
+        Blacklist
+    }
+
+    /// <summary>
+    /// 入库类型
+    /// </summary>
+    public enum InboundType
+    {
+        [Display(Name = "采购入库")]
+        Purchase,
+        [Display(Name = "退货入库")]
+        Return,
+        [Display(Name = "调拨入库")]
+        Transfer,
+        [Display(Name = "盘盈入库")]
+        StocktakeGain,
+        [Display(Name = "其他入库")]
+        Other
+    }
+
+    /// <summary>
+    /// 入库状态
+    /// </summary>
+    public enum InboundStatus
+    {
+        [Display(Name = "草稿")]
+        Draft,
+        [Display(Name = "待验收")]
+        PendingCheck,
+        [Display(Name = "已验收")]
+        Checked,
+        [Display(Name = "已入库")]
+        Completed,
+        [Display(Name = "已取消")]
+        Cancelled
+    }
+
+    /// <summary>
+    /// 出库类型
+    /// </summary>
+    public enum OutboundType
+    {
+        [Display(Name = "发药出库")]
+        Dispensing,
+        [Display(Name = "领用出库")]
+        Requisition,
+        [Display(Name = "报损出库")]
+        Damage,
+        [Display(Name = "过期出库")]
+        Expired,
+        [Display(Name = "调拨出库")]
+        Transfer,
+        [Display(Name = "盘亏出库")]
+        StocktakeLoss,
+        [Display(Name = "其他出库")]
+        Other
+    }
+
+    /// <summary>
+    /// 出库状态
+    /// </summary>
+    public enum OutboundStatus
+    {
+        [Display(Name = "草稿")]
+        Draft,
+        [Display(Name = "待审批")]
+        PendingApproval,
+        [Display(Name = "已审批")]
+        Approved,
+        [Display(Name = "已出库")]
+        Completed,
+        [Display(Name = "已拒绝")]
+        Rejected,
+        [Display(Name = "已取消")]
+        Cancelled
+    }
+
+    /// <summary>
+    /// 验收状态
+    /// </summary>
+    public enum CheckStatus
+    {
+        [Display(Name = "待验收")]
+        Pending,
+        [Display(Name = "合格")]
+        Qualified,
+        [Display(Name = "不合格")]
+        Unqualified,
+        [Display(Name = "部分合格")]
+        PartiallyQualified
+    }
+
+    /// <summary>
+    /// 盘点类型
+    /// </summary>
+    public enum StocktakeType
+    {
+        [Display(Name = "全盘")]
+        Full,
+        [Display(Name = "抽盘")]
+        Sample,
+        [Display(Name = "动态盘点")]
+        Dynamic,
+        [Display(Name = "定期盘点")]
+        Periodic
+    }
+
+    /// <summary>
+    /// 盘点状态
+    /// </summary>
+    public enum StocktakeStatus
+    {
+        [Display(Name = "进行中")]
+        InProgress,
+        [Display(Name = "已完成")]
+        Completed,
+        [Display(Name = "已审核")]
+        Audited,
+        [Display(Name = "已取消")]
+        Cancelled
+    }
+    /// <summary>
+    /// 药品来源类型
+    /// </summary>
+    public enum MedicineSourceType
+    {
+        [Display(Name = "机构采购")]
+        InstitutionPurchase,
+        [Display(Name = "家属提供")]
+        FamilyProvided,
+        [Display(Name = "个人自购")]
+        PersonalPurchase,
+        [Display(Name = "医院带药")]
+        HospitalProvided,
+        [Display(Name = "其他")]
+        Other
+    }
+
     public enum CaregiverResidentChangeType
     {
         [Display(Name = "老人入住")]

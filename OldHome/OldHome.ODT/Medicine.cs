@@ -75,5 +75,6 @@ namespace OldHome.DTO
         public string Barcode { get; set; } = string.Empty;
         public string Specification { get; set; } = string.Empty;
         public string Manufacturer { get; set; } = string.Empty;
+        public int QtyPerPackage { get; set; }
     }
 }

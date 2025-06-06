@@ -2,6 +2,7 @@
     x:Class="OldHome.DesktopApp.Views.MedicineInventoryPagedList"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:cvs="clr-namespace:OldHome.DesktopApp.Converters"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
     xmlns:local="clr-namespace:OldHome.DesktopApp.Views"
@@ -153,7 +154,7 @@
                                 Header="剩余数量" />
                             <DataGridTextColumn
                                 Width="auto"
-                                Binding="{Binding Status}"
+                                Binding="{Binding Status, Converter={cvs:EnumDisplayNameConverter}}"
                                 ElementStyle="{StaticResource CenterAlignmentStyle}"
                                 Header="状态" />
                             <!--#endregion-->
