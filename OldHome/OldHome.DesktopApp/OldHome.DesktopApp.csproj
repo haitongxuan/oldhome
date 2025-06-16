@@ -9,9 +9,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Views\Windows\MedicationPrescriptionItemWindow.xaml.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="Resources\Logo.ico" />
     <None Remove="Resources\Logo.png" />
     <None Remove="Resources\WebForms.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Remove="Views\Windows\MedicationPrescriptionItemWindow.xaml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -34,6 +42,12 @@
 
   <ItemGroup>
     <Folder Include="ViewModels\WindowViewModels\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="ViewModels\MedicationPrescriptionItemDialogViewModelValidator.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
 
 </Project>

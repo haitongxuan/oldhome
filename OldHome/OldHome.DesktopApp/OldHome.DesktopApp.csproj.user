@@ -46,7 +46,7 @@
     <Compile Update="ViewModels\MedicationPrescriptionFormViewModelValidator.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="ViewModels\MediciationPrescriptionPagedListViewModel.cs">
+    <Compile Update="ViewModels\MedicationPrescriptionPagedListViewModel.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="ViewModels\MedicineFormViewModel.cs">
@@ -133,6 +133,9 @@
     <Compile Update="Views\MedicationPrescriptionForm.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\MedicationPrescriptionItemDialog.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\MedicationPrescriptionPagedList.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -181,7 +184,7 @@
     <Compile Update="Views\StaffPagedList.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Views\Windows\MedicationPrescriptionItemWindow.xaml.cs">
+    <Compile Update="Views\Windows\CustomDialogWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>

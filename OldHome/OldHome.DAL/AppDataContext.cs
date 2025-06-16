@@ -49,5 +49,6 @@ namespace OldHome.DAL
         public DbSet<MedicationPrescription> MedicationPrescriptions { get; set; }
         public DbSet<MedicationPrescriptionItem> MedicationPrescriptionItems { get; set; }
         public DbSet<MedicationSchedule> MedicationSchedules { get; set; }
+        public DbSet<SerialNumber> SerialNumbers { get; set; }
     }
 }

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using OldHome.Core;
 
 namespace OldHome.DesktopApp.Messages
 {
@@ -692,6 +693,40 @@ namespace OldHome.DesktopApp.Messages
         public async Task<BaseResponse> DeleteMedicineInventory(int id)
         {
             var response = await _apiClient.GetAsync("medicine-inventories/delete?id=" + id);
+            return response;
+        }
+
+        #endregion
+
+        #region MedicationPrescription
+
+        public async Task<BaseResponse<PagedResult<MedicationPrescriptionDto>>> GetPagedMedicationPrescriptions
+            (int pageIndex, int pageSize, int? residentId = null)
+        {
+            var urlBuilder = new StringBuilder("medication-prescriptions/paged?pageIndex=" + pageIndex + "&pageSize=" + pageSize);
+            if (residentId != null)
+            {
+                urlBuilder.Append("&ResidentId_eq=" + residentId);
+            }
+            var response = await _apiClient.GetAsync<PagedResult<MedicationPrescriptionDto>>(urlBuilder.ToString());
+            return response;
+        }
+
+        public async Task<BaseResponse<MedicationPrescriptionDto>> CreateMedicationPrescription(MedicationPrescriptionDto create)
+        {
+            var response = await _apiClient.PostAsync<MedicationPrescriptionDto, MedicationPrescriptionDto>("medication-prescriptions/create", create);
+            return response;
+        }
+
+        public async Task<BaseResponse> ModifyMedicationPrescription(MedicationPrescriptionDto modify)
+        {
+            var response = await _apiClient.PostAsync("medication-prescriptions/modify", modify);
+            return response;
+        }
+
+        public async Task<BaseResponse> DeleteMedicationPrescription(int id)
+        {
+            var response = await _apiClient.GetAsync("medication-prescriptions/delete?id=" + id);
             return response;
         }
 

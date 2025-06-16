@@ -4,6 +4,7 @@ using OldHome.DesktopApp.Messages;
 using OldHome.DesktopApp.Services;
 using OldHome.DesktopApp.ViewModels;
 using OldHome.DesktopApp.Views;
+using OldHome.DesktopApp.Views.Windows;
 using System.Net.Http;
 using System.Windows;
 
@@ -56,7 +57,9 @@ namespace OldHome.DesktopApp
                 .Register<IValidator<BedFormViewModel>, BedFormViewModelValidator>()
                 .Register<IValidator<MedicineFormViewModel>, MedicineFormViewModelValidator>()
                 .Register<IValidator<MedicineInventoryFormViewModel>, MedicineInventoryFormViewModelValidator>()
-                .Register<IValidator<ResidentFormViewModel>, ResidentFormViewModelValidator>();
+                .Register<IValidator<ResidentFormViewModel>, ResidentFormViewModelValidator>()
+                .Register<IValidator<MedicationPrescriptionFormViewModel>, MedicationPrescriptionFormViewModelValidator>()
+                .Register<IValidator<MedicationPrescriptionItemDialogViewModel>, MedicationPrescriptionItemDialogViewModelValidator>();
 
             containerRegistry.RegisterForNavigation<Login, LoginViewModel>("Login");
             containerRegistry.RegisterForNavigation<MainWindow, MainWindowViewModel>();
@@ -72,6 +75,10 @@ namespace OldHome.DesktopApp
             containerRegistry.RegisterForNavigation<MedicinePagedList, MedicinePagedListViewModel>("SettingMedicines");
             containerRegistry.RegisterForNavigation<MedicineInventoryPagedList, MedicineInventoryPagedListViewModel>("SettingMedicineInventories");
             containerRegistry.RegisterForNavigation<ResidentPagedList, ResidentPagedListViewModel>("SettingResidents");
+            containerRegistry.RegisterForNavigation<MedicationPrescriptionPagedList, MedicationPrescriptionPagedListViewModel>("SettingMedicationPrescriptions");
+
+            containerRegistry.RegisterDialogWindow<CustomDialogWindow>(nameof(CustomDialogWindow));
+            containerRegistry.RegisterDialog<MedicationPrescriptionItemDialog, MedicationPrescriptionItemDialogViewModel>("MedicationPrescriptionItemDialog");
         }
 
         protected override void ConfigureModuleCatalog(IModuleCatalog moduleCatalog)

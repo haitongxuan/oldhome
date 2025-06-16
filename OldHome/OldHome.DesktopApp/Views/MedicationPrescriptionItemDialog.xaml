@@ -1,0 +1,152 @@
+﻿<UserControl
+    x:Class="OldHome.DesktopApp.Views.MedicationPrescriptionItemDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:acb="http://wpfcontrols.com/"
+    xmlns:bhs="clr-namespace:OldHome.DesktopApp.Behaviors"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+    xmlns:local="clr-namespace:OldHome.DesktopApp.Views"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:prs="clr-namespace:OldHome.DesktopApp.Providers"
+    xmlns:pu="https://opensource.panuon.com/wpf-ui"
+    d:Background="White"
+    d:DesignHeight="400"
+    d:DesignWidth="440"
+    mc:Ignorable="d">
+    <UserControl.Resources>
+        <TextBlock
+            x:Key="LoadingContent"
+            Margin="5"
+            FontSize="14"
+            Text="Loading..." />
+        <prs:MedicineProvider x:Key="MedicineProvider" AllowEmptyFilter="True" />
+    </UserControl.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100" />
+            <ColumnDefinition Width="340" />
+            <ColumnDefinition Width="auto" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+        <TextBlock
+            Grid.Row="0"
+            Style="{StaticResource Header}"
+            Text="选择药品:" />
+        <acb:AutoCompleteTextBox
+            Grid.Column="1"
+            Margin="0,0,0,15"
+            DisplayMember="FullName"
+            ItemTemplate="{StaticResource MedicineItemTemplate}"
+            MaxLength="20"
+            Provider="{StaticResource MedicineProvider}"
+            SelectedItem="{Binding SelectedMedicine, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}">
+            <acb:AutoCompleteTextBox.Style>
+                <Style BasedOn="{StaticResource PanuonLargerAutoCompleteTextBox}" TargetType="acb:AutoCompleteTextBox">
+                    <Setter Property="IsEnabled" Value="True" />
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding State, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Value="View">
+                            <Setter Property="IsEnabled" Value="False" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </acb:AutoCompleteTextBox.Style>
+            <i:Interaction.Behaviors>
+                <bhs:ValidationErrorBehavior />
+            </i:Interaction.Behaviors>
+        </acb:AutoCompleteTextBox>
+        <TextBlock
+            Grid.Row="1"
+            Style="{StaticResource Header}"
+            Text="单次用量:" />
+        <pu:NumberInput
+            Grid.Row="1"
+            Grid.Column="1"
+            Style="{StaticResource FormNumberInput}"
+            Value="{Binding Path, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}">
+            <i:Interaction.Behaviors>
+                <bhs:ValidationErrorBehavior />
+            </i:Interaction.Behaviors>
+        </pu:NumberInput>
+        <TextBlock
+            Grid.Row="2"
+            Style="{StaticResource Header}"
+            Text="用药频次:" />
+        <ComboBox
+            Grid.Row="2"
+            Grid.Column="1"
+            VerticalAlignment="Bottom"
+            ItemsSource="{Binding Frequencies}"
+            SelectedValue="{Binding SelectedFrequency, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}"
+            Style="{StaticResource FormEnumComboBox}">
+            <i:Interaction.Behaviors>
+                <bhs:ValidationErrorBehavior />
+            </i:Interaction.Behaviors>
+        </ComboBox>
+        <TextBlock
+            Grid.Row="3"
+            Style="{StaticResource Header}"
+            Text="用药方式:" />
+        <ComboBox
+            Grid.Row="3"
+            Grid.Column="1"
+            VerticalAlignment="Bottom"
+            ItemsSource="{Binding MedicineTypes}"
+            SelectedValue="{Binding SelectedMedicineType, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}"
+            Style="{StaticResource FormEnumComboBox}">
+            <i:Interaction.Behaviors>
+                <bhs:ValidationErrorBehavior />
+            </i:Interaction.Behaviors>
+        </ComboBox>
+        <TextBlock
+            Grid.Row="4"
+            Style="{StaticResource Header}"
+            Text="明细状态:" />
+        <ComboBox
+            Grid.Row="4"
+            Grid.Column="1"
+            VerticalAlignment="Bottom"
+            ItemsSource="{Binding Statuses}"
+            SelectedValue="{Binding SelectedStatus, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}"
+            Style="{StaticResource FormEnumComboBox}">
+            <i:Interaction.Behaviors>
+                <bhs:ValidationErrorBehavior />
+            </i:Interaction.Behaviors>
+        </ComboBox>
+        <TextBlock
+            Grid.Row="5"
+            Style="{StaticResource Header}"
+            Text="备注:" />
+        <TextBox
+            Grid.Row="5"
+            Grid.Column="1"
+            Style="{StaticResource FormMultilineBox}"
+            Text="{Binding Notes, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}">
+            <i:Interaction.Behaviors>
+                <bhs:ValidationErrorBehavior />
+            </i:Interaction.Behaviors>
+        </TextBox>
+        <StackPanel
+            Grid.Row="9"
+            Grid.Column="1"
+            Orientation="Horizontal">
+            <Button
+                HorizontalAlignment="Right"
+                Command="{Binding OkCommand}"
+                Style="{StaticResource AddButton}" />
+            <Button
+                HorizontalAlignment="Right"
+                Command="{Binding CancelCommand}"
+                Content="取消"
+                Style="{StaticResource CancelButton}" />
+        </StackPanel>
+    </Grid>
+</UserControl>

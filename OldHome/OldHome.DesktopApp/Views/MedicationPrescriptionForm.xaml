@@ -2,6 +2,7 @@
     x:Class="OldHome.DesktopApp.Views.MedicationPrescriptionForm"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:acb="http://wpfcontrols.com/"
     xmlns:bhs="clr-namespace:OldHome.DesktopApp.Behaviors"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
@@ -37,7 +38,7 @@
             Grid.Column="1"
             d:Text="111"
             Style="{StaticResource FormBox}"
-            Text="{Binding Name, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}">
+            Text="{Binding PrescriptionNumber, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}">
             <i:Interaction.Behaviors>
                 <bhs:ValidationErrorBehavior />
             </i:Interaction.Behaviors>
@@ -47,15 +48,19 @@
             Grid.Column="2"
             Style="{StaticResource Header}"
             Text="长者:" />
-        <TextBox
+        <acb:AutoCompleteTextBox
             Grid.Row="0"
             Grid.Column="3"
-            Style="{StaticResource FormBox}"
-            Text="{Binding Path, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}">
+            DisplayMember="Name"
+            ItemTemplate="{StaticResource ResidentItemTemplate}"
+            MaxLength="20"
+            Provider="{StaticResource EmptyResidentProvider}"
+            SelectedItem="{Binding SelectedResident, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}"
+            Style="{StaticResource PanuonNormalAutoCompleteTextBox}">
             <i:Interaction.Behaviors>
                 <bhs:ValidationErrorBehavior />
             </i:Interaction.Behaviors>
-        </TextBox>
+        </acb:AutoCompleteTextBox>
         <TextBlock
             Grid.Row="1"
             Style="{StaticResource Header}"
@@ -63,7 +68,12 @@
         <pu:DateTimePicker
             Grid.Row="1"
             Grid.Column="1"
-            Style="{StaticResource FormDatePicker}" />
+            SelectedDateTime="{Binding StartDate, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}"
+            Style="{StaticResource FormDatePicker}">
+            <i:Interaction.Behaviors>
+                <bhs:ValidationErrorBehavior />
+            </i:Interaction.Behaviors>
+        </pu:DateTimePicker>
         <TextBlock
             Grid.Row="1"
             Grid.Column="2"
@@ -72,7 +82,12 @@
         <pu:DateTimePicker
             Grid.Row="1"
             Grid.Column="3"
-            Style="{StaticResource FormDatePicker}" />
+            SelectedDateTime="{Binding EndDate, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}"
+            Style="{StaticResource FormDatePicker}">
+            <i:Interaction.Behaviors>
+                <bhs:ValidationErrorBehavior />
+            </i:Interaction.Behaviors>
+        </pu:DateTimePicker>
         <TextBlock
             Grid.Row="2"
             Style="{StaticResource Header}"
@@ -81,10 +96,9 @@
             Grid.Row="2"
             Grid.Column="1"
             VerticalAlignment="Bottom"
-            ItemsSource="{Binding BindItems}"
-            SelectedValue="{Binding Path, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}"
-            SelectedValuePath="ValuePath"
-            Style="{StaticResource FormComboBox}">
+            ItemsSource="{Binding AllPrescriptionTypes}"
+            SelectedValue="{Binding SelectedPrescriptionTypes, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}"
+            Style="{StaticResource FormEnumComboBox}">
             <i:Interaction.Behaviors>
                 <bhs:ValidationErrorBehavior />
             </i:Interaction.Behaviors>
@@ -98,11 +112,9 @@
             Grid.Row="2"
             Grid.Column="3"
             VerticalAlignment="Bottom"
-            DisplayMemberPath="DisplayPath"
-            ItemsSource="{Binding BindItems}"
-            SelectedValue="{Binding Path, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}"
-            SelectedValuePath="ValuePath"
-            Style="{StaticResource FormComboBox}">
+            ItemsSource="{Binding AllPrescriptionStatuses}"
+            SelectedValue="{Binding SelectedPrescriptionStatus, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}"
+            Style="{StaticResource FormEnumComboBox}">
             <i:Interaction.Behaviors>
                 <bhs:ValidationErrorBehavior />
             </i:Interaction.Behaviors>
@@ -117,7 +129,7 @@
             Grid.ColumnSpan="3"
             Width="500"
             Style="{StaticResource FormMultilineBox}"
-            Text="{Binding Path, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}">
+            Text="{Binding Diagnosis, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}">
             <i:Interaction.Behaviors>
                 <bhs:ValidationErrorBehavior />
             </i:Interaction.Behaviors>
@@ -132,7 +144,7 @@
             Grid.ColumnSpan="3"
             Width="500"
             Style="{StaticResource FormMultilineBox}"
-            Text="{Binding Path, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}">
+            Text="{Binding Notes, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}">
             <i:Interaction.Behaviors>
                 <bhs:ValidationErrorBehavior />
             </i:Interaction.Behaviors>
@@ -145,7 +157,7 @@
             Grid.Row="5"
             Grid.Column="1"
             Style="{StaticResource ReadonlyBox}"
-            Text="{Binding CreateAt}" />
+            Text="{Binding CreatedAt}" />
         <!--#endregion-->
         <StackPanel
             Grid.Row="5"
@@ -153,9 +165,23 @@
             Style="{StaticResource FormButtonPanel}">
             <Button Command="{Binding SaveCommand}" Style="{StaticResource SaveButton}" />
             <Button Command="{Binding ClearCommand}" Style="{StaticResource ClearButton}" />
+            <Button Command="{Binding AddItemCommand}" Style="{StaticResource AddItemButton}" />
         </StackPanel>
         <Grid Grid.Row="7" Grid.ColumnSpan="4">
-            <DataGrid ItemsSource="{Binding Items}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0*" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <DataGrid
+                Grid.ColumnSpan="2"
+                ItemsSource="{Binding Items}"
+                SelectedItem="{Binding SelectedItem}"
+                Style="{StaticResource NormalDataGrid}">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="MouseDoubleClick">
+                        <i:InvokeCommandAction Command="{Binding ViewItemCommand}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
                 <DataGrid.Columns>
                     <DataGridTextColumn Binding="{Binding MedicineName}" Header="药品名称" />
                     <DataGridTextColumn Binding="{Binding Dosage}" Header="单次用量" />

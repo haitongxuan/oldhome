@@ -23,6 +23,7 @@ namespace OldHome.DTO
         /// </summary>
         public int ResidentId { get; set; }
         public string ResidentName { get; set; } = string.Empty;
+        public ResidentSample Resident { get; set; }
 
         /// <summary>
         /// 开方医生ID
@@ -96,6 +97,7 @@ namespace OldHome.DTO
         /// 药品ID
         /// </summary>
         public int MedicineId { get; set; }
+        public MedicineSample Medicine { get; set; }
         public string MedicineName { get; set; } = string.Empty;
 
         /// <summary>

@@ -1,5 +1,4 @@
-﻿using Panuon.WPF.UI;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,16 +10,17 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace OldHome.DesktopApp.Views.Windows
+namespace OldHome.DesktopApp.Views
 {
     /// <summary>
-    /// MedicationPrescriptionItemWindow.xaml 的交互逻辑
+    /// MedicationPrescriptionItemForm.xaml 的交互逻辑
     /// </summary>
-    public partial class MedicationPrescriptionItemWindow : WindowX
+    public partial class MedicationPrescriptionItemDialog : UserControl
     {
-        public MedicationPrescriptionItemWindow()
+        public MedicationPrescriptionItemDialog()
         {
             InitializeComponent();
         }
