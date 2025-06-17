@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OldHome.DAL;
 
@@ -10,9 +11,11 @@ using OldHome.DAL;
 namespace OldHome.DAL.Migrations
 {
     [DbContext(typeof(AppDataContext))]
-    partial class AppDataContextModelSnapshot : ModelSnapshot
+    [Migration("20250617033833_Update19")]
+    partial class Update19
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "9.0.4");
@@ -1233,6 +1236,9 @@ namespace OldHome.DAL.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<int>("DoctorId")
+                        .HasColumnType("INTEGER");
+
                     b.Property<DateOnly?>("EndDate")
                         .HasColumnType("TEXT");
 
@@ -1259,6 +1265,9 @@ namespace OldHome.DAL.Migrations
                     b.Property<int>("ResidentId")
                         .HasColumnType("INTEGER");
 
+                    b.Property<int?>("ReviewedById")
+                        .HasColumnType("INTEGER");
+
                     b.Property<DateOnly?>("ReviewedDate")
                         .HasColumnType("TEXT");
 
@@ -1277,9 +1286,13 @@ namespace OldHome.DAL.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("DoctorId");
+
                     b.HasIndex("OrgId");
 
                     b.HasIndex("ResidentId");
+
+                    b.HasIndex("ReviewedById");
 
                     b.ToTable("MedicationPrescriptions");
                 });
@@ -3058,6 +3071,12 @@ namespace OldHome.DAL.Migrations
 
             modelBuilder.Entity("OldHome.Entities.MedicationPrescription", b =>
                 {
+                    b.HasOne("OldHome.Entities.Staff", "Doctor")
+                        .WithMany()
+                        .HasForeignKey("DoctorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("OldHome.Entities.Org", "Org")
                         .WithMany()
                         .HasForeignKey("OrgId")
@@ -3070,9 +3089,17 @@ namespace OldHome.DAL.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("OldHome.Entities.Staff", "ReviewedBy")
+                        .WithMany()
+                        .HasForeignKey("ReviewedById");
+
+                    b.Navigation("Doctor");
+
                     b.Navigation("Org");
 
                     b.Navigation("Resident");
+
+                    b.Navigation("ReviewedBy");
                 });
 
             modelBuilder.Entity("OldHome.Entities.MedicationPrescriptionItem", b =>

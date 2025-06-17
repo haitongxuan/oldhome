@@ -129,6 +129,7 @@ namespace OldHome.DesktopApp.ViewModels
                 { "Item", new MedicationPrescriptionItemDto
                     {
                         Medicine = SelectedMedicine,
+                        MedicineId=SelectedMedicine.Id,
                         MedicineName= SelectedMedicine?.Name ?? string.Empty,
                         DosageAmount = DosageAmount.Value,
                         Frequency = SelectedFrequency.Value,

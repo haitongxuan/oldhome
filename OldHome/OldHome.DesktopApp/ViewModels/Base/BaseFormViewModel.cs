@@ -40,7 +40,10 @@ namespace OldHome.DesktopApp.ViewModels.Base
         {
             State = state;
             if (detail != null && (state.Equals(FormState.Edit) || state.Equals(FormState.View)))
+            {
+                Id = detail.Id;
                 CreatedAt = detail.CreatedAt;
+            }
             else
                 CreatedAt = null;
             await Task.CompletedTask;

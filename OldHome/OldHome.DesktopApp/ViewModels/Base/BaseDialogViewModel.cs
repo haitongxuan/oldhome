@@ -18,6 +18,7 @@ namespace OldHome.DesktopApp.ViewModels.Base
         protected abstract string PreTitle { get; }
         public string Title { get; protected set; }
         public int? Id { get; set; } = null;
+        public int? Index { get; set; } = null;
 
         private DialogCloseListener _requestClose;
         public DialogCloseListener RequestClose
@@ -49,6 +50,8 @@ namespace OldHome.DesktopApp.ViewModels.Base
         void ExecuteOkCommand()
         {
             var parameters = GetDialogParameters();
+            if (State.Equals(FormState.Edit))
+                parameters.Add("Index", this.Index);
             RequestClose.Invoke(parameters, ButtonResult.OK);
         }
 
@@ -147,6 +150,11 @@ namespace OldHome.DesktopApp.ViewModels.Base
         public void OnDialogOpened(IDialogParameters parameters)
         {
             State = parameters.GetValue<FormState>("State");
+            if (State.Equals(FormState.Edit))
+            {
+                Id = parameters.GetValue<T>("Item").Id;
+                Index = parameters.GetValue<int?>("Index");
+            }
             ChangeTitleByState();
 
             if (State.Equals(FormState.Edit) || State.Equals(FormState.View))

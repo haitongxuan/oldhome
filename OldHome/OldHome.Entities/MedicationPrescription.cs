@@ -26,11 +26,11 @@ namespace OldHome.Entities
         public int ResidentId { get; set; }
         public Resident Resident { get; set; }
 
-        /// <summary>
-        /// 开方医生ID
-        /// </summary>
-        public int DoctorId { get; set; }
-        public Staff Doctor { get; set; }
+        ///// <summary>
+        ///// 开方医生ID
+        ///// </summary>
+        //public int DoctorId { get; set; }
+        //public Staff Doctor { get; set; }
 
         /// <summary>
         /// 开方日期
@@ -70,8 +70,8 @@ namespace OldHome.Entities
         /// <summary>
         /// 审核医生ID
         /// </summary>
-        public int? ReviewedById { get; set; }
-        public Staff? ReviewedBy { get; set; }
+        //public int? ReviewedById { get; set; }
+        //public Staff? ReviewedBy { get; set; }
 
         /// <summary>
         /// 审核日期

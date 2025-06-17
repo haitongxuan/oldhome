@@ -11,10 +11,9 @@ namespace OldHome.Service.Endpoints
             var group = app.MapGroup("medication-prescriptions");
             EndpointsHelper.GetPage<MedicationPrescriptionDto, MedicationPrescription>(group,
                 [q => q.Include(p => p.Resident),
-                 q => q.Include(p => p.Doctor),
                  q => q.Include(p => p.Items).ThenInclude(i => i.Medicine)]);
             EndpointsHelper.Create<MedicationPrescriptionDto, MedicationPrescription, MedicationPrescriptionDto>(group);
-            EndpointsHelper.Modify<MedicationPrescriptionDto, MedicationPrescription>(group);
+            EndpointsHelper.Modify<MedicationPrescriptionModifyDto, MedicationPrescription>(group);
             EndpointsHelper.Delete<MedicationPrescription>(group);
         }
     }

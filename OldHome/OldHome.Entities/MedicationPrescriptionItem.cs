@@ -23,7 +23,7 @@ namespace OldHome.Entities
         /// 药品ID
         /// </summary>
         public int MedicineId { get; set; }
-        public Medicine Medicine { get; set; } = new Medicine();
+        public Medicine Medicine { get; set; }
 
         /// <summary>
         /// 单次用量
@@ -48,7 +48,7 @@ namespace OldHome.Entities
         /// <summary>
         /// 具体用药时间点
         /// </summary>
-        public List<MedicineTime> MedicationTimes { get; set; } = new List<MedicineTime>();
+        public List<MedicineTime> MedicationTimes { get; set; }
 
         /// <summary>
         /// 用药方式

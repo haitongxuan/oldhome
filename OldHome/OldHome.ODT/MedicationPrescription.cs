@@ -25,11 +25,6 @@ namespace OldHome.DTO
         public string ResidentName { get; set; } = string.Empty;
         public ResidentSample Resident { get; set; }
 
-        /// <summary>
-        /// 开方医生ID
-        /// </summary>
-        public int DoctorId { get; set; }
-        public string DoctorName { get; set; } = string.Empty;
 
         /// <summary>
         /// 开方日期
@@ -82,6 +77,8 @@ namespace OldHome.DTO
         /// </summary>
         public List<MedicationPrescriptionItemDto> Items { get; set; } = new List<MedicationPrescriptionItemDto>();
     }
+
+    public class MedicationPrescriptionModifyDto : MedicationPrescriptionDto { }
 
     /// <summary>
     /// 处方明细 - 具体的用药安排

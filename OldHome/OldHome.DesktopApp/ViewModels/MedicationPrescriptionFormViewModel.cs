@@ -16,6 +16,20 @@ namespace OldHome.DesktopApp.ViewModels
     {
         #region Properties
 
+        private bool _enableOperate;
+        public bool EnableOperate
+        {
+            get { return _enableOperate; }
+            set { SetProperty(ref _enableOperate, value); }
+        }
+
+        private int? _selectedItemId;
+        public int? SelectedItemId
+        {
+            get { return _selectedItemId; }
+            set { SetProperty(ref _selectedItemId, value); }
+        }
+
         private string _prescriptionNumber;
         public string PrescriptionNumber
         {
@@ -135,6 +149,29 @@ namespace OldHome.DesktopApp.ViewModels
             }, nameof(CustomDialogWindow));
         }
 
+        private DelegateCommand<MedicationPrescriptionItemDto> _editItem;
+        public DelegateCommand<MedicationPrescriptionItemDto> EditItemCommand =>
+            _editItem ?? (_editItem = new DelegateCommand<MedicationPrescriptionItemDto>(ExecuteEditItemCommand));
+
+        void ExecuteEditItemCommand(MedicationPrescriptionItemDto parameter)
+        {
+            DialogParameters parameters = new DialogParameters
+            {
+                { "State", FormState.Edit },
+                { "Index", Items.IndexOf(parameter) },
+                { "Item", parameter   }
+            };
+            _dialogService.Show("MedicationPrescriptionItemDialog", parameters, result =>
+            {
+                if (result.Result == ButtonResult.OK)
+                {
+                    var item = result.Parameters.GetValue<MedicationPrescriptionItemDto>("Item");
+                    int index = result.Parameters.GetValue<int>("Index");
+                    Items[index] = item;
+                }
+            }, nameof(CustomDialogWindow));
+        }
+
         public MedicationPrescriptionFormViewModel(IValidator<MedicationPrescriptionFormViewModel> validator, IDialogService dialogService) : base(validator)
         {
             _dialogService = dialogService;
@@ -164,15 +201,21 @@ namespace OldHome.DesktopApp.ViewModels
             SelectedStatus = null;
             Diagnosis = string.Empty;
             Notes = string.Empty;
+            Items.Clear();
         }
 
         public override async Task ChangeState(MedicationPrescriptionDto detail, FormState state)
         {
-            if (detail == null)
+            Clear();
+            if (state.Equals(FormState.View))
             {
-                Clear();
+                EnableOperate = false;
             }
             else
+            {
+                EnableOperate = true;
+            }
+            if (detail != null)
             {
                 PrescriptionNumber = detail.PrescriptionNumber;
                 SelectedResident = detail.Resident;
@@ -209,19 +252,19 @@ namespace OldHome.DesktopApp.ViewModels
         protected override Task<bool> ModifyAsync()
         {
             return ValidateAndRunAsync(async () =>
-                await _api.ModifyMedicationPrescription(new MedicationPrescriptionDto
-                {
-                    Id = Id!.Value,
-                    PrescriptionNumber = PrescriptionNumber,
-                    ResidentId = SelectedResident!.Id,
-                    StartDate = DateOnly.FromDateTime(StartDate!.Value),
-                    EndDate = EndDate == null ? null : DateOnly.FromDateTime(EndDate.Value),
-                    PrescriptionType = SelectedPrescriptionType!.Value,
-                    Status = SelectedStatus!.Value,
-                    Diagnosis = Diagnosis,
-                    Notes = Notes,
-                    Items = Items.ToList()
-                }), head: "处方修改");
+            {
+                var dto = new MedicationPrescriptionModifyDto();
+                dto.Id = Id!.Value;
+                dto.ResidentId = SelectedResident!.Id;
+                dto.StartDate = DateOnly.FromDateTime(StartDate!.Value);
+                dto.EndDate = EndDate == null ? null : DateOnly.FromDateTime(EndDate.Value);
+                dto.PrescriptionType = SelectedPrescriptionType!.Value;
+                dto.Status = SelectedStatus!.Value;
+                dto.Diagnosis = Diagnosis;
+                dto.Notes = Notes;
+                dto.Items = Items.ToList();
+                return await _api.ModifyMedicationPrescription(dto);
+            }, head: "处方修改");
         }
     }
 }

@@ -204,6 +204,26 @@
                         Binding="{Binding Notes}"
                         ElementStyle="{StaticResource CenterAlignmentStyle}"
                         Header="备注" />
+                    <DataGridTemplateColumn
+                        Width="auto"
+                        Header="操作"
+                        Visibility="{Binding DataContext.EnableOperate, Converter={cvs:Boolean2VisibilityConverter}, RelativeSource={RelativeSource AncestorType=UserControl}}">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <Button
+                                        Command="{Binding DataContext.EditItemCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                        CommandParameter="{Binding}"
+                                        Style="{StaticResource CellEditButton}" />
+                                    <Button
+                                        Margin="10,0,0,0"
+                                        Command="{Binding DataContext.DeleteItemCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                        CommandParameter="{Binding}"
+                                        Style="{StaticResource CellDeleteButton}" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>

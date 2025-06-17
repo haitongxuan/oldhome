@@ -56,6 +56,24 @@
         <Setter Property="pu:IconHelper.HorizontalAlignment" Value="Left" />
         <Setter Property="Content" Value="添 加 明 细" />
     </Style>
+
+    <Style
+        x:Key="CellEditButton"
+        BasedOn="{StaticResource NormalButton}"
+        TargetType="Button">
+        <Setter Property="Width" Value="30" />
+        <Setter Property="pu:ButtonHelper.Icon" Value="&#xe9af;" />
+        <Setter Property="Margin" Value="0" />
+    </Style>
+    <Style
+        x:Key="CellDeleteButton"
+        BasedOn="{StaticResource NormalButton}"
+        TargetType="Button">
+        <Setter Property="Width" Value="30" />
+        <Setter Property="pu:ButtonHelper.Icon" Value="&#xe933;" />
+        <Setter Property="Background" Value="#FFED563E" />
+        <Setter Property="Margin" Value="0" />
+    </Style>
     <Style
         x:Key="SaveButton"
         BasedOn="{StaticResource NormalButton}"
@@ -76,7 +94,7 @@
         x:Key="DeleteButton"
         BasedOn="{StaticResource {x:Static pu:StyleKeys.ButtonStyle}}"
         TargetType="Button">
-        <Setter Property="pu:ButtonHelper.Icon" Value="&#xe93b;" />
+        <Setter Property="pu:ButtonHelper.Icon" Value="&#xe933;" />
         <Setter Property="pu:IconHelper.HorizontalAlignment" Value="Left" />
         <Setter Property="Content" Value="删 除" />
         <Setter Property="pu:ButtonHelper.CornerRadius" Value="5" />
@@ -425,7 +443,7 @@
         TargetType="DataGrid">
         <Setter Property="pu:DataGridHelper.ColumnHeaderHorizontalContentAlignment" Value="Center" />
         <Setter Property="pu:DataGridHelper.ColumnHeaderVerticalContentAlignment" Value="Center" />
-        <Setter Property="pu:DataGridHelper.RowSelectedBackground" Value="#36AAF7" />
+        <Setter Property="pu:DataGridHelper.RowSelectedBackground" Value="#889944ff" />
         <Setter Property="pu:DataGridHelper.RowSelectedForeground" Value="#fff" />
         <Setter Property="pu:ScrollViewerHelper.ScrollBarPosition" Value="VerticalInside" />
         <Setter Property="AutoGenerateColumns" Value="False" />

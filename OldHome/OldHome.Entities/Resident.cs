@@ -1,4 +1,5 @@
 ﻿using OldHome.Core;
+using OldHome.Core.Attributes;
 using OldHome.Entities.Base;
 using System;
 using System.Collections.Generic;
@@ -13,6 +14,7 @@ namespace OldHome.Entities
     {
         public string Name { get; set; } = string.Empty;
         public Gender Gender { get; set; }
+        [SerialNumber("RESIDENT", Prefix = "R", ResetDaily = false)]
         public string? Code { get; set; }
         public DateOnly BirthDate { get; set; } = DateOnly.MinValue;
         public string IdCardNumber { get; set; } = string.Empty;
