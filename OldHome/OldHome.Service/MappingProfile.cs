@@ -145,6 +145,13 @@ namespace OldHome.Service
             CreateMap<MedicineTransactionLogModify, MedicineTransactionLog>().IncludeBase<BaseOrgByDto, BaseOrgByEntity>();
             #endregion
 
+            #region MedicationPrescription
+            CreateMap<MedicationPrescriptionItem, MedicationPrescriptionItemDto>();
+            CreateMap<MedicationPrescriptionItemDto, MedicationPrescriptionItem>();
+            CreateMap<MedicationPrescription, MedicationPrescriptionDto>();
+            CreateMap<MedicationPrescriptionDto, MedicationPrescription>().IncludeBase<BaseOrgByDto, BaseOrgByEntity>();
+            #endregion
+
             #region Resident
             CreateMap<Resident, ResidentSample>()
                 .ForMember(dest => dest.RoomNumber, opt => opt.MapFrom(p => p.Room.RoomNumber));

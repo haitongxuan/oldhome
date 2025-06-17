@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace OldHome.DesktopApp.ViewModels
 {
-    [Navigation("SettingMedicineInventories", "SettingMedicineInventories", "库存批次管理", "人员物料", Order = 6, Icon = "e93b")]
+    [Navigation("SettingMedicineInventories", "SettingMedicineInventories", "药品批次管理", "人员物料", Order = 6, Icon = "e93b")]
     public class MedicineInventoryPagedListViewModel : BaseOrgByPagedListViewModel<MedicineInventoryDto, MedicineInventoryFormViewModel>
     {
         private string _queryBatchNumber;

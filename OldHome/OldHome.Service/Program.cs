@@ -1,12 +1,9 @@
-using BCrypt.Net;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using OldHome.DAL;
-using OldHome.DTO;
-using OldHome.Entities;
 using OldHome.Service.Endpoints;
-using System.IdentityModel.Tokens.Jwt;
+using OldHome.Service.Interceptors;
 using System.Security.Claims;
 using System.Text;
 
@@ -15,12 +12,14 @@ namespace OldHome.Service
     public class Program
     {
         const string jwtKey = "L9vZfN4xW2q8RmX0jP7cT5sBqMd1KvUg";
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
-            builder.Services.AddDbContext<AppDataContext>(options =>
+            // 在 Program.cs 中更新 DbContext 配置
+
+            builder.Services.AddDbContext<AppDataContext>((serviceProvider, options) =>
             {
-                options.UseSqlite("Data Source=oldhome.db");
+                options.UseSqlite("Data Source=oldhome.db").AddInterceptors(new SerialNumberInterceptor());
             });
 
             builder.Services
@@ -47,7 +46,7 @@ namespace OldHome.Service
             var app = builder.Build();
             app.UseAuthentication();
             app.UseAuthorization();
-            app.InitializeDatabase();
+            await app.InitializeDatabaseAsync();
 
             app.MapGet("/", () => "Hello World!");
 
@@ -64,6 +63,7 @@ namespace OldHome.Service
             app.MapMedicineEndpoints();
             app.MapResidentEndpoints();
             app.MapMedicineInventoryEndpoints();
+            app.MapMediciationPrescriptionEndpoints();
 
             app.Run();
         }

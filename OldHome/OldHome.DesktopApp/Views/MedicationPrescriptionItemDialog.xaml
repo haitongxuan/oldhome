@@ -71,7 +71,7 @@
             Grid.Row="1"
             Grid.Column="1"
             Style="{StaticResource FormNumberInput}"
-            Value="{Binding Path, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}">
+            Value="{Binding DosageAmount, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}">
             <i:Interaction.Behaviors>
                 <bhs:ValidationErrorBehavior />
             </i:Interaction.Behaviors>

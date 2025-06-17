@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using OldHome.Core.Attributes;
+using System.ComponentModel.DataAnnotations;
 
 namespace OldHome.Core
 {
@@ -322,29 +323,17 @@ namespace OldHome.Core
     public enum MedicationFrequency
     {
         [Display(Name = "每日一次")]
+        [TimesPerDay(1)]
         OnceDaily,
         [Display(Name = "每日两次")]
+        [TimesPerDay(2)]
         TwiceDaily,
         [Display(Name = "每日三次")]
+        [TimesPerDay(3)]
         ThreeTimes,
         [Display(Name = "每日四次")]
-        FourTimes,
-        [Display(Name = "每12小时")]
-        Every12Hours,
-        [Display(Name = "每8小时")]
-        Every8Hours,
-        [Display(Name = "每6小时")]
-        Every6Hours,
-        [Display(Name = "每4小时")]
-        Every4Hours,
-        [Display(Name = "按需用药")]
-        PRN,
-        [Display(Name = "单次用药")]
-        Once,
-        [Display(Name = "隔日一次")]
-        EveryOtherDay,
-        [Display(Name = "每周一次")]
-        Weekly
+        [TimesPerDay(4)]
+        FourTimes
     }
 
     /// <summary>

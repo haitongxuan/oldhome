@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace OldHome.DesktopApp.ViewModels
 {
-    [Navigation("SettingResidents", "SettingResidents", "长者资料", "人员物料", Order = 7, Icon = "e93b")]
+    [Navigation("SettingResidents", "SettingResidents", "长者资料", "人员信息", Order = 7, Icon = "e93b")]
     public class ResidentPagedListViewModel : BaseOrgByPagedListViewModel<ResidentDto, ResidentFormViewModel>
     {
         private string _queryName;

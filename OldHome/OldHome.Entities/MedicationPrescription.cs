@@ -1,4 +1,5 @@
 ﻿using OldHome.Core;
+using OldHome.Core.Attributes;
 using OldHome.Entities.Base;
 using System;
 using System.Collections.Generic;
@@ -11,11 +12,12 @@ namespace OldHome.Entities
     /// <summary>
     /// 用药处方 - 医生开具的用药方案
     /// </summary>
-    public class MedicationPrescription : BaseOrgByEntity
+    public class MedicationPrescription : BaseOrgByEntity, ISerialNumberEntity
     {
         /// <summary>
         /// 处方号
         /// </summary>
+        [SerialNumber("PRESCRIPTION", Prefix = "RX")]
         public string PrescriptionNumber { get; set; } = string.Empty;
 
         /// <summary>
@@ -28,7 +30,7 @@ namespace OldHome.Entities
         /// 开方医生ID
         /// </summary>
         public int DoctorId { get; set; }
-        public Staff Doctor { get; set; } 
+        public Staff Doctor { get; set; }
 
         /// <summary>
         /// 开方日期

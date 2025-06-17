@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:acb="http://wpfcontrols.com/"
     xmlns:bhs="clr-namespace:OldHome.DesktopApp.Behaviors"
+    xmlns:cvs="clr-namespace:OldHome.DesktopApp.Converters"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
     xmlns:local="clr-namespace:OldHome.DesktopApp.Views"
@@ -37,7 +38,7 @@
         <TextBox
             Grid.Column="1"
             d:Text="111"
-            Style="{StaticResource FormBox}"
+            Style="{StaticResource ReadonlyBox}"
             Text="{Binding PrescriptionNumber, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}">
             <i:Interaction.Behaviors>
                 <bhs:ValidationErrorBehavior />
@@ -97,7 +98,7 @@
             Grid.Column="1"
             VerticalAlignment="Bottom"
             ItemsSource="{Binding AllPrescriptionTypes}"
-            SelectedValue="{Binding SelectedPrescriptionTypes, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}"
+            SelectedValue="{Binding SelectedPrescriptionType, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}"
             Style="{StaticResource FormEnumComboBox}">
             <i:Interaction.Behaviors>
                 <bhs:ValidationErrorBehavior />
@@ -113,7 +114,7 @@
             Grid.Column="3"
             VerticalAlignment="Bottom"
             ItemsSource="{Binding AllPrescriptionStatuses}"
-            SelectedValue="{Binding SelectedPrescriptionStatus, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}"
+            SelectedValue="{Binding SelectedStatus, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}"
             Style="{StaticResource FormEnumComboBox}">
             <i:Interaction.Behaviors>
                 <bhs:ValidationErrorBehavior />
@@ -130,21 +131,6 @@
             Width="500"
             Style="{StaticResource FormMultilineBox}"
             Text="{Binding Diagnosis, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}">
-            <i:Interaction.Behaviors>
-                <bhs:ValidationErrorBehavior />
-            </i:Interaction.Behaviors>
-        </TextBox>
-        <TextBlock
-            Grid.Row="4"
-            Style="{StaticResource Header}"
-            Text="备注:" />
-        <TextBox
-            Grid.Row="4"
-            Grid.Column="1"
-            Grid.ColumnSpan="3"
-            Width="500"
-            Style="{StaticResource FormMultilineBox}"
-            Text="{Binding Notes, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}">
             <i:Interaction.Behaviors>
                 <bhs:ValidationErrorBehavior />
             </i:Interaction.Behaviors>
@@ -183,12 +169,41 @@
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
                 <DataGrid.Columns>
-                    <DataGridTextColumn Binding="{Binding MedicineName}" Header="药品名称" />
-                    <DataGridTextColumn Binding="{Binding Dosage}" Header="单次用量" />
-                    <DataGridTextColumn Binding="{Binding Frequency}" Header="用药频次" />
-                    <DataGridTextColumn Binding="{Binding TimesPerDay}" Header="每日用药次数" />
-                    <DataGridTextColumn Binding="{Binding MedicationType}" Header="用药方式" />
-                    <DataGridTextColumn Binding="{Binding Status}" Header="明细状态" />
+                    <DataGridTextColumn
+                        Width="auto"
+                        Binding="{Binding MedicineName}"
+                        ElementStyle="{StaticResource CenterAlignmentStyle}"
+                        Header="药品名称" />
+                    <DataGridTextColumn
+                        Width="auto"
+                        Binding="{Binding DosageAmount}"
+                        ElementStyle="{StaticResource CenterAlignmentStyle}"
+                        Header="单次用量" />
+                    <DataGridTextColumn
+                        Width="auto"
+                        Binding="{Binding Frequency, Converter={cvs:EnumDisplayNameConverter}}"
+                        ElementStyle="{StaticResource CenterAlignmentStyle}"
+                        Header="用药频次" />
+                    <DataGridTextColumn
+                        Width="auto"
+                        Binding="{Binding TimesPerDay}"
+                        ElementStyle="{StaticResource CenterAlignmentStyle}"
+                        Header="每日用药次数" />
+                    <DataGridTextColumn
+                        Width="auto"
+                        Binding="{Binding MedicationType, Converter={cvs:EnumDisplayNameConverter}}"
+                        ElementStyle="{StaticResource CenterAlignmentStyle}"
+                        Header="用药方式" />
+                    <DataGridTextColumn
+                        Width="auto"
+                        Binding="{Binding Status, Converter={cvs:EnumDisplayNameConverter}}"
+                        ElementStyle="{StaticResource CenterAlignmentStyle}"
+                        Header="明细状态" />
+                    <DataGridTextColumn
+                        Width="auto"
+                        Binding="{Binding Notes}"
+                        ElementStyle="{StaticResource CenterAlignmentStyle}"
+                        Header="备注" />
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>

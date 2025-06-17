@@ -9,6 +9,8 @@ using Prism.Dialogs;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Reflection;
+using OldHome.Core.Attributes;
 
 namespace OldHome.DesktopApp.ViewModels
 {
@@ -84,9 +86,9 @@ namespace OldHome.DesktopApp.ViewModels
                 ValidateProperty(nameof(Notes));
             }
         }
-        public ObservableCollection<MedicineType> AllMedicineTypes { get; set; } = new ObservableCollection<MedicineType>();
-        public ObservableCollection<PrescriptionItemStatus> AllPrescriptionItemStatuses { get; set; } = new ObservableCollection<PrescriptionItemStatus>();
-
+        public ObservableCollection<MedicineType> MedicineTypes { get; set; } = new ObservableCollection<MedicineType>();
+        public ObservableCollection<PrescriptionItemStatus> Statuses { get; set; } = new ObservableCollection<PrescriptionItemStatus>();
+        public ObservableCollection<MedicationFrequency> Frequencies { get; set; } = new ObservableCollection<MedicationFrequency>();
 
 
         #endregion
@@ -94,11 +96,15 @@ namespace OldHome.DesktopApp.ViewModels
         {
             foreach (MedicineType item in Enum.GetValues(typeof(MedicineType)))
             {
-                AllMedicineTypes.Add(item);
+                MedicineTypes.Add(item);
             }
             foreach (PrescriptionItemStatus item in Enum.GetValues(typeof(PrescriptionItemStatus)))
             {
-                AllPrescriptionItemStatuses.Add(item);
+                Statuses.Add(item);
+            }
+            foreach (MedicationFrequency item in Enum.GetValues(typeof(MedicationFrequency)))
+            {
+                Frequencies.Add(item);
             }
         }
 
@@ -122,10 +128,11 @@ namespace OldHome.DesktopApp.ViewModels
             {
                 { "Item", new MedicationPrescriptionItemDto
                     {
-                        Id = Id.Value,
                         Medicine = SelectedMedicine,
+                        MedicineName= SelectedMedicine?.Name ?? string.Empty,
                         DosageAmount = DosageAmount.Value,
                         Frequency = SelectedFrequency.Value,
+                        TimesPerDay= typeof(MedicationFrequency).GetField(SelectedFrequency.Value.ToString())?.GetCustomAttribute<TimesPerDayAttribute>()?.Times ?? 1,
                         MedicationType = SelectedMedicineType.Value,
                         Status = SelectedStatus.Value,
                         Notes = Notes

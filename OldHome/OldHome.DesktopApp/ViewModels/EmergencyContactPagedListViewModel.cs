@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace OldHome.DesktopApp.ViewModels
 {
-    [Navigation("SettingEmergencyContacts", "SettingEmergencyContacts", "监护联系人", "人员物料", Icon = "e93b")]
+    [Navigation("SettingEmergencyContacts", "SettingEmergencyContacts", "监护联系人", "人员信息", Icon = "e93b")]
     public class EmergencyContactPagedListViewModel : BaseOrgByPagedListViewModel<EmergencyContactDto, EmergencyContactFormViewModel>
     {
         private string _queryName;

@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace OldHome.DesktopApp.ViewModels
 {
-    [Navigation("SettingStaffs", "SettingStaffs", "雇员", "人员物料", IsDefault = false, Icon = "e93b")]
+    [Navigation("SettingStaffs", "SettingStaffs", "雇员", "人员信息", IsDefault = false, Icon = "e93b")]
     public class StaffPagedListViewModel : BaseOrgByPagedListViewModel<StaffDto, StaffFormViewModel>
     {
         public ObservableCollection<DepartmentSample> AllDepartments { get; set; } = new ObservableCollection<DepartmentSample>();

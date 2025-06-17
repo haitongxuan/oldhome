@@ -129,14 +129,8 @@ namespace OldHome.DesktopApp.ViewModels
             {
                 if (result.Result == ButtonResult.OK)
                 {
-                    MedicineSample medicineSample = result.Parameters.GetValue<MedicineSample>("Medicine");
-                    Items.Add(new MedicationPrescriptionItemDto
-                    {
-                        MedicineId = medicineSample.Id,
-                        MedicineName = medicineSample.Name,
-                        MedicationType = result.Parameters.GetValue<MedicineType>("MedicineType"),
-
-                    });
+                    var item = result.Parameters.GetValue<MedicationPrescriptionItemDto>("Item");
+                    Items.Add(item);
                 }
             }, nameof(CustomDialogWindow));
         }
@@ -187,7 +181,6 @@ namespace OldHome.DesktopApp.ViewModels
                 SelectedPrescriptionType = detail.PrescriptionType;
                 SelectedStatus = detail.Status;
                 Diagnosis = detail.Diagnosis;
-                Notes = detail.Notes;
                 foreach (var item in detail.Items)
                 {
                     Items.Add(item);
@@ -198,19 +191,19 @@ namespace OldHome.DesktopApp.ViewModels
 
         protected override async Task<bool> CreateAsync()
         {
-            return await ValidateAndRunAsync(async () =>
-                await _api.CreateMedicationPrescription(new MedicationPrescriptionDto
-                {
-                    PrescriptionNumber = PrescriptionNumber,
-                    ResidentId = SelectedResident!.Id,
-                    StartDate = DateOnly.FromDateTime(StartDate!.Value),
-                    EndDate = EndDate == null ? null : DateOnly.FromDateTime(EndDate.Value),
-                    PrescriptionType = SelectedPrescriptionType!.Value,
-                    Status = SelectedStatus!.Value,
-                    Diagnosis = Diagnosis,
-                    Notes = Notes,
-                    Items = Items.ToList()
-                }), head: "处方创建");
+            var res = await ValidateAndRunAsync(async () =>
+            {
+                var dto = new MedicationPrescriptionDto();
+                dto.ResidentId = SelectedResident!.Id;
+                dto.StartDate = DateOnly.FromDateTime(StartDate!.Value);
+                dto.EndDate = EndDate is not null ? DateOnly.FromDateTime(EndDate.Value) : null;
+                dto.PrescriptionType = SelectedPrescriptionType.Value;
+                dto.Status = SelectedStatus!.Value;
+                dto.Diagnosis = Diagnosis;
+                dto.Items = Items.ToList();
+                return await _api.CreateMedicationPrescription(dto);
+            }, head: "处方创建");
+            return res;
         }
 
         protected override Task<bool> ModifyAsync()

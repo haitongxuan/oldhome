@@ -9,12 +9,12 @@ namespace OldHome.Service.Endpoints
         public static void MapMediciationPrescriptionEndpoints(this IEndpointRouteBuilder app)
         {
             var group = app.MapGroup("medication-prescriptions");
-            EndpointsHelper.GetPage<MedicationPrescriptionItemDto, MedicationPrescription>(group,
+            EndpointsHelper.GetPage<MedicationPrescriptionDto, MedicationPrescription>(group,
                 [q => q.Include(p => p.Resident),
                  q => q.Include(p => p.Doctor),
                  q => q.Include(p => p.Items).ThenInclude(i => i.Medicine)]);
-            EndpointsHelper.Create<MedicationPrescriptionItemDto, MedicationPrescription, MedicationPrescriptionDto>(group);
-            EndpointsHelper.Modify<MedicationPrescriptionItemDto, MedicationPrescription>(group);
+            EndpointsHelper.Create<MedicationPrescriptionDto, MedicationPrescription, MedicationPrescriptionDto>(group);
+            EndpointsHelper.Modify<MedicationPrescriptionDto, MedicationPrescription>(group);
             EndpointsHelper.Delete<MedicationPrescription>(group);
         }
     }
