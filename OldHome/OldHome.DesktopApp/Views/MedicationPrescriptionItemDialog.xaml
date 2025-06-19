@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:acb="http://wpfcontrols.com/"
     xmlns:bhs="clr-namespace:OldHome.DesktopApp.Behaviors"
+    xmlns:cs="clr-namespace:OldHome.DesktopApp.Converters"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
     xmlns:local="clr-namespace:OldHome.DesktopApp.Views"
@@ -138,10 +139,20 @@
             Grid.Row="9"
             Grid.Column="1"
             Orientation="Horizontal">
-            <Button
-                HorizontalAlignment="Right"
-                Command="{Binding OkCommand}"
-                Style="{StaticResource AddButton}" />
+            <Button HorizontalAlignment="Right" Command="{Binding OkCommand}">
+                <Button.Style>
+                    <Style BasedOn="{StaticResource AddButton}" TargetType="Button">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding State}" Value="Edit">
+                                <Setter Property="Content" Value="修改" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding State}" Value="Create">
+                                <Setter Property="Content" Value="新增" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
             <Button
                 HorizontalAlignment="Right"
                 Command="{Binding CancelCommand}"

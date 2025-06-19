@@ -3,16 +3,19 @@ using OldHome.Core;
 using OldHome.DesktopApp.ViewModels.Base;
 using OldHome.DesktopApp.Views.Windows;
 using OldHome.DTO;
+using Panuon.WPF.UI;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace OldHome.DesktopApp.ViewModels
 {
-    public class MedicationPrescriptionFormViewModel : BaseFormViewModel<MedicationPrescriptionDto, MedicationPrescriptionFormViewModel>
+    public class MedicationPrescriptionFormViewModel
+        : BaseItemFormViewModel<MedicationPrescriptionDto, MedicationPrescriptionFormViewModel, MedicationPrescriptionItemDto>
     {
         #region Properties
 
@@ -21,13 +24,6 @@ namespace OldHome.DesktopApp.ViewModels
         {
             get { return _enableOperate; }
             set { SetProperty(ref _enableOperate, value); }
-        }
-
-        private int? _selectedItemId;
-        public int? SelectedItemId
-        {
-            get { return _selectedItemId; }
-            set { SetProperty(ref _selectedItemId, value); }
         }
 
         private string _prescriptionNumber;
@@ -124,57 +120,13 @@ namespace OldHome.DesktopApp.ViewModels
 
         public ObservableCollection<PrescriptionType> AllPrescriptionTypes { get; set; } = new ObservableCollection<PrescriptionType>();
         public ObservableCollection<PrescriptionStatus> AllPrescriptionStatuses { get; set; } = new ObservableCollection<PrescriptionStatus>();
-        public ObservableCollection<MedicationPrescriptionItemDto> Items { get; set; } = new ObservableCollection<MedicationPrescriptionItemDto>();
         #endregion
 
-        private readonly IDialogService _dialogService;
+        protected override Func<MedicationPrescriptionItemDto, string> DeleteItemMessage => (item) => { return $"处方项：{item.MedicineName}"; };
+        protected override string DialogName => "MedicationPrescriptionItemDialog";
 
-        private DelegateCommand _addItemCommand;
-        public DelegateCommand AddItemCommand =>
-            _addItemCommand ?? (_addItemCommand = new DelegateCommand(ExecuteAddItemCommand));
-
-        void ExecuteAddItemCommand()
+        public MedicationPrescriptionFormViewModel(IValidator<MedicationPrescriptionFormViewModel> validator, IDialogService dialogService) : base(validator, dialogService)
         {
-            DialogParameters parameters = new DialogParameters
-            {
-                { "State", FormState.Create }
-            };
-            _dialogService.Show("MedicationPrescriptionItemDialog", parameters, result =>
-            {
-                if (result.Result == ButtonResult.OK)
-                {
-                    var item = result.Parameters.GetValue<MedicationPrescriptionItemDto>("Item");
-                    Items.Add(item);
-                }
-            }, nameof(CustomDialogWindow));
-        }
-
-        private DelegateCommand<MedicationPrescriptionItemDto> _editItem;
-        public DelegateCommand<MedicationPrescriptionItemDto> EditItemCommand =>
-            _editItem ?? (_editItem = new DelegateCommand<MedicationPrescriptionItemDto>(ExecuteEditItemCommand));
-
-        void ExecuteEditItemCommand(MedicationPrescriptionItemDto parameter)
-        {
-            DialogParameters parameters = new DialogParameters
-            {
-                { "State", FormState.Edit },
-                { "Index", Items.IndexOf(parameter) },
-                { "Item", parameter   }
-            };
-            _dialogService.Show("MedicationPrescriptionItemDialog", parameters, result =>
-            {
-                if (result.Result == ButtonResult.OK)
-                {
-                    var item = result.Parameters.GetValue<MedicationPrescriptionItemDto>("Item");
-                    int index = result.Parameters.GetValue<int>("Index");
-                    Items[index] = item;
-                }
-            }, nameof(CustomDialogWindow));
-        }
-
-        public MedicationPrescriptionFormViewModel(IValidator<MedicationPrescriptionFormViewModel> validator, IDialogService dialogService) : base(validator)
-        {
-            _dialogService = dialogService;
             foreach (PrescriptionType item in Enum.GetValues(typeof(PrescriptionType)))
             {
                 this.AllPrescriptionTypes.Add(item);

@@ -58,6 +58,7 @@
             Provider="{StaticResource EmptyResidentProvider}"
             SelectedItem="{Binding SelectedResident, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}"
             Style="{StaticResource PanuonNormalAutoCompleteTextBox}">
+            
             <i:Interaction.Behaviors>
                 <bhs:ValidationErrorBehavior />
             </i:Interaction.Behaviors>
@@ -186,11 +187,6 @@
                         Header="用药频次" />
                     <DataGridTextColumn
                         Width="auto"
-                        Binding="{Binding TimesPerDay}"
-                        ElementStyle="{StaticResource CenterAlignmentStyle}"
-                        Header="每日用药次数" />
-                    <DataGridTextColumn
-                        Width="auto"
                         Binding="{Binding MedicationType, Converter={cvs:EnumDisplayNameConverter}}"
                         ElementStyle="{StaticResource CenterAlignmentStyle}"
                         Header="用药方式" />
@@ -204,13 +200,10 @@
                         Binding="{Binding Notes}"
                         ElementStyle="{StaticResource CenterAlignmentStyle}"
                         Header="备注" />
-                    <DataGridTemplateColumn
-                        Width="auto"
-                        Header="操作"
-                        Visibility="{Binding DataContext.EnableOperate, Converter={cvs:Boolean2VisibilityConverter}, RelativeSource={RelativeSource AncestorType=UserControl}}">
+                    <DataGridTemplateColumn Width="auto">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <StackPanel Orientation="Horizontal">
+                                <StackPanel Orientation="Horizontal" Visibility="{Binding DataContext.EnableOperate, Converter={cvs:Boolean2VisibilityConverter}, RelativeSource={RelativeSource AncestorType=UserControl}}">
                                     <Button
                                         Command="{Binding DataContext.EditItemCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
                                         CommandParameter="{Binding}"

@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace OldHome.DesktopApp.ViewModels
 {
     [Navigation("SettingMedicationPrescriptions", "SettingMedicationPrescriptions", "长者药物处方", "用药管理", Icon = "e93b")]
-    public class MedicationPrescriptionPagedListViewModel : BasePagedListViewModel<MedicationPrescriptionDto, MedicationPrescriptionFormViewModel>
+    public class MedicationPrescriptionPagedListViewModel : BaseOrgByPagedListViewModel<MedicationPrescriptionDto, MedicationPrescriptionFormViewModel>
     {
         private ResidentSample? _queryResident;
         public ResidentSample? QueryResident

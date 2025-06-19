@@ -124,21 +124,26 @@ namespace OldHome.DesktopApp.ViewModels
 
         protected override DialogParameters GetDialogParameters()
         {
+            var dto = new MedicationPrescriptionItemDto
+            {
+                Medicine = SelectedMedicine,
+                MedicineId = SelectedMedicine.Id,
+                MedicineName = SelectedMedicine?.Name ?? string.Empty,
+                DosageAmount = DosageAmount.Value,
+                Frequency = SelectedFrequency.Value,
+                TimesPerDay = typeof(MedicationFrequency).GetField(SelectedFrequency.Value.ToString())?.GetCustomAttribute<TimesPerDayAttribute>()?.Times ?? 1,
+                MedicationType = SelectedMedicineType.Value,
+                Status = SelectedStatus.Value,
+                Notes = Notes
+            };
+            if (State.Equals(FormState.Edit))
+            {
+                dto.Id = Id.Value;
+            }
+
             DialogParameters parameters = new DialogParameters
             {
-                { "Item", new MedicationPrescriptionItemDto
-                    {
-                        Medicine = SelectedMedicine,
-                        MedicineId=SelectedMedicine.Id,
-                        MedicineName= SelectedMedicine?.Name ?? string.Empty,
-                        DosageAmount = DosageAmount.Value,
-                        Frequency = SelectedFrequency.Value,
-                        TimesPerDay= typeof(MedicationFrequency).GetField(SelectedFrequency.Value.ToString())?.GetCustomAttribute<TimesPerDayAttribute>()?.Times ?? 1,
-                        MedicationType = SelectedMedicineType.Value,
-                        Status = SelectedStatus.Value,
-                        Notes = Notes
-                    }
-                }
+                { "Item",dto}
             };
             return parameters;
         }

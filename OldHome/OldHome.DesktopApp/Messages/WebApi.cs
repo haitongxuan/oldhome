@@ -720,7 +720,7 @@ namespace OldHome.DesktopApp.Messages
 
         public async Task<BaseResponse> ModifyMedicationPrescription(MedicationPrescriptionDto modify)
         {
-            var response = await _apiClient.PostAsync("medication-prescriptions/modify", modify);
+            var response = await _apiClient.PostAsync("medication-prescriptions/modify-items", modify);
             return response;
         }
 

@@ -333,6 +333,41 @@ namespace OldHome.Service.Endpoints
             }
         }
 
+        public static void ModifyItems<T, E, ItemE>(RouteGroupBuilder group, bool authorize = true)
+            where T : BaseDto
+            where E : BaseItemsOrgByEntity<ItemE>
+            where ItemE : BaseEntity
+        {
+            var req = group.MapPost("/modify-items", async (AppDataContext db, IMapper mapper, T dto, HttpContext httpContext) =>
+            {
+                try
+                {
+                    E? entity;
+                    entity = await db.Set<E>().Include(p => p.Items).FirstOrDefaultAsync(p => p.Id == dto.Id);
+
+                    if (entity == null)
+                    {
+                        return Results.NotFound();
+                    }
+
+                    var userName = httpContext.User.FindFirst(ClaimTypes.Name)?.Value ?? "";
+                    dto.UpdateAt = DateTime.UtcNow;
+                    dto.UpdateBy = userName;
+                    mapper.Map(dto, entity);
+                    await db.SaveChangesAsync();
+                    return Results.Ok();
+                }
+                catch (Exception ex)
+                {
+                    return Results.BadRequest(ex.Message);
+                }
+            });
+            if (authorize)
+            {
+                req.RequireAuthorization();
+            }
+        }
+
 
         public static void Create<T, E, R>(RouteGroupBuilder group, bool authorize = true) where T : BaseDto where E : BaseEntity where R : class
         {

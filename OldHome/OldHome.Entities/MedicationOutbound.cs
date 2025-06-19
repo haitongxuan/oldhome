@@ -12,7 +12,7 @@ namespace OldHome.Entities
     /// <summary>
     /// 发药出库单 - 专门用于发药的出库单
     /// </summary>
-    public class MedicationOutbound : BaseOrgByEntity
+    public class MedicationOutbound : BaseItemsOrgByEntity<MedicationOutboundItem>
     {
         /// <summary>
         /// 发药单号

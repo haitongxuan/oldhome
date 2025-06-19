@@ -13,7 +13,7 @@ namespace OldHome.Service.Endpoints
                 [q => q.Include(p => p.Resident),
                  q => q.Include(p => p.Items).ThenInclude(i => i.Medicine)]);
             EndpointsHelper.Create<MedicationPrescriptionDto, MedicationPrescription, MedicationPrescriptionDto>(group);
-            EndpointsHelper.Modify<MedicationPrescriptionModifyDto, MedicationPrescription>(group);
+            EndpointsHelper.ModifyItems<MedicationPrescriptionModifyDto, MedicationPrescription, MedicationPrescriptionItem>(group);
             EndpointsHelper.Delete<MedicationPrescription>(group);
         }
     }

@@ -12,7 +12,7 @@ namespace OldHome.Entities
     /// <summary>
     /// 用药处方 - 医生开具的用药方案
     /// </summary>
-    public class MedicationPrescription : BaseOrgByEntity, ISerialNumberEntity
+    public class MedicationPrescription : BaseItemsOrgByEntity<MedicationPrescriptionItem>, ISerialNumberEntity
     {
         /// <summary>
         /// 处方号
@@ -78,9 +78,5 @@ namespace OldHome.Entities
         /// </summary>
         public DateOnly? ReviewedDate { get; set; }
 
-        /// <summary>
-        /// 处方明细
-        /// </summary>
-        public List<MedicationPrescriptionItem> Items { get; set; } = new List<MedicationPrescriptionItem>();
     }
 }

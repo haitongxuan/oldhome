@@ -158,7 +158,7 @@ namespace OldHome.DesktopApp.ViewModels.Base
                 if (successMsg is not null)
                     _notificationUIService.ShowSuccess(successMsg);
                 else if (head is not null)
-                    _notificationUIService.ShowSuccess($"创建{head}成功");
+                    _notificationUIService.ShowSuccess($"{head}成功");
                 else
                     _notificationUIService.ShowSuccess("创建成功");
                 Clear();
@@ -171,11 +171,11 @@ namespace OldHome.DesktopApp.ViewModels.Base
                 }
                 else if (head is not null)
                 {
-                    _notificationUIService.ShowError($"创建{head}失败,失败原因:{response.Message}");
+                    _notificationUIService.ShowError($"{head}失败,失败原因:{response.Message}");
                 }
                 else
                 {
-                    _notificationUIService.ShowError($"创建失败,失败原因:{response.Message}");
+                    _notificationUIService.ShowError($"失败,失败原因:{response.Message}");
                 }
             }
         }
@@ -186,7 +186,7 @@ namespace OldHome.DesktopApp.ViewModels.Base
                 if (successMsg is not null)
                     _notificationUIService.ShowSuccess(successMsg);
                 else if (head is not null)
-                    _notificationUIService.ShowSuccess($"创建{head}成功");
+                    _notificationUIService.ShowSuccess($"{head}成功");
                 else
                     _notificationUIService.ShowSuccess("创建成功");
                 Clear();
@@ -199,11 +199,11 @@ namespace OldHome.DesktopApp.ViewModels.Base
                 }
                 else if (head is not null)
                 {
-                    _notificationUIService.ShowError($"创建{head}失败,失败原因:{response.Message}");
+                    _notificationUIService.ShowError($"{head}失败,失败原因:{response.Message}");
                 }
                 else
                 {
-                    _notificationUIService.ShowError($"创建失败,失败原因:{response.Message}");
+                    _notificationUIService.ShowError($"失败,失败原因:{response.Message}");
                 }
             }
         }
