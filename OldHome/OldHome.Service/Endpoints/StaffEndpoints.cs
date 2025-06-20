@@ -14,6 +14,8 @@ namespace OldHome.Service.Endpoints
 
             EndpointsHelper.GetAllSamples<StaffSample, Staff>(group);
 
+            EndpointsHelper.GetTop10Samples<StaffSample, Staff>(group);
+
             EndpointsHelper.Create<StaffCreateDto, Staff, StaffDto>(group);
 
             EndpointsHelper.Modify<StaffModifyDto, Staff>(group);

@@ -64,6 +64,7 @@ namespace OldHome.Service
             app.MapResidentEndpoints();
             app.MapMedicineInventoryEndpoints();
             app.MapMediciationPrescriptionEndpoints();
+            app.MapMedicationOutboundEndpoints();
 
             app.Run();
         }

@@ -11,6 +11,7 @@
                 <pu:StyleDictionary Excludes="ProgressBar" />
                 <ResourceDictionary Source="Themes/DefaultTheme.xaml" />
                 <ResourceDictionary Source="Themes/ToastTheme.xaml" />
+                <ResourceDictionary Source="/Themes/AutoCompletes.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

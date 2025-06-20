@@ -1,5 +1,5 @@
 ﻿<local:BaseUserControl
-    x:Class="OldHome.DesktopApp.Views.MedicationPrescriptionForm"
+    x:Class="OldHome.DesktopApp.Views.MedicationOutboundForm"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:acb="http://wpfcontrols.com/"
@@ -31,15 +31,16 @@
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
             <RowDefinition />
         </Grid.RowDefinitions>
         <!--#region 添加表单数据项-->
-        <TextBlock Style="{StaticResource Header}" Text="处方编号:" />
+        <TextBlock Style="{StaticResource Header}" Text="发药单号:" />
         <TextBox
             Grid.Column="1"
-            d:Text="111"
+            d:Text="OUT20241201001"
             Style="{StaticResource ReadonlyBox}"
-            Text="{Binding PrescriptionNumber, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}">
+            Text="{Binding OutboundNumber, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}">
             <i:Interaction.Behaviors>
                 <bhs:ValidationErrorBehavior />
             </i:Interaction.Behaviors>
@@ -48,73 +49,96 @@
             Grid.Row="0"
             Grid.Column="2"
             Style="{StaticResource Header}"
-            Text="长者:" />
-        <acb:AutoCompleteTextBox
+            Text="发药日期:" />
+        <pu:DateTimePicker
             Grid.Row="0"
             Grid.Column="3"
-            DisplayMember="Name"
-            ItemTemplate="{StaticResource ResidentItemTemplate}"
-            MaxLength="20"
-            Provider="{StaticResource EmptyResidentProvider}"
-            SelectedItem="{Binding SelectedResident, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}"
-            Style="{StaticResource PanuonNormalAutoCompleteTextBox}">
+            SelectedDateTime="{Binding OutboundDate, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}"
+            Style="{StaticResource FormDatePicker}">
+            <i:Interaction.Behaviors>
+                <bhs:ValidationErrorBehavior />
+            </i:Interaction.Behaviors>
+        </pu:DateTimePicker>
 
-            <i:Interaction.Behaviors>
-                <bhs:ValidationErrorBehavior />
-            </i:Interaction.Behaviors>
-        </acb:AutoCompleteTextBox>
         <TextBlock
             Grid.Row="1"
             Style="{StaticResource Header}"
-            Text="用药开始日期:" />
-        <pu:DateTimePicker
-            Grid.Row="1"
-            Grid.Column="1"
-            SelectedDateTime="{Binding StartDate, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}"
-            Style="{StaticResource FormDatePicker}">
-            <i:Interaction.Behaviors>
-                <bhs:ValidationErrorBehavior />
-            </i:Interaction.Behaviors>
-        </pu:DateTimePicker>
-        <TextBlock
-            Grid.Row="1"
-            Grid.Column="2"
-            Style="{StaticResource Header}"
-            Text="用药结束日期:" />
-        <pu:DateTimePicker
-            Grid.Row="1"
-            Grid.Column="3"
-            SelectedDateTime="{Binding EndDate, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}"
-            Style="{StaticResource FormDatePicker}">
-            <i:Interaction.Behaviors>
-                <bhs:ValidationErrorBehavior />
-            </i:Interaction.Behaviors>
-        </pu:DateTimePicker>
-        <TextBlock
-            Grid.Row="2"
-            Style="{StaticResource Header}"
-            Text="处方类型:" />
+            Text="发药时间段:" />
         <ComboBox
-            Grid.Row="2"
+            Grid.Row="1"
             Grid.Column="1"
             VerticalAlignment="Bottom"
-            ItemsSource="{Binding AllPrescriptionTypes}"
-            SelectedValue="{Binding SelectedPrescriptionType, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}"
+            ItemsSource="{Binding AllMedicineTimes}"
+            SelectedValue="{Binding SelectedMedicineTime, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}"
             Style="{StaticResource FormEnumComboBox}">
             <i:Interaction.Behaviors>
                 <bhs:ValidationErrorBehavior />
             </i:Interaction.Behaviors>
         </ComboBox>
         <TextBlock
+            Grid.Row="1"
+            Grid.Column="2"
+            Style="{StaticResource Header}"
+            Text="发药类型:" />
+        <ComboBox
+            Grid.Row="1"
+            Grid.Column="3"
+            VerticalAlignment="Bottom"
+            ItemsSource="{Binding AllOutboundTypes}"
+            SelectedValue="{Binding SelectedOutboundType, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}"
+            Style="{StaticResource FormEnumComboBox}">
+            <i:Interaction.Behaviors>
+                <bhs:ValidationErrorBehavior />
+            </i:Interaction.Behaviors>
+        </ComboBox>
+
+        <TextBlock
+            Grid.Row="2"
+            Style="{StaticResource Header}"
+            Text="发药护士:" />
+        <acb:AutoCompleteTextBox
+            Grid.Row="2"
+            Grid.Column="1"
+            Margin="0,0,0,15"
+            DisplayMember="Name"
+            ItemTemplate="{StaticResource StaffItemTemplate}"
+            MaxLength="20"
+            Provider="{StaticResource EmptyStaffProvider}"
+            SelectedItem="{Binding SelectedPharmacist, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}"
+            Style="{StaticResource PanuonNormalAutoCompleteTextBox}">
+            <i:Interaction.Behaviors>
+                <bhs:ValidationErrorBehavior />
+            </i:Interaction.Behaviors>
+        </acb:AutoCompleteTextBox>
+        <TextBlock
             Grid.Row="2"
             Grid.Column="2"
             Style="{StaticResource Header}"
-            Text="处方状态:" />
-        <ComboBox
+            Text="核对护士:" />
+        <acb:AutoCompleteTextBox
             Grid.Row="2"
             Grid.Column="3"
+            Margin="0,0,0,15"
+            DisplayMember="Name"
+            ItemTemplate="{StaticResource StaffItemTemplate}"
+            MaxLength="20"
+            Provider="{StaticResource EmptyStaffProvider}"
+            SelectedItem="{Binding SelectedCheckedBy, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}"
+            Style="{StaticResource PanuonNormalAutoCompleteTextBox}">
+            <i:Interaction.Behaviors>
+                <bhs:ValidationErrorBehavior />
+            </i:Interaction.Behaviors>
+        </acb:AutoCompleteTextBox>
+
+        <TextBlock
+            Grid.Row="3"
+            Style="{StaticResource Header}"
+            Text="出库状态:" />
+        <ComboBox
+            Grid.Row="3"
+            Grid.Column="1"
             VerticalAlignment="Bottom"
-            ItemsSource="{Binding AllPrescriptionStatuses}"
+            ItemsSource="{Binding AllOutboundStatuses}"
             SelectedValue="{Binding SelectedStatus, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}"
             Style="{StaticResource FormEnumComboBox}">
             <i:Interaction.Behaviors>
@@ -123,38 +147,112 @@
         </ComboBox>
         <TextBlock
             Grid.Row="3"
+            Grid.Column="2"
             Style="{StaticResource Header}"
-            Text="诊断说明:" />
-        <TextBox
+            Text="创建时间:" />
+        <pu:DateTimePicker
             Grid.Row="3"
+            Grid.Column="3"
+            SelectedDateTime="{Binding PreparedTime, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}"
+            Style="{StaticResource FormDatePicker}">
+            <i:Interaction.Behaviors>
+                <bhs:ValidationErrorBehavior />
+            </i:Interaction.Behaviors>
+        </pu:DateTimePicker>
+
+        <TextBlock
+            Grid.Row="4"
+            Style="{StaticResource Header}"
+            Text="核对时间:" />
+        <pu:DateTimePicker
+            Grid.Row="4"
+            Grid.Column="1"
+            SelectedDateTime="{Binding CheckedTime, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}"
+            Style="{StaticResource FormDatePicker}">
+            <i:Interaction.Behaviors>
+                <bhs:ValidationErrorBehavior />
+            </i:Interaction.Behaviors>
+        </pu:DateTimePicker>
+        <TextBlock
+            Grid.Row="4"
+            Grid.Column="2"
+            Style="{StaticResource Header}"
+            Text="发放时间:" />
+        <pu:DateTimePicker
+            Grid.Row="4"
+            Grid.Column="3"
+            SelectedDateTime="{Binding DispensedTime, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}"
+            Style="{StaticResource FormDatePicker}">
+            <i:Interaction.Behaviors>
+                <bhs:ValidationErrorBehavior />
+            </i:Interaction.Behaviors>
+        </pu:DateTimePicker>
+
+        <TextBlock
+            Grid.Row="5"
+            Style="{StaticResource Header}"
+            Text="总药品数量:" />
+        <pu:NumberInput
+            Grid.Row="5"
+            Grid.Column="1"
+            IsReadOnly="True"
+            Style="{StaticResource FormNumberInput}"
+            Value="{Binding TotalItemCount, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}">
+            <i:Interaction.Behaviors>
+                <bhs:ValidationErrorBehavior />
+            </i:Interaction.Behaviors>
+        </pu:NumberInput>
+        <TextBlock
+            Grid.Row="5"
+            Grid.Column="2"
+            Style="{StaticResource Header}"
+            Text="总金额:" />
+        <pu:NumberInput
+            Grid.Row="5"
+            Grid.Column="3"
+            IsReadOnly="True"
+            Style="{StaticResource FormNumberInput}"
+            Value="{Binding TotalAmount, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}">
+            <i:Interaction.Behaviors>
+                <bhs:ValidationErrorBehavior />
+            </i:Interaction.Behaviors>
+        </pu:NumberInput>
+
+        <TextBlock
+            Grid.Row="6"
+            Style="{StaticResource Header}"
+            Text="备注:" />
+        <TextBox
+            Grid.Row="6"
             Grid.Column="1"
             Grid.ColumnSpan="3"
             Width="500"
             Style="{StaticResource FormMultilineBox}"
-            Text="{Binding Diagnosis, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}">
+            Text="{Binding Notes, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}">
             <i:Interaction.Behaviors>
                 <bhs:ValidationErrorBehavior />
             </i:Interaction.Behaviors>
         </TextBox>
+
         <TextBlock
-            Grid.Row="5"
+            Grid.Row="7"
             Style="{StaticResource Header}"
             Text="创建时间:" />
         <TextBox
-            Grid.Row="5"
+            Grid.Row="7"
             Grid.Column="1"
             Style="{StaticResource ReadonlyBox}"
             Text="{Binding CreatedAt}" />
         <!--#endregion-->
         <StackPanel
-            Grid.Row="5"
+            Grid.Row="7"
             Grid.Column="3"
             Style="{StaticResource FormButtonPanel}">
             <Button Command="{Binding SaveCommand}" Style="{StaticResource SaveButton}" />
             <Button Command="{Binding ClearCommand}" Style="{StaticResource ClearButton}" />
             <Button Command="{Binding AddItemCommand}" Style="{StaticResource AddItemButton}" />
         </StackPanel>
-        <Grid Grid.Row="7" Grid.ColumnSpan="4">
+        <Grid Grid.Row="8" Grid.ColumnSpan="4">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="0*" />
                 <ColumnDefinition />
@@ -172,34 +270,49 @@
                 <DataGrid.Columns>
                     <DataGridTextColumn
                         Width="auto"
+                        Binding="{Binding ResidentName}"
+                        ElementStyle="{StaticResource CenterAlignmentStyle}"
+                        Header="住户" />
+                    <DataGridTextColumn
+                        Width="auto"
                         Binding="{Binding MedicineName}"
                         ElementStyle="{StaticResource CenterAlignmentStyle}"
                         Header="药品名称" />
                     <DataGridTextColumn
                         Width="auto"
-                        Binding="{Binding DosageAmount}"
+                        Binding="{Binding BatchNumber}"
                         ElementStyle="{StaticResource CenterAlignmentStyle}"
-                        Header="单次用量" />
+                        Header="批次号" />
                     <DataGridTextColumn
                         Width="auto"
-                        Binding="{Binding MedicineTime, Converter={cvs:EnumDisplayNameConverter}}"
+                        Binding="{Binding PlannedQuantity}"
                         ElementStyle="{StaticResource CenterAlignmentStyle}"
-                        Header="用药时间" />
+                        Header="计划用量" />
                     <DataGridTextColumn
                         Width="auto"
-                        Binding="{Binding MedicationType, Converter={cvs:EnumDisplayNameConverter}}"
+                        Binding="{Binding ActualQuantity}"
                         ElementStyle="{StaticResource CenterAlignmentStyle}"
-                        Header="用药方式" />
+                        Header="实际出库量" />
                     <DataGridTextColumn
                         Width="auto"
-                        Binding="{Binding Status, Converter={cvs:EnumDisplayNameConverter}}"
+                        Binding="{Binding UnitCost}"
                         ElementStyle="{StaticResource CenterAlignmentStyle}"
-                        Header="明细状态" />
+                        Header="单位成本" />
                     <DataGridTextColumn
                         Width="auto"
-                        Binding="{Binding Notes}"
+                        Binding="{Binding TotalCost}"
                         ElementStyle="{StaticResource CenterAlignmentStyle}"
-                        Header="备注" />
+                        Header="总成本" />
+                    <DataGridTextColumn
+                        Width="auto"
+                        Binding="{Binding DispenseStatus, Converter={cvs:EnumDisplayNameConverter}}"
+                        ElementStyle="{StaticResource CenterAlignmentStyle}"
+                        Header="发药状态" />
+                    <DataGridTextColumn
+                        Width="auto"
+                        Binding="{Binding ExpirationDate, StringFormat=yyyy-MM-dd}"
+                        ElementStyle="{StaticResource CenterAlignmentStyle}"
+                        Header="有效期" />
                     <DataGridTemplateColumn Width="auto">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>

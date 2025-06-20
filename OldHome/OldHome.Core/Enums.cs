@@ -322,18 +322,18 @@ namespace OldHome.Core
     /// </summary>
     public enum MedicationFrequency
     {
-        [Display(Name = "每日一次")]
+        [Display(Name = "每日")]
         [TimesPerDay(1)]
-        OnceDaily,
-        [Display(Name = "每日两次")]
+        PerDay,
+        [Display(Name = "两日")]
         [TimesPerDay(2)]
-        TwiceDaily,
-        [Display(Name = "每日三次")]
+        TwoDaily,
+        [Display(Name = "三日")]
         [TimesPerDay(3)]
         ThreeTimes,
-        [Display(Name = "每日四次")]
+        [Display(Name = "每周")]
         [TimesPerDay(4)]
-        FourTimes
+        PerWeek
     }
 
     /// <summary>

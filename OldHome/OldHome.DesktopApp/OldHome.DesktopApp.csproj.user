@@ -130,6 +130,15 @@
     <Compile Update="Views\FormUser.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\MedicationOutboundForm.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\MedicationOutboundItemDialog.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\MedicationOutboundPagedList.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\MedicationPrescriptionForm.xaml.cs">
       <SubType>Code</SubType>
     </Compile>

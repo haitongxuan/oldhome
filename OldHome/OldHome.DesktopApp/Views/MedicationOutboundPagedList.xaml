@@ -1,13 +1,14 @@
 ﻿<local:BaseUserControl
-    x:Class="OldHome.DesktopApp.Views.ResidentPagedList"
+    x:Class="OldHome.DesktopApp.Views.MedicationOutboundPagedList"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:acb="http://wpfcontrols.com/"
+    xmlns:cvs="clr-namespace:OldHome.DesktopApp.Converters"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
     xmlns:local="clr-namespace:OldHome.DesktopApp.Views"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:pu="https://opensource.panuon.com/wpf-ui"
-    xmlns:w="clr-namespace:OldHome.DesktopApp.Converters"
     d:Background="White"
     d:DesignHeight="800"
     d:DesignWidth="1220"
@@ -33,68 +34,115 @@
                         <ColumnDefinition Width="auto" />
                         <ColumnDefinition Width="auto" />
                         <ColumnDefinition Width="auto" />
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition Width="auto" />
                         <ColumnDefinition />
                     </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                    </Grid.RowDefinitions>
+
+                    <!--  第一行查询条件  -->
                     <TextBlock
-                        Margin="0"
+                        Grid.Column="0"
+                        Margin="0,0,5,0"
                         VerticalAlignment="Center"
                         Style="{StaticResource Header}"
-                        Text="区域:" />
-                    <ComboBox
+                        Text="开始日期:" />
+                    <pu:DateTimePicker
                         Grid.Column="1"
-                        Width="120"
-                        Margin="10,0,0,0"
-                        VerticalAlignment="Center"
-                        DisplayMemberPath="OrgAreaName"
-                        ItemsSource="{Binding AllOrgAreas}"
-                        SelectedValue="{Binding QueryOrgAreaId}"
-                        SelectedValuePath="Id"
-                        Style="{StaticResource NormalComboBox}" />
+                        Width="140"
+                        Margin="0,0,10,0"
+                        SelectedDateTime="{Binding QueryStartDate}"
+                        Style="{StaticResource NormalDatePicker}" />
+
                     <TextBlock
                         Grid.Column="2"
-                        Margin="5,0,0,0"
+                        Margin="0,0,5,0"
                         VerticalAlignment="Center"
                         Style="{StaticResource Header}"
-                        Text="楼层:" />
-                    <ComboBox
+                        Text="结束日期:" />
+                    <pu:DateTimePicker
                         Grid.Column="3"
-                        Width="120"
-                        Margin="10,0,0,0"
-                        VerticalAlignment="Center"
-                        ItemsSource="{Binding AllFloors}"
-                        SelectedValue="{Binding QueryFloor}"
-                        Style="{StaticResource NormalComboBox}" />
+                        Width="140"
+                        Margin="0,0,10,0"
+                        SelectedDateTime="{Binding QueryEndDate}"
+                        Style="{StaticResource NormalDatePicker}" />
 
                     <TextBlock
                         Grid.Column="4"
-                        Margin="5,0,0,0"
+                        Margin="0,0,5,0"
                         VerticalAlignment="Center"
                         Style="{StaticResource Header}"
-                        Text="房间:" />
+                        Text="发药时间段:" />
                     <ComboBox
                         Grid.Column="5"
                         Width="120"
-                        Margin="10,0,0,0"
+                        Margin="0,0,10,0"
                         VerticalAlignment="Center"
-                        DisplayMemberPath="RoomName"
-                        ItemsSource="{Binding Rooms}"
-                        SelectedValue="{Binding QueryRoomId}"
-                        SelectedValuePath="Id"
-                        Style="{StaticResource NormalComboBox}" />
+                        ItemsSource="{Binding AllMedicineTimes}"
+                        SelectedValue="{Binding QueryMedicineTime}"
+                        Style="{StaticResource EnumComboBox}" />
+
                     <TextBlock
                         Grid.Column="6"
-                        Margin="5,0,0,0"
+                        Margin="0,0,5,0"
                         VerticalAlignment="Center"
                         Style="{StaticResource Header}"
-                        Text="姓名:" />
-                    <TextBox
+                        Text="发药类型:" />
+                    <ComboBox
                         Grid.Column="7"
-                        Margin="10,0,0,0"
+                        Width="120"
+                        Margin="0,0,10,0"
                         VerticalAlignment="Center"
-                        Style="{StaticResource QueryBox}"
-                        Text="{Binding QueryName}" />
+                        ItemsSource="{Binding AllOutboundTypes}"
+                        SelectedValue="{Binding QueryOutboundType}"
+                        Style="{StaticResource EnumComboBox}" />
+
+                    <!--  第二行查询条件  -->
+                    <TextBlock
+                        Grid.Row="1"
+                        Grid.Column="0"
+                        Margin="0,5,5,0"
+                        VerticalAlignment="Center"
+                        Style="{StaticResource Header}"
+                        Text="出库状态:" />
+                    <ComboBox
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        Width="140"
+                        Margin="0,5,10,5"
+                        VerticalAlignment="Center"
+                        ItemsSource="{Binding AllOutboundStatuses}"
+                        SelectedValue="{Binding QueryStatus}"
+                        Style="{StaticResource EnumComboBox}" />
+
+                    <TextBlock
+                        Grid.Row="1"
+                        Grid.Column="2"
+                        Margin="0,5,5,0"
+                        VerticalAlignment="Center"
+                        Style="{StaticResource Header}"
+                        Text="发药护士:" />
+                    <acb:AutoCompleteTextBox
+                        Grid.Row="1"
+                        Grid.Column="3"
+                        Grid.ColumnSpan="2"
+                        Margin="0,-3,10,5"
+                        Padding="0"
+                        HorizontalAlignment="Left"
+                        DisplayMember="Name"
+                        ItemTemplate="{StaticResource StaffItemTemplate}"
+                        MaxLength="20"
+                        Provider="{StaticResource EmptyStaffProvider}"
+                        SelectedItem="{Binding QueryPharmacist, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        Style="{StaticResource PanuonNormalAutoCompleteTextBox}" />
+
                     <Button
-                        Grid.Column="8"
+                        Grid.Row="1"
+                        Grid.Column="5"
+                        Margin="0,5,0,0"
                         Command="{Binding QueryCommand}"
                         Style="{StaticResource QueryButton}" />
                 </Grid>
@@ -141,69 +189,59 @@
                                 Header="ID" />
                             <DataGridTextColumn
                                 Width="auto"
-                                Binding="{Binding Name}"
+                                Binding="{Binding OutboundNumber}"
                                 ElementStyle="{StaticResource CenterAlignmentStyle}"
-                                Header="长者姓名" />
+                                Header="发药单号" />
                             <DataGridTextColumn
                                 Width="auto"
-                                Binding="{Binding Code}"
+                                Binding="{Binding OutboundDate, StringFormat=yyyy-MM-dd}"
                                 ElementStyle="{StaticResource CenterAlignmentStyle}"
-                                Header="长者编号" />
+                                Header="发药日期" />
                             <DataGridTextColumn
                                 Width="auto"
-                                Binding="{Binding Gender, Converter={w:EnumDisplayNameConverter}}"
+                                Binding="{Binding MedicineTime, Converter={cvs:EnumDisplayNameConverter}}"
                                 ElementStyle="{StaticResource CenterAlignmentStyle}"
-                                Header="性别" />
+                                Header="发药时间段" />
                             <DataGridTextColumn
                                 Width="auto"
-                                Binding="{Binding BirthDate}"
+                                Binding="{Binding OutboundType, Converter={cvs:EnumDisplayNameConverter}}"
                                 ElementStyle="{StaticResource CenterAlignmentStyle}"
-                                Header="生日" />
+                                Header="发药类型" />
                             <DataGridTextColumn
                                 Width="auto"
-                                Binding="{Binding Age}"
+                                Binding="{Binding PharmacistName}"
                                 ElementStyle="{StaticResource CenterAlignmentStyle}"
-                                Header="年龄" />
+                                Header="发药护士" />
                             <DataGridTextColumn
                                 Width="auto"
-                                Binding="{Binding IdCardNumber}"
+                                Binding="{Binding CheckedByName}"
                                 ElementStyle="{StaticResource CenterAlignmentStyle}"
-                                Header="身份证编号" />
+                                Header="核对护士" />
                             <DataGridTextColumn
                                 Width="auto"
-                                Binding="{Binding PhoneNumber}"
+                                Binding="{Binding Status, Converter={cvs:EnumDisplayNameConverter}}"
                                 ElementStyle="{StaticResource CenterAlignmentStyle}"
-                                Header="电话号码" />
+                                Header="出库状态" />
                             <DataGridTextColumn
                                 Width="auto"
-                                Binding="{Binding AdmissionDate}"
+                                Binding="{Binding TotalItemCount}"
                                 ElementStyle="{StaticResource CenterAlignmentStyle}"
-                                Header="入院日期" />
+                                Header="总药品数量" />
                             <DataGridTextColumn
                                 Width="auto"
-                                Binding="{Binding OrgAreaName}"
+                                Binding="{Binding TotalAmount, StringFormat=C}"
                                 ElementStyle="{StaticResource CenterAlignmentStyle}"
-                                Header="区域" />
+                                Header="总金额" />
                             <DataGridTextColumn
                                 Width="auto"
-                                Binding="{Binding Floor}"
+                                Binding="{Binding PreparedTime, StringFormat=yyyy-MM-dd HH:mm}"
                                 ElementStyle="{StaticResource CenterAlignmentStyle}"
-                                Header="楼层" />
+                                Header="创建时间" />
                             <DataGridTextColumn
                                 Width="auto"
-                                Binding="{Binding RoomNumber}"
+                                Binding="{Binding DispensedTime, StringFormat=yyyy-MM-dd HH:mm}"
                                 ElementStyle="{StaticResource CenterAlignmentStyle}"
-                                Header="房间号" />
-                            <DataGridTextColumn
-                                Width="auto"
-                                Binding="{Binding BedNumber}"
-                                ElementStyle="{StaticResource CenterAlignmentStyle}"
-                                Header="床号" />
-                            <DataGridTextColumn
-                                Width="auto"
-                                Binding="{Binding HealthStatus, Converter={w:EnumDisplayNameConverter}}"
-                                ElementStyle="{StaticResource CenterAlignmentStyle}"
-                                Header="健康状态" />
+                                Header="发放时间" />
                             <!--#endregion-->
                         </DataGrid.Columns>
                     </DataGrid>
@@ -226,13 +264,13 @@
                 x:Name="DrwMenu"
                 Grid.Column="1"
                 MinWidth="13"
-                MaxWidth="400"
+                MaxWidth="800"
                 BorderThickness="1,1,1,1"
                 CornerRadius="10,0,0,10"
                 IsOpen="{Binding IsOpen}">
                 <Grid>
                     <ToggleButton IsChecked="{Binding IsOpen, ElementName=DrwMenu, Mode=TwoWay}" Style="{StaticResource DrawerButton}" />
-                    <local:ResidentForm Margin="10,0,0,0" DataContext="{Binding FormViewModel}" />
+                    <local:MedicationOutboundForm DataContext="{Binding FormViewModel}" />
                 </Grid>
             </pu:Drawer>
         </Grid>

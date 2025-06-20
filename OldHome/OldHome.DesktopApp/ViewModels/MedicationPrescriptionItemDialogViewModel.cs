@@ -43,14 +43,14 @@ namespace OldHome.DesktopApp.ViewModels
             }
         }
 
-        private MedicationFrequency? _selectedFrequency;
-        public MedicationFrequency? SelectedFrequency
+        private MedicineTime? _selectedTime;
+        public MedicineTime? SelectedTime
         {
-            get { return _selectedFrequency; }
+            get { return _selectedTime; }
             set
             {
-                SetProperty(ref _selectedFrequency, value);
-                ValidateProperty(nameof(SelectedFrequency));
+                SetProperty(ref _selectedTime, value);
+                ValidateProperty(nameof(SelectedTime));
             }
         }
 
@@ -88,7 +88,7 @@ namespace OldHome.DesktopApp.ViewModels
         }
         public ObservableCollection<MedicineType> MedicineTypes { get; set; } = new ObservableCollection<MedicineType>();
         public ObservableCollection<PrescriptionItemStatus> Statuses { get; set; } = new ObservableCollection<PrescriptionItemStatus>();
-        public ObservableCollection<MedicationFrequency> Frequencies { get; set; } = new ObservableCollection<MedicationFrequency>();
+        public ObservableCollection<MedicineTime> Times { get; set; } = new ObservableCollection<MedicineTime>();
 
 
         #endregion
@@ -102,9 +102,9 @@ namespace OldHome.DesktopApp.ViewModels
             {
                 Statuses.Add(item);
             }
-            foreach (MedicationFrequency item in Enum.GetValues(typeof(MedicationFrequency)))
+            foreach (MedicineTime item in Enum.GetValues(typeof(MedicineTime)))
             {
-                Frequencies.Add(item);
+                Times.Add(item);
             }
         }
 
@@ -115,7 +115,7 @@ namespace OldHome.DesktopApp.ViewModels
             Id = item.Id;
             SelectedMedicine = item.Medicine;
             DosageAmount = item.DosageAmount;
-            SelectedFrequency = item.Frequency;
+            SelectedTime = item.MedicineTime;
             SelectedMedicineType = item.MedicationType;
             SelectedStatus = item.Status;
             Notes = item.Notes;
@@ -130,8 +130,7 @@ namespace OldHome.DesktopApp.ViewModels
                 MedicineId = SelectedMedicine.Id,
                 MedicineName = SelectedMedicine?.Name ?? string.Empty,
                 DosageAmount = DosageAmount.Value,
-                Frequency = SelectedFrequency.Value,
-                TimesPerDay = typeof(MedicationFrequency).GetField(SelectedFrequency.Value.ToString())?.GetCustomAttribute<TimesPerDayAttribute>()?.Times ?? 1,
+                MedicineTime = SelectedTime.Value,
                 MedicationType = SelectedMedicineType.Value,
                 Status = SelectedStatus.Value,
                 Notes = Notes

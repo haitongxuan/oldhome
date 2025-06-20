@@ -107,5 +107,10 @@ namespace OldHome.DesktopApp.ViewModels.Base
         {
             _dialogService = dialogService;
         }
+
+        protected virtual void OnItemsChanged()
+        {
+
+        }
     }
 }

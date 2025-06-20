@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OldHome.DAL;
 
@@ -10,9 +11,11 @@ using OldHome.DAL;
 namespace OldHome.DAL.Migrations
 {
     [DbContext(typeof(AppDataContext))]
-    partial class AppDataContextModelSnapshot : ModelSnapshot
+    [Migration("20250620031642_Update21")]
+    partial class Update21
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "9.0.4");
@@ -1304,6 +1307,9 @@ namespace OldHome.DAL.Migrations
                     b.Property<decimal>("DosageAmount")
                         .HasColumnType("TEXT");
 
+                    b.Property<int>("Frequency")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("Instructions")
                         .IsRequired()
                         .HasColumnType("TEXT");
@@ -1317,6 +1323,10 @@ namespace OldHome.DAL.Migrations
                     b.Property<decimal?>("MaxDailyDose")
                         .HasColumnType("TEXT");
 
+                    b.PrimitiveCollection<string>("MedicationTimes")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
                     b.Property<int>("MedicationType")
                         .HasColumnType("INTEGER");
 
@@ -1327,6 +1337,7 @@ namespace OldHome.DAL.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Notes")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("PRNCondition")
@@ -1340,6 +1351,9 @@ namespace OldHome.DAL.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<int>("Status")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("TimesPerDay")
                         .HasColumnType("INTEGER");
 
                     b.Property<DateTime>("UpdatedAt")

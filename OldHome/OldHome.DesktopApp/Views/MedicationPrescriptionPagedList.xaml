@@ -153,7 +153,7 @@
                 IsOpen="{Binding IsOpen}">
                 <Grid>
                     <ToggleButton IsChecked="{Binding IsOpen, ElementName=DrwMenu, Mode=TwoWay}" Style="{StaticResource DrawerButton}" />
-                    <local:MedicationPrescriptionForm DataContext="{Binding FormViewModel}" />
+                    <local:MedicationPrescriptionForm Margin="10,0,0,0" DataContext="{Binding FormViewModel}" />
                 </Grid>
             </pu:Drawer>
         </Grid>

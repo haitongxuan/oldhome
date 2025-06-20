@@ -26,6 +26,11 @@ namespace OldHome.Entities
         public Medicine Medicine { get; set; }
 
         /// <summary>
+        /// 发药时段
+        /// </summary>
+        public MedicineTime MedicineTime { get; set; }
+
+        /// <summary>
         /// 单次用量
         /// </summary>
         public string Dosage { get; set; } = string.Empty; // 如：1片、2ml、半片
@@ -34,21 +39,6 @@ namespace OldHome.Entities
         /// 单次用量数值（便于计算）
         /// </summary>
         public decimal DosageAmount { get; set; }
-
-        /// <summary>
-        /// 用药频次
-        /// </summary>
-        public MedicationFrequency Frequency { get; set; }
-
-        /// <summary>
-        /// 每日用药次数
-        /// </summary>
-        public int TimesPerDay { get; set; }
-
-        /// <summary>
-        /// 具体用药时间点
-        /// </summary>
-        public List<MedicineTime> MedicationTimes { get; set; }
 
         /// <summary>
         /// 用药方式
@@ -88,6 +78,6 @@ namespace OldHome.Entities
         /// <summary>
         /// 备注
         /// </summary>
-        public string Notes { get; set; } = string.Empty;
+        public string? Notes { get; set; } = string.Empty;
     }
 }

@@ -108,19 +108,9 @@ namespace OldHome.DTO
         public decimal DosageAmount { get; set; }
 
         /// <summary>
-        /// 用药频次
+        /// 用药时间段
         /// </summary>
-        public MedicationFrequency Frequency { get; set; }
-
-        /// <summary>
-        /// 每日用药次数
-        /// </summary>
-        public int TimesPerDay { get; set; }
-
-        /// <summary>
-        /// 具体用药时间点
-        /// </summary>
-        public List<MedicineTime> MedicationTimes { get; set; } = new List<MedicineTime>();
+        public MedicineTime MedicineTime { get; set; }
 
         /// <summary>
         /// 用药方式

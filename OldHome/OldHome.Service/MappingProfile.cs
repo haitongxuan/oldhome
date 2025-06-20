@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using OldHome.Core;
 using OldHome.DTO;
 using OldHome.DTO.Base;
 using OldHome.Entities;
@@ -82,7 +83,7 @@ namespace OldHome.Service
 
             #region Staff
             CreateMap<Staff, StaffSample>()
-                .ForMember(dest => dest.Name, opt => opt.MapFrom(src => $"{src.Name}({src.Position})"));
+                .ForMember(dest => dest.Name, opt => opt.MapFrom(src => $"{src.Name}({src.Position.GetDisplayName()})"));
             CreateMap<Staff, StaffDto>()
                 .ForMember(dest => dest.DepartmentName, opt => opt.MapFrom(src => src.Department.Name))
                 .IncludeBase<BaseOrgByEntity, BaseOrgByDto>();
