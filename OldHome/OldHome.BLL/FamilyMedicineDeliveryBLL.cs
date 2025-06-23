@@ -28,8 +28,8 @@ namespace OldHome.BLL
                     var createdDelivery = await _db.FamilyMedicineDeliveries.AddAsync(delivery);
                     if (delivery.Status.Equals(DeliveryStatus.Stored))
                     {
-                        _map.Map<>
-                        _db.InventoryInbounds.Add()
+                        //_map.Map<>
+                        //_db.InventoryInbounds.Add()
                     }
                     await transaction.CommitAsync();
                     return createdDelivery.Entity;
