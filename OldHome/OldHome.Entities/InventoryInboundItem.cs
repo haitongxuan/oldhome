@@ -27,11 +27,6 @@ namespace OldHome.Entities
         public Medicine Medicine { get; set; } = new Medicine();
 
         /// <summary>
-        /// 批次号
-        /// </summary>
-        public string BatchNumber { get; set; } = string.Empty;
-
-        /// <summary>
         /// 生产日期
         /// </summary>
         public DateOnly ProductionDate { get; set; }

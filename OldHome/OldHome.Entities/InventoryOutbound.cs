@@ -1,4 +1,5 @@
 ﻿using OldHome.Core;
+using OldHome.Core.Attributes;
 using OldHome.Entities.Base;
 using System;
 using System.Collections.Generic;
@@ -17,6 +18,7 @@ namespace OldHome.Entities
         /// <summary>
         /// 出库单号
         /// </summary>
+        [SerialNumber("OUTBOUND", Prefix = "OUT")]
         public string OutboundNumber { get; set; } = string.Empty;
 
         /// <summary>
@@ -35,11 +37,6 @@ namespace OldHome.Entities
         public int? RequesterId { get; set; }
         public User? Requester { get; set; }
 
-        /// <summary>
-        /// 关联住户ID（如果是发药）
-        /// </summary>
-        public int? ResidentId { get; set; }
-        public Resident? Resident { get; set; }
 
         /// <summary>
         /// 关联处方ID（如果是发药）

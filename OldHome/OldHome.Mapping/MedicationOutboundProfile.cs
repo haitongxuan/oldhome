@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using OldHome.Core;
 
 namespace OldHome.Mapping
 {
@@ -54,6 +55,16 @@ namespace OldHome.Mapping
             CreateMap<MedicationOutbound, MedicationOutboundSampleDto>()
                 .ForMember(dest => dest.PharmacistName, opt => opt.MapFrom(src => src.Pharmacist.Name))
                 .IncludeBase<BaseOrgByEntity, BaseOrgByDto>();
+
+            CreateMap<MedicationOutbound, InventoryOutbound>()
+                .ForMember(dest => dest.OutboundNumber, opt => opt.MapFrom(src => src.OutboundNumber))
+                .ForMember(dest => dest.OutboundDate, opt => opt.MapFrom(src => src.OutboundDate))
+                .ForMember(dest => dest.OutboundType, opt => opt.MapFrom(src => src.OutboundType))
+                .ForMember(dest => dest.Status, opt => opt.MapFrom(src => OutboundStatus.Draft));
+
+            CreateMap<MedicationOutboundItem, InventoryOutboundItem>()
+                .ForMember(dest => dest.RequestedQuantity, opt => opt.MapFrom(src => src.PlannedQuantity));
+
         }
     }
 }

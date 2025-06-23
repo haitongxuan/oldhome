@@ -1,4 +1,5 @@
 ﻿using OldHome.Core;
+using OldHome.Core.Attributes;
 using OldHome.Entities.Base;
 using System;
 using System.Collections.Generic;
@@ -17,6 +18,7 @@ namespace OldHome.Entities
         /// <summary>
         /// 发药单号
         /// </summary>
+        [SerialNumber("MEDOUT", Prefix = "MO")]
         public string OutboundNumber { get; set; } = string.Empty;
 
         /// <summary>
@@ -51,11 +53,7 @@ namespace OldHome.Entities
         /// </summary>
         public MedicationOutboundStatus Status { get; set; } = MedicationOutboundStatus.Draft;
 
-        /// <summary>
-        /// 创建时间
-        /// </summary>
-        public DateTime PreparedTime { get; set; } = DateTime.UtcNow;
-
+        
         /// <summary>
         /// 核对时间
         /// </summary>

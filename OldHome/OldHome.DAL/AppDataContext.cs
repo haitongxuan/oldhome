@@ -42,6 +42,8 @@ namespace OldHome.DAL
         public DbSet<FamilyMedicineDeliveryItem> FamilyMedicineDeliveryItems { get; set; }
         public DbSet<InventoryInbound> InventoryInbounds { get; set; }
         public DbSet<InventoryInboundItem> InventoryInboundItems { get; set; }
+        public DbSet<InventoryOutbound> InventoryOutbounds { get; set; }
+        public DbSet<InventoryOutboundItem> InventoryOutboundItems { get; set; }
         public DbSet<InventoryStocktake> InventoryStocktakes { get; set; }
         public DbSet<InventoryStocktakeItem> InventoryStocktakeItems { get; set; }
         public DbSet<MedicationOutbound> MedicationOutbounds { get; set; }

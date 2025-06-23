@@ -32,6 +32,12 @@ namespace OldHome.Entities
         public Medicine Medicine { get; set; } = new Medicine();
 
         /// <summary>
+        /// 关联住户ID（如果是药品是家属提供）
+        /// </summary>
+        public int? ResidentId { get; set; }
+        public Resident? Resident { get; set; }
+
+        /// <summary>
         /// 批次号
         /// </summary>
         public string BatchNumber { get; set; } = string.Empty;

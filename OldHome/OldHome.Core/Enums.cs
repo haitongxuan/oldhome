@@ -482,6 +482,8 @@ namespace OldHome.Core
     /// </summary>
     public enum InboundType
     {
+        [Display(Name = "家属提供")]
+        FamliyProvided,
         [Display(Name = "采购入库")]
         Purchase,
         [Display(Name = "退货入库")]

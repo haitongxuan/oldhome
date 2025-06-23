@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\OldHome.DAL\OldHome.DAL.csproj" />
+    <ProjectReference Include="..\OldHome.ODT\OldHome.DTO.csproj" />
   </ItemGroup>
 
 </Project>

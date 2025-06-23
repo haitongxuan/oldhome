@@ -1,4 +1,5 @@
 ﻿using OldHome.Core;
+using OldHome.Core.Attributes;
 using OldHome.Entities.Base;
 using System;
 using System.Collections.Generic;
@@ -17,6 +18,7 @@ namespace OldHome.Entities
         /// <summary>
         /// 入库单号
         /// </summary>
+        [SerialNumber("INBOUND", Prefix = "INB")]
         public string InboundNumber { get; set; } = string.Empty;
 
         /// <summary>
@@ -37,17 +39,7 @@ namespace OldHome.Entities
         /// <summary>
         /// 来源详情
         /// </summary>
-        public string SourceDetails { get; set; } = string.Empty;
-
-        /// <summary>
-        /// 提供人信息
-        /// </summary>
-        public string? ProviderInfo { get; set; }
-
-        /// <summary>
-        /// 提供人与住户关系
-        /// </summary>
-        public ContactRelationship? ProviderRelationship { get; set; }
+        public string SourceInfo { get; set; } = string.Empty;
 
         /// <summary>
         /// 关联住户ID（家属提供时）

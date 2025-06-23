@@ -60,6 +60,7 @@ namespace OldHome.Service
                 cfg.AddProfile<RoomProfile>();
                 cfg.AddProfile<StaffProfile>();
                 cfg.AddProfile<UserProfile>();
+                cfg.AddProfile<FamilyMedicineDeliveryProfile>();
             });
 
             var app = builder.Build();
