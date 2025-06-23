@@ -7,8 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="AutoMapper" Version="14.0.0" />
-    <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
+    <ProjectReference Include="..\OldHome.Core\OldHome.Core.csproj" />
+    <ProjectReference Include="..\OldHome.Entities\OldHome.Entities.csproj" />
+    <ProjectReference Include="..\OldHome.ODT\OldHome.DTO.csproj" />
   </ItemGroup>
 
 </Project>

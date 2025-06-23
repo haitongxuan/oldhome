@@ -49,7 +49,7 @@
         <TextBox
             Grid.Column="1"
             d:Text="111"
-            Style="{StaticResource FormBox}"
+            Style="{StaticResource ReadonlyBox}"
             Text="{Binding BatchNumber, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}">
             <i:Interaction.Behaviors>
                 <bhs:ValidationErrorBehavior />

@@ -27,9 +27,6 @@ namespace OldHome.DesktopApp.ViewModels
             RuleFor(p => p.ExpirationDate)
                 .NotNull()
                 .WithMessage("请输入效期");
-            RuleFor(p => p.BatchNumber)
-                .NotEmpty()
-                .WithMessage("请输入批次号");
             RuleFor(p => p.SelectedStatus)
                 .NotNull()
                 .WithMessage("请选择入库批次状态");

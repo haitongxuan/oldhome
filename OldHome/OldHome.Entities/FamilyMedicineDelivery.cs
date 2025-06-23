@@ -1,4 +1,5 @@
 ﻿using OldHome.Core;
+using OldHome.Core.Attributes;
 using OldHome.Entities.Base;
 using System;
 using System.Collections.Generic;
@@ -12,11 +13,12 @@ namespace OldHome.Entities
     /// <summary>
     /// 家属送药记录表
     /// </summary>
-    public class FamilyMedicineDelivery : BaseOrgByEntity
+    public class FamilyMedicineDelivery : BaseOrgByEntity, ISerialNumberEntity
     {
         /// <summary>
         /// 送药记录号
         /// </summary>
+        [SerialNumber("FAMILY_MED_DELIVERY", Prefix = "FMD")]
         public string DeliveryNumber { get; set; } = string.Empty;
 
         /// <summary>
@@ -83,5 +85,5 @@ namespace OldHome.Entities
         public List<FamilyMedicineDeliveryItem> Items { get; set; } = new List<FamilyMedicineDeliveryItem>();
     }
 
-   
+
 }

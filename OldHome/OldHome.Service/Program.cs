@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using OldHome.DAL;
+using OldHome.Mapping;
 using OldHome.Service.Endpoints;
 using OldHome.Service.Interceptors;
 using System.Security.Claims;
@@ -41,7 +42,25 @@ namespace OldHome.Service
                 });
 
             builder.Services.AddAuthorization();
-            builder.Services.AddAutoMapper(typeof(MappingProfile));
+            builder.Services.AddAutoMapper(cfg =>
+            {
+                cfg.AddProfile<BaseProfile>();
+                cfg.AddProfile<BedProfile>();
+                cfg.AddProfile<DepartmentProfile>();
+                cfg.AddProfile<EmergencyContactProfile>();
+                cfg.AddProfile<MedicationOutboundProfile>();
+                cfg.AddProfile<MedicationPrescriptionProfile>();
+                cfg.AddProfile<MedicineInventoryProfile>();
+                cfg.AddProfile<MedicineProfile>();
+                cfg.AddProfile<MedicineTransactionLogProfile>();
+                cfg.AddProfile<OrgAreaProfile>();
+                cfg.AddProfile<OrgProfile>();
+                cfg.AddProfile<ResidentProfile>();
+                cfg.AddProfile<RoleProfile>();
+                cfg.AddProfile<RoomProfile>();
+                cfg.AddProfile<StaffProfile>();
+                cfg.AddProfile<UserProfile>();
+            });
 
             var app = builder.Build();
             app.UseAuthentication();

@@ -1,4 +1,5 @@
 ﻿using OldHome.Core;
+using OldHome.Core.Attributes;
 using OldHome.Entities.Base;
 using System;
 using System.Collections.Generic;
@@ -8,10 +9,11 @@ using System.Threading.Tasks;
 
 namespace OldHome.Entities
 {
-    public class MedicineInventory : BaseOrgByEntity
+    public class MedicineInventory : BaseOrgByEntity, ISerialNumberEntity
     {
         public int MedicineId { get; set; }
         public Medicine Medicine { get; set; }
+        [SerialNumber("MIBATCH", Prefix = "MIB")]
         public string BatchNumber { get; set; } = string.Empty;
         public string MedicineName { get; set; } = string.Empty;
         public string MedicineBarcode { get; set; } = string.Empty;

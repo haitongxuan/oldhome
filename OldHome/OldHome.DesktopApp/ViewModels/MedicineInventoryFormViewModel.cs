@@ -166,7 +166,6 @@ namespace OldHome.DesktopApp.ViewModels
             return await ValidateAndRunAsync(async () =>
                  await _api.CreateMedicineInventory(new MedicineInventoryCreate
                  {
-                     BatchNumber = this.BatchNumber,
                      ExpirationDate = DateOnly.FromDateTime(this.ExpirationDate.Value),
                      PackageCount = PackageCount.Value,
                      QtyTotal = QtyTotal.Value,

@@ -72,14 +72,6 @@ namespace OldHome.Service
                 .IncludeBase<BaseOrgByDto, BaseOrgByEntity>();
             #endregion
 
-            #region Room
-            CreateMap<Room, RoomSample>().ForMember(dest => dest.RoomName, opt => opt.MapFrom(src => $"{src.OrgArea.Name}-{src.RoomNumber}"));
-            CreateMap<RoomCreate, Room>();
-            CreateMap<RoomModify, Room>();
-            CreateMap<Room, RoomDto>()
-                .ForMember(dest => dest.OrgAreaName, opt => opt.MapFrom(src => src.OrgArea.Name))
-                .IncludeBase<BaseOrgByEntity, BaseOrgByDto>();
-            #endregion
 
             #region Staff
             CreateMap<Staff, StaffSample>()
