@@ -164,7 +164,7 @@ namespace OldHome.DesktopApp.ViewModels
         protected override async Task<bool> CreateAsync()
         {
             return await ValidateAndRunAsync(async () =>
-                 await _api.CreateMedicineInventory(new MedicineInventoryCreate
+                 await _api.MedicineInventoryApi.CreateMedicineInventory(new MedicineInventoryCreate
                  {
                      ExpirationDate = DateOnly.FromDateTime(this.ExpirationDate.Value),
                      PackageCount = PackageCount.Value,
@@ -183,7 +183,7 @@ namespace OldHome.DesktopApp.ViewModels
 
         protected override async Task<bool> ModifyAsync()
         {
-            return await ValidateAndRunAsync(async () => await _api.ModifyMedicineInventory(new MedicineInventoryModify
+            return await ValidateAndRunAsync(async () => await _api.MedicineInventoryApi.ModifyMedicineInventory(new MedicineInventoryModify
             {
                 Id = this.Id!.Value,
                 ExpirationDate = DateOnly.FromDateTime(this.ExpirationDate.Value),

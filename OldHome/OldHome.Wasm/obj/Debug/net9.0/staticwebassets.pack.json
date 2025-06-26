@@ -1,0 +1,61 @@
+{
+  "Files": [
+    {
+      "Id": "E:\\project\\OldHome\\OldHome.Wasm\\bin\\Debug\\net9.0\\wwwroot\\_framework\\blazor.webassembly.js",
+      "PackagePath": "staticwebassets\\_framework\\blazor.webassembly.js"
+    },
+    {
+      "Id": "E:\\project\\OldHome\\OldHome.Wasm\\obj\\Debug\\net9.0\\scopedcss\\bundle\\OldHome.Wasm.styles.css",
+      "PackagePath": "staticwebassets\\OldHome.Wasm.styles.css"
+    },
+    {
+      "Id": "E:\\project\\OldHome\\OldHome.Wasm\\wwwroot\\appsettings.json",
+      "PackagePath": "staticwebassets\\appsettings.json"
+    },
+    {
+      "Id": "E:\\project\\OldHome\\OldHome.Wasm\\wwwroot\\assets\\403.svg",
+      "PackagePath": "staticwebassets\\assets\\403.svg"
+    },
+    {
+      "Id": "E:\\project\\OldHome\\OldHome.Wasm\\wwwroot\\assets\\logo.svg",
+      "PackagePath": "staticwebassets\\assets\\logo.svg"
+    },
+    {
+      "Id": "E:\\project\\OldHome\\OldHome.Wasm\\wwwroot\\css\\site.css",
+      "PackagePath": "staticwebassets\\css\\site.css"
+    },
+    {
+      "Id": "E:\\project\\OldHome\\OldHome.Wasm\\wwwroot\\favicon.ico",
+      "PackagePath": "staticwebassets\\favicon.ico"
+    },
+    {
+      "Id": "E:\\project\\OldHome\\OldHome.Wasm\\wwwroot\\index.html",
+      "PackagePath": "staticwebassets\\index.html"
+    },
+    {
+      "Id": "E:\\project\\OldHome\\OldHome.Wasm\\wwwroot\\pro_icon.svg",
+      "PackagePath": "staticwebassets\\pro_icon.svg"
+    },
+    {
+      "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.OldHome.Wasm.Microsoft.AspNetCore.StaticWebAssetEndpoints.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssetEndpoints.props"
+    },
+    {
+      "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.OldHome.Wasm.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.build.OldHome.Wasm.props",
+      "PackagePath": "build\\OldHome.Wasm.props"
+    },
+    {
+      "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.buildMultiTargeting.OldHome.Wasm.props",
+      "PackagePath": "buildMultiTargeting\\OldHome.Wasm.props"
+    },
+    {
+      "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.buildTransitive.OldHome.Wasm.props",
+      "PackagePath": "buildTransitive\\OldHome.Wasm.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

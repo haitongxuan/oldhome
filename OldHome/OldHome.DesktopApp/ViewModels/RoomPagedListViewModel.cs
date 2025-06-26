@@ -57,7 +57,7 @@ namespace OldHome.DesktopApp.ViewModels
         public override async Task LoadDataAsync()
         {
             await base.LoadDataAsync();
-            var resp = await _api.GetAllOrgAreaSamples();
+            var resp = await _api.OrgAreaApi.GetAllOrgAreaSamples();
             if (resp.IsSuccess)
             {
                 AllOrgAreas.Clear();
@@ -70,9 +70,9 @@ namespace OldHome.DesktopApp.ViewModels
 
         protected override Func<int, int, Task<BaseResponse<PagedResult<RoomDto>>>> GetPagedFunc => async (pi, pz) =>
         {
-            return await _api.GetPagedRooms(pi, pz, this.QueryOrgAreaId, this.QueryFloor);
+            return await _api.RoomApi.GetPagedRooms(pi, pz, this.QueryOrgAreaId, this.QueryFloor);
         };
 
-        protected override Func<Task<BaseResponse>> DeleteFunc => async () => await _api.DeleteRoom(SelectedItem.Id);
+        protected override Func<Task<BaseResponse>> DeleteFunc => async () => await _api.RoomApi.DeleteRoom(SelectedItem.Id);
     }
 }

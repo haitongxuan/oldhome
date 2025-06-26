@@ -12,10 +12,9 @@ namespace OldHome.DesktopApp.ViewModels.Base
     {
         public BaseOrgByPagedListViewModel(F formViewModel) : base(formViewModel)
         {
-            var ea = ContainerLocator.Container.Resolve<IEventAggregator>();
-            ea.GetEvent<CurrentOrgChangedEvent>().Subscribe(OnCurrentOrgChanged);
+            _user.OrgChanged += OnCurrentOrgChanged;
         }
-        private async void OnCurrentOrgChanged(int orgId)
+        private async void OnCurrentOrgChanged(object? sender, int orgId)
         {
             await LoadDataAsync();
         }

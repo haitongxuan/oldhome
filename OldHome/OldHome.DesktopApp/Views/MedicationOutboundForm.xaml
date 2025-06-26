@@ -145,20 +145,6 @@
                 <bhs:ValidationErrorBehavior />
             </i:Interaction.Behaviors>
         </ComboBox>
-        <TextBlock
-            Grid.Row="3"
-            Grid.Column="2"
-            Style="{StaticResource Header}"
-            Text="创建时间:" />
-        <pu:DateTimePicker
-            Grid.Row="3"
-            Grid.Column="3"
-            SelectedDateTime="{Binding PreparedTime, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}"
-            Style="{StaticResource FormDatePicker}">
-            <i:Interaction.Behaviors>
-                <bhs:ValidationErrorBehavior />
-            </i:Interaction.Behaviors>
-        </pu:DateTimePicker>
 
         <TextBlock
             Grid.Row="4"
@@ -189,30 +175,16 @@
         </pu:DateTimePicker>
 
         <TextBlock
-            Grid.Row="5"
+            Grid.Row="3"
+            Grid.Column="2"
             Style="{StaticResource Header}"
             Text="总药品数量:" />
         <pu:NumberInput
-            Grid.Row="5"
-            Grid.Column="1"
-            IsReadOnly="True"
-            Style="{StaticResource FormNumberInput}"
-            Value="{Binding TotalItemCount, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}">
-            <i:Interaction.Behaviors>
-                <bhs:ValidationErrorBehavior />
-            </i:Interaction.Behaviors>
-        </pu:NumberInput>
-        <TextBlock
-            Grid.Row="5"
-            Grid.Column="2"
-            Style="{StaticResource Header}"
-            Text="总金额:" />
-        <pu:NumberInput
-            Grid.Row="5"
+            Grid.Row="3"
             Grid.Column="3"
             IsReadOnly="True"
             Style="{StaticResource FormNumberInput}"
-            Value="{Binding TotalAmount, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}">
+            Value="{Binding TotalItemCount, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}">
             <i:Interaction.Behaviors>
                 <bhs:ValidationErrorBehavior />
             </i:Interaction.Behaviors>

@@ -28,7 +28,7 @@ namespace OldHome.Entities
         /// <summary>
         /// 剩余最小单位数量
         /// </summary>
-        public int QtyRemaining { get; set; }
+        public decimal QtyRemaining { get; set; }
         /// <summary>
         /// 最初入库数量
         /// </summary>

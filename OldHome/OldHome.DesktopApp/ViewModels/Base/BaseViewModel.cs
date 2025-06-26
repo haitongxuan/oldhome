@@ -1,10 +1,6 @@
-﻿using OldHome.DesktopApp.Messages;
+﻿using OldHome.API;
+using OldHome.API.Services;
 using OldHome.DesktopApp.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OldHome.DesktopApp.ViewModels.Base
 {
@@ -12,12 +8,14 @@ namespace OldHome.DesktopApp.ViewModels.Base
     {
         public abstract Task LoadDataAsync();
         protected readonly INotificationUIService _notificationUIService;
-        protected readonly WebApi _api;
+        protected readonly ApiManager _api;
+        protected readonly IUserSessionService _user;
 
         public BaseViewModel()
         {
             _notificationUIService = ContainerLocator.Container.Resolve<INotificationUIService>();
-            _api = ContainerLocator.Container.Resolve<WebApi>();
+            _user = ContainerLocator.Container.Resolve<IUserSessionService>();
+            _api = ContainerLocator.Container.Resolve<ApiManager>();
         }
 
         private AsyncDelegateCommand _loaded;

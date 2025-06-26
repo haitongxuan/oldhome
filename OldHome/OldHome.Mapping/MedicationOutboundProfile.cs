@@ -26,8 +26,6 @@ namespace OldHome.Mapping
             CreateMap<MedicationOutboundItemDto, MedicationOutboundItem>()
                 .ForMember(dest => dest.Outbound, opt => opt.Ignore())
                 .ForMember(dest => dest.Resident, opt => opt.Ignore())
-                .ForMember(dest => dest.Schedule, opt => opt.Ignore())
-                .ForMember(dest => dest.Inventory, opt => opt.Ignore())
                 .ForMember(dest => dest.Medicine, opt => opt.Ignore())
                 .IncludeBase<BaseDto, BaseEntity>();
 

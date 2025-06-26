@@ -1,0 +1,14 @@
+{
+  "version": 2,
+  "dgSpecHash": "diPbjdIs+pA=",
+  "success": true,
+  "projectFilePath": "E:\\project\\OldHome\\OldHome.API\\OldHome.API.csproj",
+  "expectedPackageFiles": [
+    "D:\\nuget\\packages\\automapper\\14.0.0\\automapper.14.0.0.nupkg.sha512",
+    "D:\\nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512",
+    "D:\\nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\8.0.0\\microsoft.extensions.dependencyinjection.abstractions.8.0.0.nupkg.sha512",
+    "D:\\nuget\\packages\\microsoft.extensions.options\\8.0.0\\microsoft.extensions.options.8.0.0.nupkg.sha512",
+    "D:\\nuget\\packages\\microsoft.extensions.primitives\\8.0.0\\microsoft.extensions.primitives.8.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}

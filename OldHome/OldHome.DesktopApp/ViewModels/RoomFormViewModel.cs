@@ -136,7 +136,7 @@ namespace OldHome.DesktopApp.ViewModels
             {
                 AllRoomTypes.Add(item);
             }
-            var resp = await _api.GetAllOrgAreaSamples();
+            var resp = await _api.OrgAreaApi.GetAllOrgAreaSamples();
             if (resp.IsSuccess && resp.Data is not null)
             {
                 resp.Data.ForEach(AllOrgAreas.Add);
@@ -186,7 +186,7 @@ namespace OldHome.DesktopApp.ViewModels
 
         protected override async Task<bool> CreateAsync()
         {
-            return await ValidateAndRunAsync(async () => await _api.CreateRoom(new RoomCreate
+            return await ValidateAndRunAsync(async () => await _api.RoomApi.CreateRoom(new RoomCreate
             {
                 RoomNumber = this.Name,
                 RoomType = this.SelectedRoomType!.Value,
@@ -201,7 +201,7 @@ namespace OldHome.DesktopApp.ViewModels
 
         protected override async Task<bool> ModifyAsync()
         {
-            return await ValidateAndRunAsync(async () => await _api.ModifyRoom(new()
+            return await ValidateAndRunAsync(async () => await _api.RoomApi.ModifyRoom(new()
             {
                 Id = this.Id!.Value,
                 RoomNumber = this.Name,

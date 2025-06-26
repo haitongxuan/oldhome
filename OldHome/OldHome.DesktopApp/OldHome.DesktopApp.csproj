@@ -37,6 +37,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\AutoCompleteTextBox\AutoCompleteTextBox.csproj" />
+    <ProjectReference Include="..\OldHome.API\OldHome.API.csproj" />
     <ProjectReference Include="..\OldHome.ODT\OldHome.DTO.csproj" />
   </ItemGroup>
 

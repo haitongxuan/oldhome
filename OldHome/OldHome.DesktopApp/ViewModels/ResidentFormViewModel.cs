@@ -230,7 +230,7 @@ namespace OldHome.DesktopApp.ViewModels
 
         protected override async Task<bool> CreateAsync()
         {
-            return await ValidateAndRunAsync(async () => await _api.CreateResident(new ResidentCreate
+            return await ValidateAndRunAsync(async () => await _api.ResidentApi.CreateResident(new ResidentCreate
             {
                 Name = Name,
                 Gender = SelectedGender.Value,
@@ -251,7 +251,7 @@ namespace OldHome.DesktopApp.ViewModels
 
         protected override async Task<bool> ModifyAsync()
         {
-            return await ValidateAndRunAsync(async () => await _api.ModifyResident(new ResidentModify
+            return await ValidateAndRunAsync(async () => await _api.ResidentApi.ModifyResident(new ResidentModify
             {
                 Id = Id.Value,
                 Name = Name,

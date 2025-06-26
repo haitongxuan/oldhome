@@ -53,7 +53,11 @@ namespace OldHome.Entities
         /// </summary>
         public MedicationOutboundStatus Status { get; set; } = MedicationOutboundStatus.Draft;
 
-        
+        /// <summary>
+        /// 是否从公共库存发药
+        /// </summary>
+        public bool IsFromPublicInventory { get; set; }
+
         /// <summary>
         /// 核对时间
         /// </summary>

@@ -78,7 +78,7 @@ namespace OldHome.DesktopApp.ViewModels
 
         public override async Task LoadDataAsync()
         {
-            var res = await _api.GetAllOrgSamples();
+            var res = await _api.OrgApi.GetAllOrgSamples();
             if (res.IsSuccess)
             {
                 Orgs = res.Data!;
@@ -100,7 +100,7 @@ namespace OldHome.DesktopApp.ViewModels
 
         protected override async Task<bool> CreateAsync()
         {
-            return await ValidateAndRunAsync(async () => await _api.CreateOrgArea(new()
+            return await ValidateAndRunAsync(async () => await _api.OrgAreaApi.CreateOrgArea(new()
             {
                 Name = Name,
                 Description = Description,
@@ -112,7 +112,7 @@ namespace OldHome.DesktopApp.ViewModels
 
         protected override async Task<bool> ModifyAsync()
         {
-            return await ValidateAndRunAsync(async () => await _api.ModifyOrgArea(new()
+            return await ValidateAndRunAsync(async () => await _api.OrgAreaApi.ModifyOrgArea(new()
             {
                 Id = Id!.Value,
                 Name = Name,

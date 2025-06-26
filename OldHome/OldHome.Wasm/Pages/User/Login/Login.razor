@@ -1,0 +1,33 @@
+﻿@namespace OldHome.Wasm.Pages.User
+@layout UserLayout
+@page "/user/login"
+
+<div class="main__b__0">
+    <div class="login">
+        <Form Model="@_model" OnFinish="HandleSubmit">
+            <FormItem>
+                <OldHome.Wasm.Components.OrgSelect />
+            </FormItem>
+            <FormItem>
+                <AntDesign.Input Placeholder="Username: admin or user" Size="@InputSize.Large" @bind-Value="@context.UserName">
+                    <Prefix><Icon Type="user" /></Prefix>
+                </AntDesign.Input>
+            </FormItem>
+            <FormItem>
+                <AntDesign.Input Placeholder="Password: ant.design" Size="@InputSize.Large" @bind-Value="@context.Password" Type="@InputType.Password">
+                    <Prefix><Icon Type="lock" /></Prefix>
+                </AntDesign.Input>
+            </FormItem>
+            <div>
+                <Checkbox Checked="@context.AutoLogin">
+                    自动登录
+                </Checkbox>
+                <a style="float: right;">
+                    忘记密码
+                </a>
+            </div>
+            <Button Type="@ButtonType.Primary" HtmlType="submit" Class="submit" Size="@ButtonSize.Large" Block>登录 </Button>
+
+        </Form>
+    </div>
+</div>

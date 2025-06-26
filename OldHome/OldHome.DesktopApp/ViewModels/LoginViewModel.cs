@@ -1,9 +1,8 @@
-﻿using OldHome.DesktopApp.Messages;
+﻿using OldHome.API;
+using OldHome.API.Services;
 using OldHome.DesktopApp.Services;
 using OldHome.DTO;
 using Prism.Common;
-using Prism.Ioc;
-using System.Collections.ObjectModel;
 using System.Windows;
 
 namespace OldHome.DesktopApp.ViewModels
@@ -14,11 +13,11 @@ namespace OldHome.DesktopApp.ViewModels
         private IRegionManager _regionManager;
         private IUserSessionService _userSession;
         private INotificationUIService _notificationUIService;
-        private WebApi _api;
+        private ApiManager _api;
         private IContainerExtension _containerExtension;
 
         public LoginViewModel(IRegionManager regionManager, IContainerExtension containerExtension
-            , IUserSessionService userSession, WebApi api, INotificationUIService notificationUIService)
+            , IUserSessionService userSession, ApiManager api, INotificationUIService notificationUIService)
         {
             _regionManager = regionManager;
             _api = api;
@@ -67,7 +66,7 @@ namespace OldHome.DesktopApp.ViewModels
 
         async Task ExecuteLoadedCommand()
         {
-            var response = await _api.GetAllOrgSamples();
+            var response = await _api.OrgApi.GetAllOrgSamples();
             if (response.IsSuccess)
             {
                 Orgs = response.Data!;
@@ -86,7 +85,7 @@ namespace OldHome.DesktopApp.ViewModels
         {
             try
             {
-                var resp = await _api.SignIn(SelectedOrgId, UserName, Password)!;
+                var resp = await _api.AuthApi.SignIn(SelectedOrgId, UserName, Password)!;
                 if (resp.IsSuccess)
                     _userSession.SetSession(resp.Data.UserName, resp.Data.Token, resp.Data.Role, resp.Data.OrgId);
                 else

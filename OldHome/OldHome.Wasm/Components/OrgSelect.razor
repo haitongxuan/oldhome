@@ -1,0 +1,6 @@
+﻿@namespace OldHome.Wasm.Components
+@inherits AntDomComponentBase
+
+<Select Placeholder="选择组织机构" Size="@InputSize.Large" DataSource="@_orgs" @bind-Value="@_selectedOrg" >
+    <PrefixIcon><Icon Type="bank" /></PrefixIcon>
+</Select>

@@ -629,19 +629,13 @@ namespace OldHome.DAL.Migrations
                     b.Property<int>("OrgId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("ProviderInfo")
-                        .HasColumnType("TEXT");
-
-                    b.Property<int?>("ProviderRelationship")
-                        .HasColumnType("INTEGER");
-
                     b.Property<string>("PurchaseReference")
                         .HasColumnType("TEXT");
 
                     b.Property<int?>("ResidentId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("SourceDetails")
+                    b.Property<string>("SourceInfo")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
@@ -679,10 +673,6 @@ namespace OldHome.DAL.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
-
-                    b.Property<string>("BatchNumber")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
 
                     b.Property<string>("CheckNotes")
                         .HasColumnType("TEXT");
@@ -810,9 +800,6 @@ namespace OldHome.DAL.Migrations
                     b.Property<int?>("RequesterId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("ResidentId")
-                        .HasColumnType("INTEGER");
-
                     b.Property<int>("Status")
                         .HasColumnType("INTEGER");
 
@@ -836,9 +823,7 @@ namespace OldHome.DAL.Migrations
 
                     b.HasIndex("RequesterId");
 
-                    b.HasIndex("ResidentId");
-
-                    b.ToTable("InventoryOutbound");
+                    b.ToTable("InventoryOutbounds");
                 });
 
             modelBuilder.Entity("OldHome.Entities.InventoryOutboundItem", b =>
@@ -847,8 +832,8 @@ namespace OldHome.DAL.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("ActualQuantity")
-                        .HasColumnType("INTEGER");
+                    b.Property<decimal>("ActualQuantity")
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("BatchNumber")
                         .IsRequired()
@@ -880,7 +865,10 @@ namespace OldHome.DAL.Migrations
                     b.Property<int>("OutboundId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("RequestedQuantity")
+                    b.Property<decimal>("RequestedQuantity")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int?>("ResidentId")
                         .HasColumnType("INTEGER");
 
                     b.Property<decimal>("TotalCost")
@@ -904,7 +892,9 @@ namespace OldHome.DAL.Migrations
 
                     b.HasIndex("OutboundId");
 
-                    b.ToTable("InventoryOutboundItem");
+                    b.HasIndex("ResidentId");
+
+                    b.ToTable("InventoryOutboundItems");
                 });
 
             modelBuilder.Entity("OldHome.Entities.InventoryStocktake", b =>
@@ -1070,6 +1060,9 @@ namespace OldHome.DAL.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("INTEGER");
 
+                    b.Property<bool>("IsFromPublicInventory")
+                        .HasColumnType("INTEGER");
+
                     b.Property<int>("MedicineTime")
                         .HasColumnType("INTEGER");
 
@@ -1092,9 +1085,6 @@ namespace OldHome.DAL.Migrations
 
                     b.Property<int>("PharmacistId")
                         .HasColumnType("INTEGER");
-
-                    b.Property<DateTime>("PreparedTime")
-                        .HasColumnType("TEXT");
 
                     b.Property<int>("Status")
                         .HasColumnType("INTEGER");
@@ -1132,10 +1122,6 @@ namespace OldHome.DAL.Migrations
                     b.Property<decimal>("ActualQuantity")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("BatchNumber")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("TEXT");
 
@@ -1146,25 +1132,11 @@ namespace OldHome.DAL.Migrations
                     b.Property<int>("DispenseStatus")
                         .HasColumnType("INTEGER");
 
-                    b.Property<DateOnly>("ExpirationDate")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Instructions")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("InventoryId")
-                        .HasColumnType("INTEGER");
-
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("MedicineId")
                         .HasColumnType("INTEGER");
-
-                    b.Property<string>("Notes")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
 
                     b.Property<int>("OutboundId")
                         .HasColumnType("INTEGER");
@@ -1172,27 +1144,11 @@ namespace OldHome.DAL.Migrations
                     b.Property<decimal>("PlannedQuantity")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("RefusalReason")
-                        .HasColumnType("TEXT");
-
                     b.Property<DateTime?>("ResidentConfirmedTime")
                         .HasColumnType("TEXT");
 
                     b.Property<int>("ResidentId")
                         .HasColumnType("INTEGER");
-
-                    b.Property<int>("ScheduleId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("SpecialInstructions")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<decimal>("TotalCost")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<decimal>("UnitCost")
-                        .HasColumnType("decimal(18,4)");
 
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("TEXT");
@@ -1203,15 +1159,11 @@ namespace OldHome.DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("InventoryId");
-
                     b.HasIndex("MedicineId");
 
                     b.HasIndex("OutboundId");
 
                     b.HasIndex("ResidentId");
-
-                    b.HasIndex("ScheduleId");
 
                     b.ToTable("MedicationOutboundItems");
                 });
@@ -1622,8 +1574,8 @@ namespace OldHome.DAL.Migrations
                     b.Property<int>("PackageCount")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("QtyRemaining")
-                        .HasColumnType("INTEGER");
+                    b.Property<decimal>("QtyRemaining")
+                        .HasColumnType("TEXT");
 
                     b.Property<int>("QtyTotal")
                         .HasColumnType("INTEGER");
@@ -2894,10 +2846,6 @@ namespace OldHome.DAL.Migrations
                         .WithMany()
                         .HasForeignKey("RequesterId");
 
-                    b.HasOne("OldHome.Entities.Resident", "Resident")
-                        .WithMany()
-                        .HasForeignKey("ResidentId");
-
                     b.Navigation("ApprovedBy");
 
                     b.Navigation("Org");
@@ -2905,8 +2853,6 @@ namespace OldHome.DAL.Migrations
                     b.Navigation("OutboundBy");
 
                     b.Navigation("Requester");
-
-                    b.Navigation("Resident");
                 });
 
             modelBuilder.Entity("OldHome.Entities.InventoryOutboundItem", b =>
@@ -2929,11 +2875,17 @@ namespace OldHome.DAL.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("OldHome.Entities.Resident", "Resident")
+                        .WithMany()
+                        .HasForeignKey("ResidentId");
+
                     b.Navigation("Inventory");
 
                     b.Navigation("Medicine");
 
                     b.Navigation("Outbound");
+
+                    b.Navigation("Resident");
                 });
 
             modelBuilder.Entity("OldHome.Entities.InventoryStocktake", b =>
@@ -3007,12 +2959,6 @@ namespace OldHome.DAL.Migrations
 
             modelBuilder.Entity("OldHome.Entities.MedicationOutboundItem", b =>
                 {
-                    b.HasOne("OldHome.Entities.MedicineInventory", "Inventory")
-                        .WithMany()
-                        .HasForeignKey("InventoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("OldHome.Entities.Medicine", "Medicine")
                         .WithMany()
                         .HasForeignKey("MedicineId")
@@ -3031,21 +2977,11 @@ namespace OldHome.DAL.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("OldHome.Entities.MedicationSchedule", "Schedule")
-                        .WithMany()
-                        .HasForeignKey("ScheduleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Inventory");
-
                     b.Navigation("Medicine");
 
                     b.Navigation("Outbound");
 
                     b.Navigation("Resident");
-
-                    b.Navigation("Schedule");
                 });
 
             modelBuilder.Entity("OldHome.Entities.MedicationPrescription", b =>

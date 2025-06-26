@@ -196,7 +196,7 @@ namespace OldHome.DesktopApp.ViewModels
                 dto.Status = SelectedStatus!.Value;
                 dto.Diagnosis = Diagnosis;
                 dto.Items = Items.ToList();
-                return await _api.CreateMedicationPrescription(dto);
+                return await _api.MedicationPrescriptionApi.CreateMedicationPrescription(dto);
             }, head: "处方创建");
             return res;
         }
@@ -215,7 +215,7 @@ namespace OldHome.DesktopApp.ViewModels
                 dto.Diagnosis = Diagnosis;
                 dto.Notes = Notes;
                 dto.Items = Items.ToList();
-                return await _api.ModifyMedicationPrescription(dto);
+                return await _api.MedicationPrescriptionApi.ModifyMedicationPrescription(dto);
             }, head: "处方修改");
         }
     }

@@ -1,20 +1,15 @@
 ﻿using AutoCompleteTextBox.Editors;
-using OldHome.DesktopApp.Messages;
-using System;
+using OldHome.API;
 using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OldHome.DesktopApp.Providers
 {
     public class StaffProvider : BindableBase, ISuggestionProvider
     {
-        private readonly WebApi _api;
+        private readonly ApiManager _api;
         public StaffProvider()
         {
-            _api = ContainerLocator.Container.Resolve<WebApi>();
+            _api = ContainerLocator.Container.Resolve<ApiManager>();
         }
 
 
@@ -33,13 +28,13 @@ namespace OldHome.DesktopApp.Providers
                     return null;
                 else
                 {
-                    var resp = await _api.GetAllStaffSamples(filter);
+                    var resp = await _api.StaffApi.GetAllStaffSamples(filter);
                     return resp.Data;
                 }
             }
             else
             {
-                var r = await _api.GetAllStaffSamples(filter);
+                var r = await _api.StaffApi.GetAllStaffSamples(filter);
                 return r.Data;
             }
         }

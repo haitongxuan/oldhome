@@ -1,6 +1,7 @@
 ﻿using FluentValidation;
+using OldHome.API;
+using OldHome.API.Services;
 using OldHome.DesktopApp.Containers;
-using OldHome.DesktopApp.Messages;
 using OldHome.DesktopApp.Services;
 using OldHome.DesktopApp.ViewModels;
 using OldHome.DesktopApp.ViewModels.OldHome.DesktopApp.ViewModels;
@@ -19,7 +20,7 @@ namespace OldHome.DesktopApp
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
             // Register your types here
-            containerRegistry.RegisterSingleton<WebApi>()
+            containerRegistry.RegisterSingleton<ApiManager>()
                 .RegisterSingleton<NavigationsContainer>()
                 .RegisterSingleton<IUserSessionService, UserSessionService>()
                 .RegisterSingleton<INotificationUIService, NotificationUIService>()

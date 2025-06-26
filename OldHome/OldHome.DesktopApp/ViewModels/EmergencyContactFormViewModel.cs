@@ -69,7 +69,7 @@ namespace OldHome.DesktopApp.ViewModels
 
         protected override async Task<bool> CreateAsync()
         {
-            return await ValidateAndRunAsync(async () => await _api.CreateEmergencyContact(new EmergencyContactCreate
+            return await ValidateAndRunAsync(async () => await _api.EmergencyContactApi.CreateEmergencyContact(new EmergencyContactCreate
             {
                 Name = this.Name,
                 PhoneNum = this.PhoneNum,
@@ -79,7 +79,7 @@ namespace OldHome.DesktopApp.ViewModels
 
         protected override async Task<bool> ModifyAsync()
         {
-            return await ValidateAndRunAsync(async () => await _api.ModifyEmergencyContact(new EmergencyContactModify
+            return await ValidateAndRunAsync(async () => await _api.EmergencyContactApi.ModifyEmergencyContact(new EmergencyContactModify
             {
                 Id = this.Id!.Value,
                 Name = this.Name,

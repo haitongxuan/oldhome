@@ -1,0 +1,14 @@
+E:\project\OldHome\OldHome.Wasm\wwwroot\index.html
+E:\project\OldHome\OldHome.Wasm\wwwroot\appsettings.json
+E:\project\OldHome\OldHome.Wasm\wwwroot\assets\logo.svg
+E:\project\OldHome\OldHome.Wasm\wwwroot\favicon.ico
+E:\project\OldHome\OldHome.Wasm\wwwroot\pro_icon.svg
+E:\project\OldHome\OldHome.Wasm\wwwroot\assets\403.svg
+E:\project\OldHome\OldHome.Wasm\wwwroot\css\site.css
+wwwroot\appsettings.json
+wwwroot\assets\403.svg
+wwwroot\assets\logo.svg
+wwwroot\css\site.css
+wwwroot\favicon.ico
+wwwroot\index.html
+wwwroot\pro_icon.svg

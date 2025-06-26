@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using OldHome.BLL;
 using OldHome.DAL;
 using OldHome.Mapping;
 using OldHome.Service.Endpoints;
@@ -42,6 +43,7 @@ namespace OldHome.Service
                 });
 
             builder.Services.AddAuthorization();
+            builder.Services.AddScoped<InventoryBLL>();
             builder.Services.AddAutoMapper(cfg =>
             {
                 cfg.AddProfile<BaseProfile>();

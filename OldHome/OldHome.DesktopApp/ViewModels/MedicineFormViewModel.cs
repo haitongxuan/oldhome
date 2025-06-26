@@ -169,7 +169,7 @@ namespace OldHome.DesktopApp.ViewModels
         protected override async Task<bool> CreateAsync()
         {
             return await ValidateAndRunAsync(async () =>
-             await _api.CreateMedicine(new MedicineCreate
+             await _api.MedicineApi.CreateMedicine(new MedicineCreate
              {
                  Name = this.Name,
                  Specification = this.Specification,
@@ -185,7 +185,7 @@ namespace OldHome.DesktopApp.ViewModels
 
         protected override async Task<bool> ModifyAsync()
         {
-            return await ValidateAndRunAsync(async () => await _api.ModifyMedicine(new MedicineModify
+            return await ValidateAndRunAsync(async () => await _api.MedicineApi.ModifyMedicine(new MedicineModify
             {
                 Id = this.Id.Value,
                 Name = this.Name,

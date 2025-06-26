@@ -82,9 +82,9 @@ namespace OldHome.DesktopApp.ViewModels
         }
 
         protected override Func<int, int, Task<BaseResponse<PagedResult<ResidentDto>>>> GetPagedFunc =>
-            async (pi, pz) => await _api.GetPagedResidents(pi, pz, QueryName, QueryOrgAreaId, QueryFloor, QueryRoomId, QueryBedId);
+            async (pi, pz) => await _api.ResidentApi.GetPagedResidents(pi, pz, QueryName, QueryOrgAreaId, QueryFloor, QueryRoomId, QueryBedId);
 
-        protected override Func<Task<BaseResponse>> DeleteFunc => async () => await _api.DeleteResident(SelectedItem.Id);
+        protected override Func<Task<BaseResponse>> DeleteFunc => async () => await _api.ResidentApi.DeleteResident(SelectedItem.Id);
 
         public override async Task LoadDataAsync()
         {

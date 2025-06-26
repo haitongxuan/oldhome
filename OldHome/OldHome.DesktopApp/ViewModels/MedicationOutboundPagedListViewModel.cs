@@ -84,7 +84,7 @@ namespace OldHome.DesktopApp.ViewModels
         }
 
         protected override Func<int, int, Task<BaseResponse<PagedResult<MedicationOutboundDto>>>> GetPagedFunc =>
-           async (pi, pz) => await _api.GetPagedMedicationOutbounds(pi, pz,
+           async (pi, pz) => await _api.MedicationOutboundApi.GetPagedMedicationOutbounds(pi, pz,
                QueryStartDate,
                QueryEndDate,
                QueryMedicineTime,
@@ -92,6 +92,6 @@ namespace OldHome.DesktopApp.ViewModels
                QueryStatus,
                QueryPharmacist?.Id);
 
-        protected override Func<Task<BaseResponse>> DeleteFunc => async () => await _api.DeleteMedicationOutbound(SelectedItem.Id);
+        protected override Func<Task<BaseResponse>> DeleteFunc => async () => await _api.MedicationOutboundApi.DeleteMedicationOutbound(SelectedItem.Id);
     }
 }

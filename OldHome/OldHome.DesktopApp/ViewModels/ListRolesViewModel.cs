@@ -17,8 +17,8 @@ namespace OldHome.DesktopApp.ViewModels
         {
         }
 
-        protected override Func<Task<BaseResponse<List<RoleDto>>>> GetAllFunc => _api.GetAllRoles;
+        protected override Func<Task<BaseResponse<List<RoleDto>>>> GetAllFunc => _api.RoleApi.GetAllRoles;
 
-        protected override Func<Task<BaseResponse>> DeleteFunc => async () => await _api.DeleteRole(SelectedItem.Id);
+        protected override Func<Task<BaseResponse>> DeleteFunc => async () => await _api.RoleApi.DeleteRole(SelectedItem.Id);
     }
 }

@@ -33,10 +33,10 @@ namespace OldHome.DesktopApp.ViewModels
 
         protected override Func<int, int, Task<BaseResponse<PagedResult<EmergencyContactDto>>>> GetPagedFunc => async (pi, pz) =>
         {
-            return await _api.GetPagedEmergencyContacts(pi, pz, this.QueryName, this.QueryPhoneNum);
+            return await _api.EmergencyContactApi.GetPagedEmergencyContacts(pi, pz, this.QueryName, this.QueryPhoneNum);
         };
 
 
-        protected override Func<Task<BaseResponse>> DeleteFunc => async () => { return await _api.DeleteEmergencyContact(SelectedItem.Id); };
+        protected override Func<Task<BaseResponse>> DeleteFunc => async () => { return await _api.EmergencyContactApi.DeleteEmergencyContact(SelectedItem.Id); };
     }
 }

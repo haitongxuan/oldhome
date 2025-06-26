@@ -65,10 +65,10 @@ namespace OldHome.DesktopApp.ViewModels
 
         protected override Func<int, int, Task<BaseResponse<PagedResult<BedDto>>>> GetPagedFunc => async (pi, pz) =>
         {
-            var resp = await _api.GetPagedBeds(pi, pz, QueryOrgAreaId, QueryFloor, QueryRoomId);
+            var resp = await _api.BedApi.GetPagedBeds(pi, pz, QueryOrgAreaId, QueryFloor, QueryRoomId);
             return resp;
         };
 
-        protected override Func<Task<BaseResponse>> DeleteFunc => async () => await _api.DeleteBed(SelectedItem.Id);
+        protected override Func<Task<BaseResponse>> DeleteFunc => async () => await _api.BedApi.DeleteBed(SelectedItem.Id);
     }
 }

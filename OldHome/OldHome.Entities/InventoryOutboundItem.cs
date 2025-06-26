@@ -45,12 +45,12 @@ namespace OldHome.Entities
         /// <summary>
         /// 申请数量
         /// </summary>
-        public int RequestedQuantity { get; set; }
+        public decimal RequestedQuantity { get; set; }
 
         /// <summary>
         /// 实际出库数量
         /// </summary>
-        public int ActualQuantity { get; set; }
+        public decimal ActualQuantity { get; set; }
 
         /// <summary>
         /// 单位成本

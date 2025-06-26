@@ -1,12 +1,7 @@
-﻿using OldHome.Core;
-using OldHome.DesktopApp.Messages;
+﻿using OldHome.API;
+using OldHome.Core;
 using OldHome.DTO;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OldHome.DesktopApp.ViewModels
 {
@@ -27,13 +22,13 @@ namespace OldHome.DesktopApp.ViewModels
             }
         }
 
-        public static async void LoadRooms(ObservableCollection<RoomSample> rooms, int? orgAreaId, int? floor, WebApi api)
+        public static async void LoadRooms(ObservableCollection<RoomSample> rooms, int? orgAreaId, int? floor, ApiManager api)
         {
             rooms.Clear();
             if (orgAreaId == null || floor == null)
                 return;
             {
-                var resp = await api.GetAllRoomSamples(orgAreaId, floor);
+                var resp = await api.RoomApi.GetAllRoomSamples(orgAreaId, floor);
                 if (!resp.IsSuccess)
                 {
                     return;
@@ -46,10 +41,10 @@ namespace OldHome.DesktopApp.ViewModels
             }
         }
 
-        public static async void LoadOrgAreas(ObservableCollection<OrgAreaSample> allOrgAreas, WebApi api)
+        public static async void LoadOrgAreas(ObservableCollection<OrgAreaSample> allOrgAreas, ApiManager api)
         {
             allOrgAreas.Clear();
-            var resp = await api.GetAllOrgAreaSamples();
+            var resp = await api.OrgAreaApi.GetAllOrgAreaSamples();
             if (!resp.IsSuccess)
             {
                 return;
@@ -70,10 +65,10 @@ namespace OldHome.DesktopApp.ViewModels
             }
         }
 
-        public static async void LoadBeds(ObservableCollection<BedSample> allBeds, int? roomId, WebApi api)
+        public static async void LoadBeds(ObservableCollection<BedSample> allBeds, int? roomId, ApiManager api)
         {
             allBeds.Clear();
-            var resp = await api.GetAllBedSamples(roomId);
+            var resp = await api.BedApi.GetAllBedSamples(roomId);
             if (!resp.IsSuccess)
             {
                 return;

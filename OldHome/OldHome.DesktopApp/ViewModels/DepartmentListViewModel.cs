@@ -17,11 +17,11 @@ namespace OldHome.DesktopApp.ViewModels
         {
         }
 
-        protected override Func<Task<BaseResponse<List<DepartmentDto>>>> GetAllFunc => _api.GetAllDepartments;
+        protected override Func<Task<BaseResponse<List<DepartmentDto>>>> GetAllFunc => _api.DepartmentApi.GetAllDepartments;
 
         protected override Func<Task<BaseResponse>> DeleteFunc => async () =>
         {
-            return await _api.DeleteDepartment(SelectedItem.Id);
+            return await _api.DepartmentApi.DeleteDepartment(SelectedItem.Id);
         };
     }
 }

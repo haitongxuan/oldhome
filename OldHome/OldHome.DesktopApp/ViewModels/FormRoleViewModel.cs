@@ -68,7 +68,7 @@ namespace OldHome.DesktopApp.ViewModels
 
         protected override async Task<bool> CreateAsync()
         {
-            return await ValidateAndRunAsync(async () => await _api.CreateRole(new()
+            return await ValidateAndRunAsync(async () => await _api.RoleApi.CreateRole(new()
             {
                 Name = Name,
                 Code = Code,
@@ -78,7 +78,7 @@ namespace OldHome.DesktopApp.ViewModels
 
         protected override async Task<bool> ModifyAsync()
         {
-            return await ValidateAndRunAsync(async () => await _api.CreateRole(new() {
+            return await ValidateAndRunAsync(async () => await _api.RoleApi.CreateRole(new() {
                 Id = Id.Value,
                 Name = Name,
                 Code = Code,

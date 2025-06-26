@@ -1,14 +1,13 @@
-﻿using OldHome.DesktopApp.Containers;
-using OldHome.DesktopApp.Messages;
-using OldHome.DesktopApp.Services;
+﻿using OldHome.API;
+using OldHome.API.Services;
+using OldHome.DesktopApp.Containers;
 using OldHome.DTO;
-using OldHome.DTO.Base;
 
 namespace OldHome.DesktopApp.ViewModels
 {
     public class MainWindowViewModel : BindableBase
     {
-        private readonly WebApi _api;
+        private readonly ApiManager _api;
         private readonly IUserSessionService _userSessionService;
 
         private string _checkedName = string.Empty;
@@ -66,7 +65,7 @@ namespace OldHome.DesktopApp.ViewModels
         public string _username;
         private readonly NavigationsContainer _navigationsContainer;
 
-        public MainWindowViewModel(IRegionManager regionManager, WebApi api,
+        public MainWindowViewModel(IRegionManager regionManager, ApiManager api,
             NavigationsContainer navigationsContainer, IUserSessionService userSessionService)
         {
             _api = api;
@@ -103,7 +102,7 @@ namespace OldHome.DesktopApp.ViewModels
 
         async Task ExecuteLoadedCommand()
         {
-            var resp = await _api.GetAllOrgSamples();
+            var resp = await _api.OrgApi.GetAllOrgSamples();
             if (resp.IsSuccess)
             {
                 Orgs = resp.Data;

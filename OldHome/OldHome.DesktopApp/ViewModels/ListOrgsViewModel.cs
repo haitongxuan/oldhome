@@ -1,15 +1,7 @@
 ﻿using OldHome.DesktopApp.Containers;
-using OldHome.DesktopApp.Messages;
-using OldHome.DesktopApp.Services;
 using OldHome.DesktopApp.ViewModels.Base;
-using OldHome.DesktopApp.ViewModels;
 using OldHome.DTO;
 using OldHome.DTO.Base;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OldHome.DesktopApp.ViewModels
 {
@@ -23,9 +15,9 @@ namespace OldHome.DesktopApp.ViewModels
 
         protected override Func<Task<BaseResponse>> DeleteFunc => async () =>
         {
-            return await _api.DeleteOrg(SelectedItem.Id);
+            return await _api.OrgApi.DeleteOrg(SelectedItem.Id);
         };
 
-        protected override Func<Task<BaseResponse<List<OrgDto>>>> GetAllFunc => _api.GetAllOrgs;
+        protected override Func<Task<BaseResponse<List<OrgDto>>>> GetAllFunc => _api.OrgApi.GetAllOrgs;
     }
 }

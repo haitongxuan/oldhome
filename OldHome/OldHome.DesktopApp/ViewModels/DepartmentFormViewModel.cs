@@ -49,12 +49,12 @@ namespace OldHome.DesktopApp.ViewModels
         protected override async Task<bool> CreateAsync()
         {
             return await ValidateAndRunAsync(async () =>
-             await _api.CreateDepartment(new DepartmentCreate { Name = this.Name }), head: "部门");
+             await _api.DepartmentApi.CreateDepartment(new DepartmentCreate { Name = this.Name }), head: "部门");
         }
 
         protected override async Task<bool> ModifyAsync()
         {
-            return await ValidateAndRunAsync(async () => await _api.ModifyDepartment(new DepartmentModify { Id = this.Id!.Value, Name = this.Name })
+            return await ValidateAndRunAsync(async () => await _api.DepartmentApi.ModifyDepartment(new DepartmentModify { Id = this.Id!.Value, Name = this.Name })
             , head: "部门");
         }
 

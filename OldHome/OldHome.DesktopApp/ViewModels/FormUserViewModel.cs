@@ -1,12 +1,6 @@
 ﻿using FluentValidation;
-using OldHome.DesktopApp.Messages;
 using OldHome.DesktopApp.ViewModels.Base;
 using OldHome.DTO;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OldHome.DesktopApp.ViewModels
 {
@@ -119,7 +113,7 @@ namespace OldHome.DesktopApp.ViewModels
 
         public override async Task LoadDataAsync()
         {
-            var res = await _api.GetAllOrgSamples();
+            var res = await _api.OrgApi.GetAllOrgSamples();
             if (res.IsSuccess)
             {
                 Orgs = res.Data!;
@@ -128,7 +122,7 @@ namespace OldHome.DesktopApp.ViewModels
             {
                 _notificationUIService.ShowError(res.Message);
             }
-            var roleRes = await _api.GetAllRoleSamples();
+            var roleRes = await _api.RoleApi.GetAllRoleSamples();
             if (roleRes.IsSuccess)
             {
                 Roles = roleRes.Data!;
@@ -141,7 +135,7 @@ namespace OldHome.DesktopApp.ViewModels
 
         protected override async Task<bool> CreateAsync()
         {
-            return await ValidateAndRunAsync(async () => await _api.CreateUser(new()
+            return await ValidateAndRunAsync(async () => await _api.UserApi.CreateUser(new()
             {
                 UserName = this.UserName,
                 PhoneNum = this.PhoneNum,
@@ -153,14 +147,14 @@ namespace OldHome.DesktopApp.ViewModels
 
         protected override async Task<bool> ModifyAsync()
         {
-            return await ValidateAndRunAsync(async () => await _api.ModifyUser(new()
+            return await ValidateAndRunAsync(async () => await _api.UserApi.ModifyUser(new()
             {
                 Id = Id.Value,
                 PhoneNum = this.PhoneNum,
                 Password = this.Password,
                 OrgId = this.OrgId ?? 1,
                 RoleId = this.RoleId ?? 1
-            }), head: "用户");            
+            }), head: "用户");
         }
 
         protected override void Clear()

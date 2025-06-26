@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OldHome.API.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,12 +15,10 @@ namespace OldHome.DesktopApp.Services
         public int? OrgId { get; private set; } = null;
         public bool IsAuthenticated => !string.IsNullOrWhiteSpace(Token);
         public bool IsSuperAdmin => Role.Equals("SuperAdmin", StringComparison.OrdinalIgnoreCase);
-        private readonly IEventAggregator _eventAggregator;
 
-        public UserSessionService()
-        {
-            _eventAggregator = ContainerLocator.Container.Resolve<IEventAggregator>();
-        }
+
+        public event EventHandler<int>? OrgChanged;
+
 
         public void SetSession(string username, string token, string role, int OrgId)
         {
@@ -40,7 +39,7 @@ namespace OldHome.DesktopApp.Services
         public void ChangeOrgId(int orgId)
         {
             OrgId = orgId;
-            _eventAggregator.GetEvent<CurrentOrgChangedEvent>().Publish(orgId);
+            OrgChanged?.Invoke(this, orgId);
         }
     }
 }

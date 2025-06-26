@@ -29,7 +29,7 @@ namespace OldHome.DesktopApp.ViewModels
 
         public override async Task LoadDataAsync()
         {
-            var response = await _api.GetAllOrgSamples();
+            var response = await _api.OrgApi.GetAllOrgSamples();
             if (response.IsSuccess)
             {
                 Orgs = response.Data;
@@ -41,9 +41,9 @@ namespace OldHome.DesktopApp.ViewModels
         {
         }
 
-        protected override Func<Task<BaseResponse<List<OrgAreaDto>>>> GetAllFunc => _api.GetAllOrgAreas;
+        protected override Func<Task<BaseResponse<List<OrgAreaDto>>>> GetAllFunc => _api.OrgAreaApi.GetAllOrgAreas;
 
-        protected override Func<Task<BaseResponse>> DeleteFunc => async () => { return await _api.DeleteOrgArea(SelectedItem.Id); };
+        protected override Func<Task<BaseResponse>> DeleteFunc => async () => { return await _api.OrgAreaApi.DeleteOrgArea(SelectedItem.Id); };
 
 
         private AsyncDelegateCommand _query;
@@ -54,7 +54,7 @@ namespace OldHome.DesktopApp.ViewModels
         {
             if (SelectedOrgId is not null)
             {
-                var resp = await _api.GetOrgAreas(SelectedOrgId.Value);
+                var resp = await _api.OrgApi.GetOrgAreas(SelectedOrgId.Value);
                 if (resp.IsSuccess)
                 {
                     Items = resp.Data;

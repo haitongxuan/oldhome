@@ -103,20 +103,6 @@
         </acb:AutoCompleteTextBox>
 
         <TextBlock
-            Grid.Row="2"
-            Style="{StaticResource Header}"
-            Text="批次号:" />
-        <TextBox
-            Grid.Row="2"
-            Grid.Column="1"
-            Style="{StaticResource FormBox}"
-            Text="{Binding BatchNumber, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}">
-            <i:Interaction.Behaviors>
-                <bhs:ValidationErrorBehavior />
-            </i:Interaction.Behaviors>
-        </TextBox>
-
-        <TextBlock
             Grid.Row="3"
             Style="{StaticResource Header}"
             Text="计划用量:" />
@@ -143,65 +129,6 @@
                 <bhs:ValidationErrorBehavior />
             </i:Interaction.Behaviors>
         </pu:NumberInput>
-
-        <TextBlock
-            Grid.Row="5"
-            Style="{StaticResource Header}"
-            Text="单位成本:" />
-        <pu:NumberInput
-            Grid.Row="5"
-            Grid.Column="1"
-            Style="{StaticResource FormNumberInput}"
-            Value="{Binding UnitCost, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}">
-            <i:Interaction.Behaviors>
-                <bhs:ValidationErrorBehavior />
-            </i:Interaction.Behaviors>
-        </pu:NumberInput>
-
-        <TextBlock
-            Grid.Row="6"
-            Style="{StaticResource Header}"
-            Text="总成本:" />
-        <pu:NumberInput
-            Grid.Row="6"
-            Grid.Column="1"
-            IsReadOnly="True"
-            Style="{StaticResource FormNumberInput}"
-            Value="{Binding TotalCost, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}">
-            <i:Interaction.Behaviors>
-                <bhs:ValidationErrorBehavior />
-            </i:Interaction.Behaviors>
-        </pu:NumberInput>
-
-        <TextBlock
-            Grid.Row="7"
-            Style="{StaticResource Header}"
-            Text="有效期:" />
-        <pu:DateTimePicker
-            Grid.Row="7"
-            Grid.Column="1"
-            SelectedDateTime="{Binding ExpirationDate, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}"
-            Style="{StaticResource FormDatePicker}">
-            <i:Interaction.Behaviors>
-                <bhs:ValidationErrorBehavior />
-            </i:Interaction.Behaviors>
-        </pu:DateTimePicker>
-
-        <TextBlock
-            Grid.Row="8"
-            Style="{StaticResource Header}"
-            Text="发药状态:" />
-        <ComboBox
-            Grid.Row="8"
-            Grid.Column="1"
-            VerticalAlignment="Bottom"
-            ItemsSource="{Binding DispenseStatuses}"
-            SelectedValue="{Binding SelectedDispenseStatus, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}"
-            Style="{StaticResource FormEnumComboBox}">
-            <i:Interaction.Behaviors>
-                <bhs:ValidationErrorBehavior />
-            </i:Interaction.Behaviors>
-        </ComboBox>
         <StackPanel
             Grid.Row="13"
             Grid.Column="1"

@@ -1,22 +1,15 @@
 ﻿using AutoCompleteTextBox.Editors;
-using OldHome.DesktopApp.Messages;
-using OldHome.DTO;
-using System;
+using OldHome.API;
 using System.Collections;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OldHome.DesktopApp.Providers
 {
     public class MedicineProvider : BindableBase, ISuggestionProvider
     {
-        private readonly WebApi _api;
+        private readonly ApiManager _api;
         public MedicineProvider()
         {
-            _api = ContainerLocator.Container.Resolve<WebApi>();
+            _api = ContainerLocator.Container.Resolve<ApiManager>();
         }
 
 
@@ -34,20 +27,20 @@ namespace OldHome.DesktopApp.Providers
                     return null;
                 else
                 {
-                    var resp = await _api.GetTop10MedicineSamples();
+                    var resp = await _api.MedicineApi.GetTop10MedicineSamples();
                     return resp.Data;
                 }
             }
             else
             {
-                var r = await _api.GetAllMedicineSamples(filter, filter);
+                var r = await _api.MedicineApi.GetAllMedicineSamples(filter, filter);
                 return r.Data;
             }
         }
 
         public async Task<IEnumerable> GetFullCollection()
         {
-            var r = await _api.GetAllMedicineSamples();
+            var r = await _api.MedicineApi.GetAllMedicineSamples();
             if (r.IsSuccess)
             {
                 return r.Data;

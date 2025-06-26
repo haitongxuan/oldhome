@@ -43,10 +43,10 @@ namespace OldHome.DesktopApp.ViewModels
 
         protected override Func<int, int, Task<BaseResponse<PagedResult<StaffDto>>>> GetPagedFunc => async (pi, pz) =>
         {
-            var resp = await _api.GetPagedStaffs(pi, pz, this.QueryName, this.QueryPhoneNum);
+            var resp = await _api.StaffApi.GetPagedStaffs(pi, pz, this.QueryName, this.QueryPhoneNum);
             return resp;
         };
 
-        protected override Func<Task<BaseResponse>> DeleteFunc => async () => { return await _api.DeleteStaff(SelectedItem.Id); };
+        protected override Func<Task<BaseResponse>> DeleteFunc => async () => { return await _api.StaffApi.DeleteStaff(SelectedItem.Id); };
     }
 }

@@ -41,16 +41,7 @@ namespace OldHome.DesktopApp.ViewModels
             }
         }
 
-        private string _batchNumber;
-        public string BatchNumber
-        {
-            get { return _batchNumber; }
-            set
-            {
-                SetProperty(ref _batchNumber, value);
-                ValidateProperty(nameof(BatchNumber));
-            }
-        }
+
 
         private decimal? _plannedQuantity;
         public decimal? PlannedQuantity
@@ -60,7 +51,6 @@ namespace OldHome.DesktopApp.ViewModels
             {
                 SetProperty(ref _plannedQuantity, value);
                 ValidateProperty(nameof(PlannedQuantity));
-                CalculateTotalCost();
             }
         }
 
@@ -72,32 +62,10 @@ namespace OldHome.DesktopApp.ViewModels
             {
                 SetProperty(ref _actualQuantity, value);
                 ValidateProperty(nameof(ActualQuantity));
-                CalculateTotalCost();
             }
         }
 
-        private decimal? _unitCost;
-        public decimal? UnitCost
-        {
-            get { return _unitCost; }
-            set
-            {
-                SetProperty(ref _unitCost, value);
-                ValidateProperty(nameof(UnitCost));
-                CalculateTotalCost();
-            }
-        }
 
-        private decimal? _totalCost;
-        public decimal? TotalCost
-        {
-            get { return _totalCost; }
-            set
-            {
-                SetProperty(ref _totalCost, value);
-                ValidateProperty(nameof(TotalCost));
-            }
-        }
 
         private DateTime? _expirationDate;
         public DateTime? ExpirationDate
@@ -143,38 +111,6 @@ namespace OldHome.DesktopApp.ViewModels
             }
         }
 
-        private DateTime? _residentConfirmedTime;
-        public DateTime? ResidentConfirmedTime
-        {
-            get { return _residentConfirmedTime; }
-            set
-            {
-                SetProperty(ref _residentConfirmedTime, value);
-                ValidateProperty(nameof(ResidentConfirmedTime));
-            }
-        }
-
-        private string _refusalReason;
-        public string RefusalReason
-        {
-            get { return _refusalReason; }
-            set
-            {
-                SetProperty(ref _refusalReason, value);
-                ValidateProperty(nameof(RefusalReason));
-            }
-        }
-
-        private string _notes;
-        public string Notes
-        {
-            get { return _notes; }
-            set
-            {
-                SetProperty(ref _notes, value);
-                ValidateProperty(nameof(Notes));
-            }
-        }
 
         public ObservableCollection<DispenseStatus> DispenseStatuses { get; set; } = new ObservableCollection<DispenseStatus>();
 
@@ -194,18 +130,9 @@ namespace OldHome.DesktopApp.ViewModels
             Id = item.Id;
             SelectedResident = new ResidentSample { Id = item.ResidentId, Name = item.ResidentName };
             SelectedMedicine = new MedicineSample { Id = item.MedicineId, Name = item.MedicineName };
-            BatchNumber = item.BatchNumber;
             PlannedQuantity = item.PlannedQuantity;
             ActualQuantity = item.ActualQuantity;
-            UnitCost = item.UnitCost;
-            TotalCost = item.TotalCost;
-            ExpirationDate = item.ExpirationDate.ToDateTime(TimeOnly.MinValue);
             SelectedDispenseStatus = item.DispenseStatus;
-            Instructions = item.Instructions;
-            SpecialInstructions = item.SpecialInstructions;
-            ResidentConfirmedTime = item.ResidentConfirmedTime;
-            RefusalReason = item.RefusalReason;
-            Notes = item.Notes;
         }
 
         protected override DialogParameters GetDialogParameters()
@@ -216,18 +143,10 @@ namespace OldHome.DesktopApp.ViewModels
                 ResidentName = SelectedResident.Name,
                 MedicineId = SelectedMedicine!.Id,
                 MedicineName = SelectedMedicine.Name,
-                BatchNumber = BatchNumber,
                 PlannedQuantity = PlannedQuantity!.Value,
                 ActualQuantity = ActualQuantity!.Value,
-                UnitCost = UnitCost!.Value,
-                TotalCost = TotalCost!.Value,
-                ExpirationDate = DateOnly.FromDateTime(ExpirationDate!.Value),
-                DispenseStatus = SelectedDispenseStatus!.Value,
-                Instructions = Instructions,
-                SpecialInstructions = SpecialInstructions,
-                ResidentConfirmedTime = ResidentConfirmedTime,
-                RefusalReason = RefusalReason,
-                Notes = Notes
+                DispenseStatus = DispenseStatus.Dispensed,
+                ResidentConfirmedTime = DateTime.Now,
             };
 
             if (State.Equals(FormState.Edit))
@@ -242,12 +161,5 @@ namespace OldHome.DesktopApp.ViewModels
             return parameters;
         }
 
-        private void CalculateTotalCost()
-        {
-            if (ActualQuantity.HasValue && UnitCost.HasValue)
-            {
-                TotalCost = ActualQuantity.Value * UnitCost.Value;
-            }
-        }
     }
 }

@@ -71,11 +71,6 @@ namespace OldHome.DTO
         /// </summary>
         public int TotalItemCount { get; set; }
 
-        /// <summary>
-        /// 总金额
-        /// </summary>
-        [Column(TypeName = "decimal(18,2)")]
-        public decimal TotalAmount { get; set; }
 
         /// <summary>
         /// 备注
@@ -149,12 +144,6 @@ namespace OldHome.DTO
         public int TotalItemCount { get; set; }
 
         /// <summary>
-        /// 总金额
-        /// </summary>
-        [Column(TypeName = "decimal(18,2)")]
-        public decimal TotalAmount { get; set; }
-
-        /// <summary>
         /// 备注
         /// </summary>
         public string Notes { get; set; } = string.Empty;
@@ -225,11 +214,6 @@ namespace OldHome.DTO
         /// </summary>
         public int TotalItemCount { get; set; }
 
-        /// <summary>
-        /// 总金额
-        /// </summary>
-        [Column(TypeName = "decimal(18,2)")]
-        public decimal TotalAmount { get; set; }
 
         /// <summary>
         /// 备注
@@ -305,10 +289,6 @@ namespace OldHome.DTO
         public int MedicineId { get; set; }
         public string MedicineName { get; set; } = string.Empty;
 
-        /// <summary>
-        /// 批次号
-        /// </summary>
-        public string BatchNumber { get; set; } = string.Empty;
 
         /// <summary>
         /// 计划用量
@@ -320,22 +300,6 @@ namespace OldHome.DTO
         /// </summary>
         public decimal ActualQuantity { get; set; }
 
-        /// <summary>
-        /// 单位成本
-        /// </summary>
-        [Column(TypeName = "decimal(18,4)")]
-        public decimal UnitCost { get; set; }
-
-        /// <summary>
-        /// 总成本
-        /// </summary>
-        [Column(TypeName = "decimal(18,2)")]
-        public decimal TotalCost { get; set; }
-
-        /// <summary>
-        /// 有效期
-        /// </summary>
-        public DateOnly ExpirationDate { get; set; }
 
         /// <summary>
         /// 发药状态
@@ -343,28 +307,8 @@ namespace OldHome.DTO
         public DispenseStatus DispenseStatus { get; set; } = DispenseStatus.Prepared;
 
         /// <summary>
-        /// 用药说明
-        /// </summary>
-        public string Instructions { get; set; } = string.Empty;
-
-        /// <summary>
-        /// 特殊说明
-        /// </summary>
-        public string SpecialInstructions { get; set; } = string.Empty;
-
-        /// <summary>
         /// 住户确认时间
         /// </summary>
         public DateTime? ResidentConfirmedTime { get; set; }
-
-        /// <summary>
-        /// 住户拒绝原因
-        /// </summary>
-        public string? RefusalReason { get; set; }
-
-        /// <summary>
-        /// 备注
-        /// </summary>
-        public string Notes { get; set; } = string.Empty;
     }
 }

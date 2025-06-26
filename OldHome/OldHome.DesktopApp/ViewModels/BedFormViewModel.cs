@@ -129,7 +129,7 @@ namespace OldHome.DesktopApp.ViewModels
 
         protected override async Task<bool> CreateAsync()
         {
-            return await ValidateAndRunAsync(async () => await _api.CreateBed(new BedCreate
+            return await ValidateAndRunAsync(async () => await _api.BedApi.CreateBed(new BedCreate
             {
                 BedNum = BedNum,
                 OrgAreaId = SelectedOrgAreaId.Value,
@@ -143,7 +143,7 @@ namespace OldHome.DesktopApp.ViewModels
 
         protected override async Task<bool> ModifyAsync()
         {
-            return await ValidateAndRunAsync(async () => await _api.ModifyBed(new BedModify
+            return await ValidateAndRunAsync(async () => await _api.BedApi.ModifyBed(new BedModify
             {
                 Id = Id.Value,
                 BedNum = BedNum,

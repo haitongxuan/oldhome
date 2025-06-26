@@ -209,7 +209,8 @@ namespace OldHome.Service.Endpoints
                         PageSize = pageSize,
                         Items = mapper.Map<List<T>>(items)
                     };
-                    return Results.Ok(result);
+                    var res = Results.Ok(result);
+                    return res;
                 }
                 catch (Exception ex)
                 {

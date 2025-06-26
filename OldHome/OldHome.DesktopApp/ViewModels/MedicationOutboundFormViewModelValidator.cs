@@ -40,8 +40,6 @@ namespace OldHome.DesktopApp.ViewModels
                 RuleFor(x => x.TotalItemCount)
                     .GreaterThanOrEqualTo(0).WithMessage("总药品数量不能为负数");
 
-                RuleFor(x => x.TotalAmount)
-                    .GreaterThanOrEqualTo(0).WithMessage("总金额不能为负数");
             }
         }
     }

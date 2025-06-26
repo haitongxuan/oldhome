@@ -147,16 +147,6 @@ namespace OldHome.DesktopApp.ViewModels
             }
         }
 
-        private decimal _totalAmount;
-        public decimal TotalAmount
-        {
-            get { return _totalAmount; }
-            set
-            {
-                SetProperty(ref _totalAmount, value);
-                ValidateProperty(nameof(TotalAmount));
-            }
-        }
 
         private string _notes;
         public string Notes
@@ -214,7 +204,6 @@ namespace OldHome.DesktopApp.ViewModels
             CheckedTime = null;
             DispensedTime = null;
             TotalItemCount = 0;
-            TotalAmount = 0;
             Notes = string.Empty;
             Items.Clear();
         }
@@ -246,7 +235,6 @@ namespace OldHome.DesktopApp.ViewModels
                 CheckedTime = detail.CheckedTime;
                 DispensedTime = detail.DispensedTime;
                 TotalItemCount = detail.TotalItemCount;
-                TotalAmount = detail.TotalAmount;
                 Notes = detail.Notes;
                 foreach (var item in detail.Items)
                 {
@@ -271,10 +259,9 @@ namespace OldHome.DesktopApp.ViewModels
                 dto.CheckedTime = CheckedTime;
                 dto.DispensedTime = DispensedTime;
                 dto.TotalItemCount = TotalItemCount;
-                dto.TotalAmount = TotalAmount;
                 dto.Notes = Notes;
                 dto.Items = Items.ToList();
-                return await _api.CreateMedicationOutbound(dto);
+                return await _api.MedicationOutboundApi.CreateMedicationOutbound(dto);
             }, head: "发药单创建");
             return res;
         }
@@ -296,10 +283,9 @@ namespace OldHome.DesktopApp.ViewModels
                 dto.CheckedTime = CheckedTime;
                 dto.DispensedTime = DispensedTime;
                 dto.TotalItemCount = TotalItemCount;
-                dto.TotalAmount = TotalAmount;
                 dto.Notes = Notes;
                 dto.Items = Items.ToList();
-                return await _api.ModifyMedicationOutbound(dto);
+                return await _api.MedicationOutboundApi.ModifyMedicationOutbound(dto);
             }, head: "发药单修改");
         }
 
@@ -307,7 +293,6 @@ namespace OldHome.DesktopApp.ViewModels
         protected override void OnItemsChanged()
         {
             TotalItemCount = Items.Count;
-            TotalAmount = Items.Sum(x => x.TotalCost);
             base.OnItemsChanged();
         }
     }

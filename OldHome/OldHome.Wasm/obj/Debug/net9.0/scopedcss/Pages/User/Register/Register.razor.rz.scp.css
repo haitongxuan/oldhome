@@ -1,0 +1,46 @@
+/* stylelint-disable at-rule-empty-line-before,at-rule-name-space-after,at-rule-no-unknown */
+/* stylelint-disable no-duplicate-selectors */
+/* stylelint-disable */
+/* stylelint-disable declaration-bang-space-before,no-duplicate-selectors,string-no-newline */
+.main__b__1[b-z98kni4031] {
+  width: 368px;
+  margin: 0 auto;
+}
+.main__b__1 h3[b-z98kni4031] {
+  margin-bottom: 20px;
+  font-size: 16px;
+}
+.main__b__1 .password[b-z98kni4031] {
+  margin-bottom: 24px;
+}
+.main__b__1 .password :global .ant-form-item-explain[b-z98kni4031] {
+  display: none;
+}
+.main__b__1 .getCaptcha[b-z98kni4031] {
+  display: block;
+  width: 100%;
+}
+.main__b__1 .submit[b-z98kni4031] {
+  width: 50%;
+}
+.main__b__1 .login[b-z98kni4031] {
+  float: right;
+  line-height: 40px;
+}
+.success[b-z98kni4031],
+.warning[b-z98kni4031],
+.error[b-z98kni4031] {
+  transition: color 0.3s;
+}
+.success[b-z98kni4031] {
+  color: #52c41a;
+}
+.warning[b-z98kni4031] {
+  color: #faad14;
+}
+.error[b-z98kni4031] {
+  color: #ff4d4f;
+}
+.progress-pass > .progress :global .ant-progress-bg[b-z98kni4031] {
+  background-color: #faad14;
+}

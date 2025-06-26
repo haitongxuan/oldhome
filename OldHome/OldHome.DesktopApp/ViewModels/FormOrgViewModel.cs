@@ -67,7 +67,7 @@ namespace OldHome.DesktopApp.ViewModels
         {
             if (Id != null)
             {
-                var response = await _api.GetOrgAreas(Id!.Value);
+                var response = await _api.OrgApi.GetOrgAreas(Id!.Value);
                 if (response.IsSuccess)
                 {
                     OrgAreas = response.Data;
@@ -86,7 +86,7 @@ namespace OldHome.DesktopApp.ViewModels
 
         protected override async Task<bool> CreateAsync()
         {
-            return await ValidateAndRunAsync(async () => await _api.CreateOrg(new OrgCreate
+            return await ValidateAndRunAsync(async () => await _api.OrgApi.CreateOrg(new OrgCreate
             {
                 Name = Name,
                 Address = Address,
@@ -96,7 +96,7 @@ namespace OldHome.DesktopApp.ViewModels
 
         protected override async Task<bool> ModifyAsync()
         {
-            return await ValidateAndRunAsync(async () => await _api.ModifyOrg(new()
+            return await ValidateAndRunAsync(async () => await _api.OrgApi.ModifyOrg(new()
             {
                 Id = Id.Value,
                 PhoneNum = PhoneNum,

@@ -123,7 +123,7 @@ namespace OldHome.DesktopApp.ViewModels
             {
                 AllPositions.Add(position);
             }
-            var response = await _api.GetAllDepartmentSamples();
+            var response = await _api.DepartmentApi.GetAllDepartmentSamples();
             if (response.IsSuccess && response.Data is not null)
             {
                 foreach (var department in response.Data)
@@ -147,7 +147,7 @@ namespace OldHome.DesktopApp.ViewModels
 
         protected override async Task<bool> CreateAsync()
         {
-            return await ValidateAndRunAsync(async () => await _api.CreateStaff(new()
+            return await ValidateAndRunAsync(async () => await _api.StaffApi.CreateStaff(new()
             {
                 Name = Name,
                 Gender = SelectedGender!.Value,
@@ -162,7 +162,7 @@ namespace OldHome.DesktopApp.ViewModels
 
         protected override async Task<bool> ModifyAsync()
         {
-            return await ValidateAndRunAsync(async () => await _api.ModifyStaff(new()
+            return await ValidateAndRunAsync(async () => await _api.StaffApi.ModifyStaff(new()
             {
                 Id = Id!.Value,
                 Name = Name,
