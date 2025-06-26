@@ -42,6 +42,15 @@ namespace OldHome.Service
                     };
                 });
 
+            builder.Services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(policy =>
+                {
+                    policy.AllowAnyOrigin()
+                          .AllowAnyMethod()
+                          .AllowAnyHeader();
+                });
+            });
             builder.Services.AddAuthorization();
             builder.Services.AddScoped<InventoryBLL>();
             builder.Services.AddAutoMapper(cfg =>
