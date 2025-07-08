@@ -1,12 +1,13 @@
 ﻿@namespace OldHome.Wasm.Pages.User
 @layout UserLayout
 @page "/user/login"
+@attribute [ReuseTabsPage(Ignore = true)]
 
 <div class="main__b__0">
     <div class="login">
         <Form Model="@_model" OnFinish="HandleSubmit">
             <FormItem>
-                <OldHome.Wasm.Components.OrgSelect />
+                <OldHome.Wasm.Components.OrgSelect @bind-SelectedOrgId="@context.OrgId" />
             </FormItem>
             <FormItem>
                 <AntDesign.Input Placeholder="Username: admin or user" Size="@InputSize.Large" @bind-Value="@context.UserName">

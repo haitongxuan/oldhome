@@ -1,9 +1,3 @@
-E:\project\OldHome\OldHome.API\obj\Debug\net8.0\OldHome.API.csproj.AssemblyReference.cache
-E:\project\OldHome\OldHome.API\obj\Debug\net8.0\OldHome.API.GeneratedMSBuildEditorConfig.editorconfig
-E:\project\OldHome\OldHome.API\obj\Debug\net8.0\OldHome.API.AssemblyInfoInputs.cache
-E:\project\OldHome\OldHome.API\obj\Debug\net8.0\OldHome.API.AssemblyInfo.cs
-E:\project\OldHome\OldHome.API\obj\Debug\net8.0\OldHome.API.csproj.CoreCompileInputs.cache
-E:\project\OldHome\OldHome.API\obj\Debug\net8.0\OldHome.API.sourcelink.json
 E:\project\OldHome\OldHome.API\bin\Debug\net8.0\OldHome.API.deps.json
 E:\project\OldHome\OldHome.API\bin\Debug\net8.0\OldHome.API.dll
 E:\project\OldHome\OldHome.API\bin\Debug\net8.0\OldHome.API.pdb
@@ -11,6 +5,12 @@ E:\project\OldHome\OldHome.API\bin\Debug\net8.0\OldHome.Core.dll
 E:\project\OldHome\OldHome.API\bin\Debug\net8.0\OldHome.DTO.dll
 E:\project\OldHome\OldHome.API\bin\Debug\net8.0\OldHome.DTO.pdb
 E:\project\OldHome\OldHome.API\bin\Debug\net8.0\OldHome.Core.pdb
+E:\project\OldHome\OldHome.API\obj\Debug\net8.0\OldHome.API.csproj.AssemblyReference.cache
+E:\project\OldHome\OldHome.API\obj\Debug\net8.0\OldHome.API.GeneratedMSBuildEditorConfig.editorconfig
+E:\project\OldHome\OldHome.API\obj\Debug\net8.0\OldHome.API.AssemblyInfoInputs.cache
+E:\project\OldHome\OldHome.API\obj\Debug\net8.0\OldHome.API.AssemblyInfo.cs
+E:\project\OldHome\OldHome.API\obj\Debug\net8.0\OldHome.API.csproj.CoreCompileInputs.cache
+E:\project\OldHome\OldHome.API\obj\Debug\net8.0\OldHome.API.sourcelink.json
 E:\project\OldHome\OldHome.API\obj\Debug\net8.0\OldHome..288B1A56.Up2Date
 E:\project\OldHome\OldHome.API\obj\Debug\net8.0\OldHome.API.dll
 E:\project\OldHome\OldHome.API\obj\Debug\net8.0\refint\OldHome.API.dll

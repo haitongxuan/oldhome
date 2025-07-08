@@ -1,6 +1,17 @@
 ﻿@namespace OldHome.Wasm.Components
 @inherits AntDomComponentBase
+@using OldHome.DTO
 
-<Select Placeholder="选择组织机构" Size="@InputSize.Large" DataSource="@_orgs" @bind-Value="@_selectedOrg" >
+<Select DataSource="@_orgs"
+        Placeholder="选择组织机构"
+        TItem="OrgSample"
+        TItemValue="int?"
+        Value="@_selectedOrgId"
+        ValueChanged="@OnSelectedOrgChanged"
+        LabelName="@nameof(OrgSample.Name)"
+        ValueName="@nameof(OrgSample.Id)"
+        ItemValue="c=>c.Id"
+        ItemLabel="c=>c.Name"
+        Size="@InputSize.Large">
     <PrefixIcon><Icon Type="bank" /></PrefixIcon>
 </Select>

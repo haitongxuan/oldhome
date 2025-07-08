@@ -14,7 +14,7 @@ namespace OldHome.Service
                 // 确保数据库创建
                 await db.Database.EnsureCreatedAsync();
                 // 运行迁移
-                await db.Database.MigrateAsync();
+                //await db.Database.MigrateAsync();
 
                 if (!await db.Users.AnyAsync())
                 {

@@ -1,6 +1,7 @@
 ﻿using AntDesign.Extensions.Localization;
 using AntDesign.ProLayout;
 using Microsoft.AspNetCore.Components;
+using OldHome.Wasm.Services;
 using System.Globalization;
 using System.Net.Http.Json;
 
@@ -11,18 +12,24 @@ namespace OldHome.Wasm.Layouts
         private MenuDataItem[] _menuData;
 
         [Inject] private ReuseTabsService TabService { get; set; }
+        [Inject] private NavigationContainer NavigationContainer { get; set; }
 
         protected override async Task OnInitializedAsync()
         {
-            _menuData = new[] {
+            var menuData = new List<MenuDataItem>{
                 new MenuDataItem
                 {
                     Path = "/",
-                    Name = "welcome",
+                    Name = "欢迎",
                     Key = "welcome",
                     Icon = "smile",
                 }
             };
+            NavigationContainer.GetAll().ForEach(p =>
+            {
+                menuData.Add(p.ToMenuDataItem());
+            });
+            _menuData = menuData.ToArray();
         }
 
         void Reload()

@@ -13,25 +13,47 @@ namespace OldHome.Wasm.Components
     public partial class OrgSelect
     {
         private List<OrgSample> _orgs;
-        private OrgSample _selectedOrg;
+        private int? _selectedOrgId;
+
         [Inject] ApiManager ApiManager { get; set; }
 
+        [Parameter] public int? SelectedOrgId { get; set; }
+        [Parameter] public EventCallback<int?> SelectedOrgIdChanged { get; set; }
 
-        protected override void OnInitialized()
+        private async Task OnSelectedOrgChanged(int? newOrgId)
         {
-            ApiManager.OrgApi.GetAllOrgSamples()
-                .ContinueWith(t =>
+            _selectedOrgId = newOrgId;
+
+            // 触发 SelectedOrgId 的双向绑定
+            if (SelectedOrgIdChanged.HasDelegate && newOrgId != null)
+            {
+                await SelectedOrgIdChanged.InvokeAsync(newOrgId);
+            }
+        }
+
+        protected override async Task OnInitializedAsync()
+        {
+            try
+            {
+                var api = ApiManager.OrgApi;
+                var res = await api.GetAllOrgSamples();
+                if (res.IsSuccess)
                 {
-                    if (t.IsCompletedSuccessfully)
-                    {
-                        _orgs = t.Result.Data!;
-                        StateHasChanged();
-                    }
-                    else
-                    {
-                        Console.WriteLine("Failed to load organizations: " + t.Exception?.Message);
-                    }
-                });
+                    _orgs = res.Data;
+                }
+                else
+                {
+                    // Handle error, e.g., show a notification
+                    Console.WriteLine($"Error fetching organizations: {res.Message}");
+                }
+                await base.OnInitializedAsync();
+            }
+            catch (Exception ex)
+            {
+                var s = ex.Message;
+                throw;
+            }
+
         }
     }
 }

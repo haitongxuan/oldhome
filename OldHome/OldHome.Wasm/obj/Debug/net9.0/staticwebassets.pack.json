@@ -25,6 +25,42 @@
       "PackagePath": "staticwebassets\\css\\site.css"
     },
     {
+      "Id": "E:\\project\\OldHome\\OldHome.Wasm\\wwwroot\\data\\activities.json",
+      "PackagePath": "staticwebassets\\data\\activities.json"
+    },
+    {
+      "Id": "E:\\project\\OldHome\\OldHome.Wasm\\wwwroot\\data\\advanced.json",
+      "PackagePath": "staticwebassets\\data\\advanced.json"
+    },
+    {
+      "Id": "E:\\project\\OldHome\\OldHome.Wasm\\wwwroot\\data\\basic.json",
+      "PackagePath": "staticwebassets\\data\\basic.json"
+    },
+    {
+      "Id": "E:\\project\\OldHome\\OldHome.Wasm\\wwwroot\\data\\current_user.json",
+      "PackagePath": "staticwebassets\\data\\current_user.json"
+    },
+    {
+      "Id": "E:\\project\\OldHome\\OldHome.Wasm\\wwwroot\\data\\fake_chart_data.json",
+      "PackagePath": "staticwebassets\\data\\fake_chart_data.json"
+    },
+    {
+      "Id": "E:\\project\\OldHome\\OldHome.Wasm\\wwwroot\\data\\fake_list.json",
+      "PackagePath": "staticwebassets\\data\\fake_list.json"
+    },
+    {
+      "Id": "E:\\project\\OldHome\\OldHome.Wasm\\wwwroot\\data\\menu.json",
+      "PackagePath": "staticwebassets\\data\\menu.json"
+    },
+    {
+      "Id": "E:\\project\\OldHome\\OldHome.Wasm\\wwwroot\\data\\notice.json",
+      "PackagePath": "staticwebassets\\data\\notice.json"
+    },
+    {
+      "Id": "E:\\project\\OldHome\\OldHome.Wasm\\wwwroot\\data\\notices.json",
+      "PackagePath": "staticwebassets\\data\\notices.json"
+    },
+    {
       "Id": "E:\\project\\OldHome\\OldHome.Wasm\\wwwroot\\favicon.ico",
       "PackagePath": "staticwebassets\\favicon.ico"
     },

@@ -1,0 +1,9 @@
+﻿@page "/"
+@attribute [ReuseTabsPage(Pin = true, Closable = false)]
+
+
+<AuthorizeView>
+    <Authorized>
+        <h1>Welcome to OldHome @context.User.Identity?.Name</h1>
+    </Authorized>
+</AuthorizeView>

@@ -1406,73 +1406,6 @@ namespace OldHome.DAL.Migrations
                     b.ToTable("MedicationSchedules");
                 });
 
-            modelBuilder.Entity("OldHome.Entities.MedicationTemplate", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("CreatedBy")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Notes")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("TemplateName")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("UpdatedBy")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("MedicationTemplates");
-                });
-
-            modelBuilder.Entity("OldHome.Entities.MedicationTemplateItem", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("MedicationTemplateId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("MedicineId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("MedicineTime")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("MedicineType")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Notes")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("MedicationTemplateId");
-
-                    b.HasIndex("MedicineId");
-
-                    b.ToTable("MedicationTemplateItems");
-                });
-
             modelBuilder.Entity("OldHome.Entities.Medicine", b =>
                 {
                     b.Property<int>("Id")
@@ -3069,23 +3002,6 @@ namespace OldHome.DAL.Migrations
                     b.Navigation("Resident");
                 });
 
-            modelBuilder.Entity("OldHome.Entities.MedicationTemplateItem", b =>
-                {
-                    b.HasOne("OldHome.Entities.MedicationTemplate", null)
-                        .WithMany("Items")
-                        .HasForeignKey("MedicationTemplateId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("OldHome.Entities.Medicine", "Medicine")
-                        .WithMany()
-                        .HasForeignKey("MedicineId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Medicine");
-                });
-
             modelBuilder.Entity("OldHome.Entities.MedicineInventory", b =>
                 {
                     b.HasOne("OldHome.Entities.Medicine", "Medicine")
@@ -3517,11 +3433,6 @@ namespace OldHome.DAL.Migrations
                 });
 
             modelBuilder.Entity("OldHome.Entities.MedicationPrescription", b =>
-                {
-                    b.Navigation("Items");
-                });
-
-            modelBuilder.Entity("OldHome.Entities.MedicationTemplate", b =>
                 {
                     b.Navigation("Items");
                 });

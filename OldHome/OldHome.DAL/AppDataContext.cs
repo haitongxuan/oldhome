@@ -18,8 +18,6 @@ namespace OldHome.DAL
         public DbSet<CareRecord> CareRecords { get; set; }
         public DbSet<Department> Departments { get; set; }
         public DbSet<EmergencyContact> EmergencyContacts { get; set; }
-        public DbSet<MedicationTemplate> MedicationTemplates { get; set; }
-        public DbSet<MedicationTemplateItem> MedicationTemplateItems { get; set; }
         public DbSet<Medicine> Medicines { get; set; }
         public DbSet<MedicineTransactionLog> MedicineTransactionLogs { get; set; }
         public DbSet<MedicineInventory> MedicineInventories { get; set; }
@@ -52,5 +50,6 @@ namespace OldHome.DAL
         public DbSet<MedicationPrescriptionItem> MedicationPrescriptionItems { get; set; }
         public DbSet<MedicationSchedule> MedicationSchedules { get; set; }
         public DbSet<SerialNumber> SerialNumbers { get; set; }
+        public DbSet<RefreshToken> RefreshTokens { get; set; }
     }
 }

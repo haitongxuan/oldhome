@@ -75,6 +75,7 @@ namespace OldHome.Service
             });
 
             var app = builder.Build();
+            app.UseCors();
             app.UseAuthentication();
             app.UseAuthorization();
             await app.InitializeDatabaseAsync();

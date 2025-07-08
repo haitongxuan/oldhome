@@ -8,7 +8,7 @@ namespace OldHome.Wasm.Models
 
         [Required] public string Password { get; set; }
 
-        [Required] public int OrgId { get; set; }
+        [Required] public int? OrgId { get; set; }
 
         public bool AutoLogin { get; set; }
     }

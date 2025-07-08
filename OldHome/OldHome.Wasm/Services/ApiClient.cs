@@ -12,118 +12,185 @@ namespace OldHome.Wasm.Services
     {
         private readonly HttpClient _httpClient;
         private readonly Func<Task<SignInResponse?>>? _refreshTokenFunc;
-        [Inject] public IUserSessionService UserSession{ get; set; }
+        private readonly IUserSessionService _userSessionService;
 
-        public ApiClient(HttpClient httpClient, Func<Task<SignInResponse?>>? refreshTokenFunc = null)
+        public ApiClient(HttpClient httpClient, IUserSessionService userSessionService, Func<Task<SignInResponse?>>? refreshTokenFunc = null)
         {
             _httpClient = httpClient;
             _refreshTokenFunc = refreshTokenFunc;
+            _userSessionService = userSessionService;
         }
-
 
         private void AddJwtHeader()
         {
             _httpClient.DefaultRequestHeaders.Authorization =
-            new AuthenticationHeaderValue("Bearer", UserSession.Token);
+                new AuthenticationHeaderValue("Bearer", _userSessionService.Token);
 
-            if (UserSession.OrgId is not null)
+            if (_userSessionService.OrgId is not null)
             {
                 if (_httpClient.DefaultRequestHeaders.Contains("OrgId"))
                     _httpClient.DefaultRequestHeaders.Remove("OrgId");
-                _httpClient.DefaultRequestHeaders.Add("OrgId", UserSession.OrgId.ToString());
+                _httpClient.DefaultRequestHeaders.Add("OrgId", _userSessionService.OrgId.ToString());
             }
         }
 
         public async Task<BaseResponse<T>?> GetAsync<T>(string url)
         {
-            AddJwtHeader();
-            try
+            return await ExecuteWithRetryGeneric(async () =>
             {
+                AddJwtHeader();
                 var response = await _httpClient.GetAsync(url);
-                return await HandleResponse(response, () => GetAsync<T>(url));
-            }
-            catch (Exception ex)
-            {
-                return new BaseResponse<T>
-                {
-                    IsSuccess = false,
-                    Message = ex.Message,
-                    StatusCode = System.Net.HttpStatusCode.InternalServerError
-                };
-            }
+                return GetResponse<T>(response);
+            });
         }
 
         public async Task<BaseResponse<T>?> PostAsync<TRequest, T>(string url, TRequest request)
         {
-            AddJwtHeader();
-            string json = JsonSerializer.Serialize(request);
-            var content = new StringContent(json, Encoding.UTF8, "application/json");
+            return await ExecuteWithRetryGeneric(async () =>
+            {
+                AddJwtHeader();
+                string json = JsonSerializer.Serialize(request);
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
+                var response = await _httpClient.PostAsync(url, content);
+                return GetResponse<T>(response);
+            });
+        }
+
+        public async Task<BaseResponse?> GetAsync(string url)
+        {
+            return await ExecuteWithRetry(async () =>
+            {
+                AddJwtHeader();
+                var response = await _httpClient.GetAsync(url);
+                return GetResponse(response);
+            });
+        }
+
+        public async Task<BaseResponse?> PostAsync<TRequest>(string url, TRequest request)
+        {
+            return await ExecuteWithRetry(async () =>
+            {
+                AddJwtHeader();
+                string json = JsonSerializer.Serialize(request);
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
+                var response = await _httpClient.PostAsync(url, content);
+                return GetResponse(response);
+            });
+        }
+
+        private async Task<BaseResponse<T>?> ExecuteWithRetryGeneric<T>(Func<Task<BaseResponse<T>>> operation)
+        {
             try
             {
-                var response = await _httpClient.PostAsync(url, content);
-                return await HandleResponse(response, () => PostAsync<TRequest, T>(url, request));
+                var result = await operation();
+
+                // 如果是401错误且可以刷新令牌，尝试刷新一次
+                if (result.StatusCode == System.Net.HttpStatusCode.Unauthorized && _refreshTokenFunc != null)
+                {
+                    var oldToken = _userSessionService.Token;
+                    var refreshResult = await _refreshTokenFunc.Invoke();
+
+                    if (refreshResult != null && !string.IsNullOrEmpty(refreshResult.Token))
+                    {
+                        _userSessionService.SetSession(refreshResult.UserName, refreshResult.Token, refreshResult.Role, refreshResult.OrgId);
+
+                        // 只有当令牌真的更新了才重试
+                        if (refreshResult.Token != oldToken)
+                        {
+                            var retryResult = await operation();
+
+                            // 如果重试后仍然是401，说明令牌问题无法解决
+                            if (retryResult.StatusCode == System.Net.HttpStatusCode.Unauthorized)
+                            {
+                                throw new UnauthorizedAccessException("Token 过期且刷新后仍然无效。");
+                            }
+
+                            return retryResult;
+                        }
+                    }
+
+                    throw new UnauthorizedAccessException("Token 过期且刷新失败。");
+                }
+
+                // 对于其他错误，直接抛出异常
+                if (!result.IsSuccess)
+                {
+                    throw new HttpRequestException($"HTTP {result.StatusCode}:\n{result.Message}");
+                }
+
+                return result;
+            }
+            catch (UnauthorizedAccessException)
+            {
+                throw; // 重新抛出授权异常
+            }
+            catch (HttpRequestException)
+            {
+                throw; // 重新抛出HTTP请求异常
             }
             catch (Exception ex)
             {
-                return new BaseResponse<T>
+                // 对于其他异常，包装为对应的响应类型
+                var errorResponse = new BaseResponse<T>
                 {
                     IsSuccess = false,
                     Message = ex.Message,
                     StatusCode = System.Net.HttpStatusCode.InternalServerError
                 };
+                return errorResponse;
             }
         }
 
-        private async Task<BaseResponse<T>?> HandleResponse<T>(HttpResponseMessage response, Func<Task<BaseResponse<T>?>> retryFunc)
+        private async Task<BaseResponse?> ExecuteWithRetry(Func<Task<BaseResponse>> operation)
         {
-            if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized && _refreshTokenFunc != null)
-            {
-                var res = await _refreshTokenFunc.Invoke();
-                UserSession.SetSession(res.UserName, res.Token, res.Role, res.OrgId);
-                if (!string.IsNullOrEmpty(UserSession.Token))
-                    return await retryFunc();
-
-                throw new UnauthorizedAccessException("Token 过期且刷新失败。");
-            }
-
             try
             {
-                var result = GetResponse<T>(response);
+                var result = await operation();
+
+                // 如果是401错误且可以刷新令牌，尝试刷新一次
+                if (result.StatusCode == System.Net.HttpStatusCode.Unauthorized && _refreshTokenFunc != null)
+                {
+                    var oldToken = _userSessionService.Token;
+                    var refreshResult = await _refreshTokenFunc.Invoke();
+
+                    if (refreshResult != null && !string.IsNullOrEmpty(refreshResult.Token))
+                    {
+                        _userSessionService.SetSession(refreshResult.UserName, refreshResult.Token, refreshResult.Role, refreshResult.OrgId);
+
+                        // 只有当令牌真的更新了才重试
+                        if (refreshResult.Token != oldToken)
+                        {
+                            var retryResult = await operation();
+
+                            // 如果重试后仍然是401，说明令牌问题无法解决
+                            if (retryResult.StatusCode == System.Net.HttpStatusCode.Unauthorized)
+                            {
+                                throw new UnauthorizedAccessException("Token 过期且刷新后仍然无效。");
+                            }
+
+                            return retryResult;
+                        }
+                    }
+
+                    throw new UnauthorizedAccessException("Token 过期且刷新失败。");
+                }
+
+                // 对于其他错误，直接抛出异常
                 if (!result.IsSuccess)
+                {
                     throw new HttpRequestException($"HTTP {result.StatusCode}:\n{result.Message}");
+                }
+
                 return result;
             }
-            catch (Exception ex)
+            catch (UnauthorizedAccessException)
             {
-                var msg = ex.Message;
-                throw;
+                throw; // 重新抛出授权异常
             }
-        }
-
-        private async Task<BaseResponse?> HandleResponse(HttpResponseMessage response, Func<Task<BaseResponse?>> retryFunc)
-        {
-            if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized && _refreshTokenFunc != null)
+            catch (HttpRequestException)
             {
-                var res = await _refreshTokenFunc.Invoke();
-                UserSession.SetSession(res.UserName, res.Token, res.Role, res.OrgId);
-                if (!string.IsNullOrEmpty(UserSession.Token))
-                    return await retryFunc();
-
-                throw new UnauthorizedAccessException("Token 过期且刷新失败。");
-            }
-
-            try
-            {
-                var result = GetResponse(response);
-                if (!result.IsSuccess)
-                    throw new HttpRequestException($"HTTP {result.StatusCode}:\n{result.Message}");
-                return result;
-            }
-            catch (Exception ex)
-            {
-                var msg = ex.Message;
-                throw;
-            }
+                throw; // 重新抛出HTTP请求异常
+            }            
         }
 
         private BaseResponse<T> GetResponse<T>(HttpResponseMessage response)
@@ -148,46 +215,6 @@ namespace OldHome.Wasm.Services
             result.StatusCode = response.StatusCode;
             result.Message = response.ReasonPhrase;
             return result;
-        }
-
-        public async Task<BaseResponse?> GetAsync(string url)
-        {
-            AddJwtHeader();
-            try
-            {
-                var response = await _httpClient.GetAsync(url);
-                return await HandleResponse(response, () => GetAsync(url));
-            }
-            catch (Exception ex)
-            {
-                return new BaseResponse
-                {
-                    IsSuccess = false,
-                    Message = ex.Message,
-                    StatusCode = System.Net.HttpStatusCode.InternalServerError
-                };
-            }
-        }
-
-        public async Task<BaseResponse?> PostAsync<TRequest>(string url, TRequest request)
-        {
-            AddJwtHeader();
-            string json = JsonSerializer.Serialize(request);
-            var content = new StringContent(json, Encoding.UTF8, "application/json");
-            try
-            {
-                var response = await _httpClient.PostAsync(url, content);
-                return await HandleResponse(response, () => PostAsync<TRequest>(url, request));
-            }
-            catch (Exception ex)
-            {
-                return new BaseResponse
-                {
-                    IsSuccess = false,
-                    Message = ex.Message,
-                    StatusCode = System.Net.HttpStatusCode.InternalServerError
-                };
-            }
         }
     }
 }

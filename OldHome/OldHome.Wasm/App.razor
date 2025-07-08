@@ -1,3 +1,17 @@
 @namespace OldHome.Wasm
+@using OldHome.Wasm.Services
 
-<Routes />
+<CascadingAuthenticationState>
+    <Routes />
+</CascadingAuthenticationState>
+
+@code {
+    [Inject] public NavigationContainer NavigationContainer { get; set; }
+    // This code block is intentionally left empty.
+    // It can be used for any global logic or state management if needed in the future.
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        OldHome.Wasm.Services.NavigationScanner.RegisterNavigations(NavigationContainer);
+    }
+}
