@@ -14,18 +14,21 @@ namespace OldHome.Wasm
         private readonly IUserSessionService _userSession;
         private readonly IJSRuntime _jsRuntime;
         private readonly ApiClient _apiClient;
+        private readonly ApiManager _apiManager;
 
         private const string TOKEN_KEY = "authToken";
+        private const string REFRESH_TOKEN_KEY = "refreshToken";
         private const string USER_KEY = "authUser";
 
         public AppAuthStateProvider(
           IUserSessionService userSession,
           IJSRuntime jsRuntime,
-          ApiClient apiClient)
+          ApiClient apiClient, ApiManager apiManager)
         {
             _userSession = userSession;
             _jsRuntime = jsRuntime;
             _apiClient = apiClient;
+            _apiManager = apiManager;
         }
 
         public override async Task<AuthenticationState> GetAuthenticationStateAsync()
@@ -33,7 +36,8 @@ namespace OldHome.Wasm
             try
             {
                 // 尝试从本地存储获取token
-                var savedToken = await _jsRuntime.InvokeAsync<string>("localStorage.getItem", TOKEN_KEY);
+                var savedToken = await _jsRuntime.InvokeAsync<string>("localStorage.getItem", TOKEN_KEY); 
+                var savedRefreshToken = await _jsRuntime.InvokeAsync<string>("localStorage.getItem", REFRESH_TOKEN_KEY);
                 var savedUserJson = await _jsRuntime.InvokeAsync<string>("localStorage.getItem", USER_KEY);
 
                 if (string.IsNullOrWhiteSpace(savedToken) || string.IsNullOrWhiteSpace(savedUserJson))
@@ -82,6 +86,11 @@ namespace OldHome.Wasm
 
                     // 保存到本地存储
                     await _jsRuntime.InvokeVoidAsync("localStorage.setItem", TOKEN_KEY, loginResponse.Token);
+                    // 保存RefreshToken
+                    if (!string.IsNullOrEmpty(loginResponse.RefreshToken))
+                    {
+                        await _jsRuntime.InvokeVoidAsync("localStorage.setItem", REFRESH_TOKEN_KEY, loginResponse.RefreshToken);
+                    }
                     await _jsRuntime.InvokeVoidAsync("localStorage.setItem", USER_KEY,
                         JsonSerializer.Serialize(new SavedUserInfo
                         {
@@ -110,6 +119,8 @@ namespace OldHome.Wasm
                     return true;
                 }
 
+                // 刷新失败，清理并登出
+                await LogoutAsync();
                 return false;
             }
             catch (Exception ex)
@@ -123,6 +134,7 @@ namespace OldHome.Wasm
         {
             // 清除本地存储
             await _jsRuntime.InvokeVoidAsync("localStorage.removeItem", TOKEN_KEY);
+            await _jsRuntime.InvokeVoidAsync("localStorage.removeItem", REFRESH_TOKEN_KEY);
             await _jsRuntime.InvokeVoidAsync("localStorage.removeItem", USER_KEY);
 
             // 清除会话
@@ -146,18 +158,16 @@ namespace OldHome.Wasm
             }
         }
 
-        // 刷新Token的方法
-        public async Task<bool> RefreshTokenAsync()
+        // 获取当前的RefreshToken
+        public async Task<string?> GetRefreshTokenAsync()
         {
             try
             {
-                await _apiClient.PostAsync("/refresh-token", new RefreshTokenRequest { RefreshToken = });
-                return true;
+                return await _jsRuntime.InvokeAsync<string>("localStorage.getItem", REFRESH_TOKEN_KEY);
             }
             catch
             {
-                await LogoutAsync();
-                return false;
+                return null;
             }
         }
 

@@ -10,13 +10,13 @@ namespace OldHome.Entities
     /// <summary>
     /// 刷新令牌实体 - 用于管理用户的刷新令牌
     /// </summary>
-    public class RefreshToken : BaseOrgByEntity
+    public class RefreshToken : BaseEntity
     {
         /// <summary>
         /// 关联的用户ID
         /// </summary>
         public int UserId { get; set; }
-        public User User { get; set; } = new User();
+        public User User { get; set; }
 
         /// <summary>
         /// 令牌值（完整的JWT令牌）

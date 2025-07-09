@@ -1,23 +1,18 @@
 ﻿@namespace OldHome.Wasm.Pages.Organization
 @page "/organization/orglist"
 @using AntDesign.TableModels
-@inherits BaseListComponent<OldHome.DTO.OrgDto>
+@inherits BaseListComponent<OrgDto>
 @attribute [Navigation("orgList", "/organization/orglist", "机构管理", "组织管理", Icon = "bank")]
-@inject ILogger<OrgList> Logger
 @inject ModalService ModalService
 @inject ConfirmService ComfirmService
 
-<AuthorizeView></AuthorizeView>
 <div>
     <GridRow>
         <GridCol Span="24">
-            <Table @ref="_table" DataSource="@_items" Loading="_loading" TItem="OrgDto" OnChange="HandleTableChange">
+            <Table @ref="_table" DataSource="@_items" Loading="_loading" TItem="OrgDto" OnChange="HandleTableChange" HidePagination>
                 <TitleTemplate>
                     <GridRow>
-                        <GridCol Span="5">
-                            <Search Placeholder="机构名称" @bind-Value="searchString" OnSearch="()=>_table?.ReloadData()" />
-                        </GridCol>
-                        <GridCol Span="1" Offset="18">
+                        <GridCol Span="1" Offset="23">
                             <Button Type="ButtonType.Primary" OnClick="() => StartEdit(default)">新增</Button>
                         </GridCol>
                     </GridRow>
@@ -27,7 +22,7 @@
                     <ActionColumn>
                         <a @onclick=" ()=>
                         StartEdit(row)">编辑</a>
-                        <Popconfirm OnConfirm="()=>Delete(row)">
+                        <Popconfirm Title="@("是否要删除【"+row.Name+"】?")" OnConfirm="()=>Delete(row)">
                             <a>删除</a>
                         </Popconfirm>
                     </ActionColumn>
@@ -40,88 +35,41 @@
 @code {
     protected override Func<Task<BaseResponse<List<OrgDto>>>> GetAllFunc => async () => await ApiManager.OrgApi.GetAllOrgs();
     protected override Func<int, Task<BaseResponse>> DeleteFunc => async (id) => await ApiManager.OrgApi.DeleteOrg(id);
-
-    private string _queryOrgName;
-    private string searchString;
-    private ITable _table;
-
-    async Task HandleTableChange(QueryModel<OrgDto> queryModel)
+    protected override string Title => "机构";
+    protected override async Task<BaseResponse> Modify(OrgDto data)
     {
-        await LoadData();
-    }
-
-    private void StartEdit(OrgDto? row)
-    {
-        var data = row == null ? new() : row;
-        ModalRef<bool> modalRef = default;
-        IForm form = default;
-        modalRef = ModalService.CreateModal<bool>(new()
+        return await ApiManager.OrgApi.ModifyOrg(new OrgModify
                 {
-                    Title = data.Id > 0 ? "编辑" : "新增",
-                    Content =
+                    Id = data.Id,
+                    Name = data.Name,
+                    Address = data.Address,
+                    PhoneNum = data.PhoneNum
+                });
+    }
+    protected override RenderFragment GetModalContent(IForm form, OrgDto? data, ModalRef<bool> modalRef)
+    {
+        RenderFragment render =
     @<Form @ref="form" Model="data" OnFinish="()=> modalRef.OkAsync(true)" LabelColSpan="6" WrapperColSpan="18">
         <FormItem><Input @bind-Value="@data.Name" /></FormItem>
         <FormItem><Input @bind-Value="@data.PhoneNum" /></FormItem>
         <FormItem><TextArea @bind-Value="@data.Address" /></FormItem>
-        @if(data.Id>0){
+        @if(data.Id>0)
+    {
         <FormItem Label="总公司"><Switch @bind-Checked="@data.IsHead" Disabled=true /></FormItem>
     }
-    </Form>                                                                     ,
-                OnOk = async (e) =>
-{
-if (!form.Validate())
-{
-    return;
-}
-
-    // save db and refresh
-modalRef.SetConfirmLoading(true);
-
-if (data.Id > 0)
-{
-    await ApiManager.OrgApi.ModifyOrg(new OrgModify
-    {
-        Id = data.Id,
-        Name = data.Name,
-        Address = data.Address,
-        PhoneNum = data.PhoneNum
-    });
-}
-else
-{
-    await ApiManager.OrgApi.CreateOrg(new OrgCreate
-    {
-        Name = data.Name,
-        Address = data.Address,
-        PhoneNum = data.PhoneNum
-    });
-}
-
-await Task.Delay(1000);
-
-await modalRef.CloseAsync();
-_table.ReloadData();
-StateHasChanged();
-},
-                OnCancel = async (e) =>
-{
-if (form.IsModified && (!await Comfirm("The form have been updated, are you sure quit?")))
-{
-    return;
-}
-await modalRef.CloseAsync();
-}
-            });
+    </Form>
+        ;
+        return render;
     }
 
-    private async Task<bool>
-        Comfirm(string message)
+    protected override async Task<BaseResponse<OrgDto>> Create(OrgDto data)
     {
-        return await ComfirmService.Show(message, "Confirm", ConfirmButtons.YesNo, ConfirmIcon.Warning) == ConfirmResult.Yes;
-    }
-
-    private void Delete(OrgDto row)
-    {
+        return await ApiManager.OrgApi.CreateOrg(new OrgCreate
+                {
+                    Name = data.Name,
+                    Address = data.Address,
+                    PhoneNum = data.PhoneNum
+                });
 
     }
 
@@ -129,44 +77,11 @@ await modalRef.CloseAsync();
     {
         if (propertyName.Equals("IsHead"))
         {
-            var tagCol = ((Column<bool>
-        )column);
+            var tagCol = (Column<bool>)column;
             tagCol.CellRender = cellData => @<span>@(cellData.FieldValue ? "是" : "否")</span>;
             return;
         }
         column.Sortable = true;
         column.Filterable = true;
-    }
-
-
-    private OrgCreate _orgCreate;
-
-    private OrgModify _orgModify;
-
-    private Form<OrgCreate>
-        _form;
-
-    private void HandleOk()
-    {
-        if (_form.Validate())
-        {
-            _form.Submit();
-        }
-    }
-
-    private async Task CreateSubmit()
-    {
-        var res = await ApiManager.OrgApi.CreateOrg(_orgCreate);
-        if (res.IsSuccess)
-        {
-            _orgCreate = new OrgCreate();
-            await Message.SuccessAsync("组织信息保存成功");
-        }
-        else
-        {
-            // Handle error
-            Logger.LogError($"Failed to create organization: {res.Message}");
-            await Message.ErrorAsync($"组织信息保存失败: {res.Message}");
-        }
     }
 }

@@ -11,10 +11,10 @@ namespace OldHome.Service
             using (var scope = app.Services.CreateScope())
             {
                 var db = scope.ServiceProvider.GetRequiredService<AppDataContext>();
-                // 确保数据库创建
-                await db.Database.EnsureCreatedAsync();
+                //// 确保数据库创建
+                //await db.Database.EnsureCreatedAsync();
                 // 运行迁移
-                //await db.Database.MigrateAsync();
+                await db.Database.MigrateAsync();
 
                 if (!await db.Users.AnyAsync())
                 {

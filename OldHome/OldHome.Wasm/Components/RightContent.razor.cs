@@ -87,7 +87,7 @@ namespace OldHome.Wasm.Components
                     NavigationManager.NavigateTo("/account/settings");
                     break;
                 case "logout":
-                    NavigationManager.NavigateTo("/user/login");
+                    NavigationManager.NavigateTo("/user/logout");
                     break;
             }
         }

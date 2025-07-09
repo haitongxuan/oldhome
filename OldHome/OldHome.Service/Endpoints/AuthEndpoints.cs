@@ -255,11 +255,10 @@ namespace OldHome.Service.Endpoints
         /// 保存刷新令牌到数据库
         /// </summary>
         private static async Task SaveRefreshTokenAsync(AppDataContext db, int userId, string refreshToken, string jwtId, string? ipAddress = null, string? userAgent = null)
-        {
+        { 
             var tokenEntity = new Entities.RefreshToken
             {
                 UserId = userId,
-                OrgId = (await db.Users.FindAsync(userId))?.OrgId ?? 0,
                 Token = refreshToken,
                 JwtId = jwtId,
                 ExpiresAt = DateTime.UtcNow.AddDays(7),
@@ -299,9 +298,16 @@ namespace OldHome.Service.Endpoints
                     token.RevokeReason = "超出令牌数量限制";
                 }
             }
+            try
+            {
+                db.RefreshTokens.Add(tokenEntity);
+                await db.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
 
-            db.RefreshTokens.Add(tokenEntity);
-            await db.SaveChangesAsync();
+                throw ex;
+            }
         }
 
         /// <summary>

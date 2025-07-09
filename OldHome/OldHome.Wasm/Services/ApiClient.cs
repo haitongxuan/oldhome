@@ -5,20 +5,25 @@ using System.Net.Http.Headers;
 using System.Text.Json;
 using System.Text;
 using Microsoft.AspNetCore.Components;
+using Microsoft.JSInterop;
 
 namespace OldHome.Wasm.Services
 {
     public class ApiClient : IApiClient
     {
         private readonly HttpClient _httpClient;
-        private readonly Func<Task<SignInResponse?>>? _refreshTokenFunc;
         private readonly IUserSessionService _userSessionService;
+        private readonly IJSRuntime _jsRuntime;
+        private readonly NavigationManager _navigationManager;
+        private bool _isRefreshing = false;
+        private readonly SemaphoreSlim _refreshSemaphore = new(1, 1);
 
-        public ApiClient(HttpClient httpClient, IUserSessionService userSessionService, Func<Task<SignInResponse?>>? refreshTokenFunc = null)
+        public ApiClient(HttpClient httpClient, IUserSessionService userSessionService, IJSRuntime jSRuntime, NavigationManager navigationManager)
         {
             _httpClient = httpClient;
-            _refreshTokenFunc = refreshTokenFunc;
             _userSessionService = userSessionService;
+            _jsRuntime = jSRuntime;
+            _navigationManager = navigationManager;
         }
 
         private void AddJwtHeader()
@@ -40,7 +45,7 @@ namespace OldHome.Wasm.Services
             {
                 AddJwtHeader();
                 var response = await _httpClient.GetAsync(url);
-                return GetResponse<T>(response);
+                return await GetResponse<T>(response);
             });
         }
 
@@ -52,7 +57,7 @@ namespace OldHome.Wasm.Services
                 string json = JsonSerializer.Serialize(request);
                 var content = new StringContent(json, Encoding.UTF8, "application/json");
                 var response = await _httpClient.PostAsync(url, content);
-                return GetResponse<T>(response);
+                return await GetResponse<T>(response);
             });
         }
 
@@ -62,7 +67,7 @@ namespace OldHome.Wasm.Services
             {
                 AddJwtHeader();
                 var response = await _httpClient.GetAsync(url);
-                return GetResponse(response);
+                return await GetResponse(response);
             });
         }
 
@@ -74,7 +79,7 @@ namespace OldHome.Wasm.Services
                 string json = JsonSerializer.Serialize(request);
                 var content = new StringContent(json, Encoding.UTF8, "application/json");
                 var response = await _httpClient.PostAsync(url, content);
-                return GetResponse(response);
+                return await GetResponse(response);
             });
         }
 
@@ -84,49 +89,30 @@ namespace OldHome.Wasm.Services
             {
                 var result = await operation();
 
-                // 如果是401错误且可以刷新令牌，尝试刷新一次
-                if (result.StatusCode == System.Net.HttpStatusCode.Unauthorized && _refreshTokenFunc != null)
+                // 如果是401错误，尝试刷新令牌
+                if (result.StatusCode == System.Net.HttpStatusCode.Unauthorized)
                 {
-                    var oldToken = _userSessionService.Token;
-                    var refreshResult = await _refreshTokenFunc.Invoke();
+                    var refreshed = await RefreshTokenAsync();
 
-                    if (refreshResult != null && !string.IsNullOrEmpty(refreshResult.Token))
+                    if (refreshed)
                     {
-                        _userSessionService.SetSession(refreshResult.UserName, refreshResult.Token, refreshResult.Role, refreshResult.OrgId);
+                        // 重试原始请求
+                        result = await operation();
 
-                        // 只有当令牌真的更新了才重试
-                        if (refreshResult.Token != oldToken)
+                        if (result.StatusCode == System.Net.HttpStatusCode.Unauthorized)
                         {
-                            var retryResult = await operation();
-
-                            // 如果重试后仍然是401，说明令牌问题无法解决
-                            if (retryResult.StatusCode == System.Net.HttpStatusCode.Unauthorized)
-                            {
-                                throw new UnauthorizedAccessException("Token 过期且刷新后仍然无效。");
-                            }
-
-                            return retryResult;
+                            // 刷新后仍然401，跳转到登录页
+                            await NavigateToLogin();
                         }
                     }
-
-                    throw new UnauthorizedAccessException("Token 过期且刷新失败。");
-                }
-
-                // 对于其他错误，直接抛出异常
-                if (!result.IsSuccess)
-                {
-                    throw new HttpRequestException($"HTTP {result.StatusCode}:\n{result.Message}");
+                    else
+                    {
+                        // 刷新失败，跳转到登录页
+                        await NavigateToLogin();
+                    }
                 }
 
                 return result;
-            }
-            catch (UnauthorizedAccessException)
-            {
-                throw; // 重新抛出授权异常
-            }
-            catch (HttpRequestException)
-            {
-                throw; // 重新抛出HTTP请求异常
             }
             catch (Exception ex)
             {
@@ -147,55 +133,126 @@ namespace OldHome.Wasm.Services
             {
                 var result = await operation();
 
-                // 如果是401错误且可以刷新令牌，尝试刷新一次
-                if (result.StatusCode == System.Net.HttpStatusCode.Unauthorized && _refreshTokenFunc != null)
+                // 如果是401错误，尝试刷新令牌
+                if (result.StatusCode == System.Net.HttpStatusCode.Unauthorized)
                 {
-                    var oldToken = _userSessionService.Token;
-                    var refreshResult = await _refreshTokenFunc.Invoke();
+                    var refreshed = await RefreshTokenAsync();
 
-                    if (refreshResult != null && !string.IsNullOrEmpty(refreshResult.Token))
+                    if (refreshed)
                     {
-                        _userSessionService.SetSession(refreshResult.UserName, refreshResult.Token, refreshResult.Role, refreshResult.OrgId);
+                        // 重试原始请求
+                        result = await operation();
 
-                        // 只有当令牌真的更新了才重试
-                        if (refreshResult.Token != oldToken)
+                        if (result.StatusCode == System.Net.HttpStatusCode.Unauthorized)
                         {
-                            var retryResult = await operation();
-
-                            // 如果重试后仍然是401，说明令牌问题无法解决
-                            if (retryResult.StatusCode == System.Net.HttpStatusCode.Unauthorized)
-                            {
-                                throw new UnauthorizedAccessException("Token 过期且刷新后仍然无效。");
-                            }
-
-                            return retryResult;
+                            // 刷新后仍然401，跳转到登录页
+                            await NavigateToLogin();
                         }
                     }
-
-                    throw new UnauthorizedAccessException("Token 过期且刷新失败。");
-                }
-
-                // 对于其他错误，直接抛出异常
-                if (!result.IsSuccess)
-                {
-                    throw new HttpRequestException($"HTTP {result.StatusCode}:\n{result.Message}");
+                    else
+                    {
+                        // 刷新失败，跳转到登录页
+                        await NavigateToLogin();
+                    }
                 }
 
                 return result;
             }
-            catch (UnauthorizedAccessException)
+            catch (Exception ex)
             {
-                throw; // 重新抛出授权异常
+                // 对于其他异常，返回错误响应
+                var errorResponse = new BaseResponse
+                {
+                    IsSuccess = false,
+                    Message = ex.Message,
+                    StatusCode = System.Net.HttpStatusCode.InternalServerError
+                };
+                return errorResponse;
             }
-            catch (HttpRequestException)
-            {
-                throw; // 重新抛出HTTP请求异常
-            }            
         }
 
-        private BaseResponse<T> GetResponse<T>(HttpResponseMessage response)
+        private async Task<bool> RefreshTokenAsync()
         {
-            var json = response.Content.ReadAsStringAsync().Result;
+            // 避免多个请求同时刷新
+            await _refreshSemaphore.WaitAsync();
+            try
+            {
+                if (_isRefreshing)
+                {
+                    // 如果已经在刷新，等待刷新完成
+                    return !string.IsNullOrEmpty(_userSessionService.Token);
+                }
+
+                _isRefreshing = true;
+
+                // 从本地存储获取RefreshToken
+                var refreshToken = await _jsRuntime.InvokeAsync<string>("localStorage.getItem", "refreshToken");
+
+                if (string.IsNullOrEmpty(refreshToken))
+                {
+                    return false;
+                }
+
+                // 调用刷新API
+                var refreshRequest = new RefreshTokenRequest { RefreshToken = refreshToken };
+                var json = JsonSerializer.Serialize(refreshRequest);
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+                // 不使用AddJwtHeader，因为refresh token请求不需要Bearer token
+                _httpClient.DefaultRequestHeaders.Authorization = null;
+
+                var response = await _httpClient.PostAsync("/auth/refresh-token", content);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var responseJson = await response.Content.ReadAsStringAsync();
+                    var tokenResponse = JsonSerializer.Deserialize<SignInResponse>(responseJson,
+                        new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+
+                    if (tokenResponse != null)
+                    {
+                        // 更新本地存储
+                        await _jsRuntime.InvokeVoidAsync("localStorage.setItem", "authToken", tokenResponse.Token);
+
+                        if (!string.IsNullOrEmpty(tokenResponse.RefreshToken))
+                        {
+                            await _jsRuntime.InvokeVoidAsync("localStorage.setItem", "refreshToken", tokenResponse.RefreshToken);
+                        }
+
+                        // 更新用户会话
+                        _userSessionService.SetSession(tokenResponse.UserName, tokenResponse.Token, tokenResponse.Role, tokenResponse.OrgId);
+
+                        return true;
+                    }
+                }
+
+                return false;
+            }
+            finally
+            {
+                _isRefreshing = false;
+                _refreshSemaphore.Release();
+            }
+        }
+
+        private async Task NavigateToLogin()
+        {
+            // 清理本地存储
+            await _jsRuntime.InvokeVoidAsync("localStorage.removeItem", "authToken");
+            await _jsRuntime.InvokeVoidAsync("localStorage.removeItem", "refreshToken");
+            await _jsRuntime.InvokeVoidAsync("localStorage.removeItem", "authUser");
+
+            // 清理会话
+            _userSessionService.ClearSession();
+
+            // 导航到登录页
+            var returnUrl = Uri.EscapeDataString(_navigationManager.Uri);
+            _navigationManager.NavigateTo($"/user/login?returnUrl={returnUrl}", forceLoad: true);
+        }
+
+        private async Task<BaseResponse<T>> GetResponse<T>(HttpResponseMessage response)
+        {
+            var json = await response.Content.ReadAsStringAsync();
             var result = new BaseResponse<T>();
             result.IsSuccess = response.IsSuccessStatusCode;
             if (response.IsSuccessStatusCode)
@@ -207,9 +264,9 @@ namespace OldHome.Wasm.Services
             return result;
         }
 
-        private BaseResponse GetResponse(HttpResponseMessage response)
+        private async Task<BaseResponse> GetResponse(HttpResponseMessage response)
         {
-            var json = response.Content.ReadAsStringAsync().Result;
+            var json = await response.Content.ReadAsStringAsync();
             var result = new BaseResponse();
             result.IsSuccess = response.IsSuccessStatusCode;
             result.StatusCode = response.StatusCode;

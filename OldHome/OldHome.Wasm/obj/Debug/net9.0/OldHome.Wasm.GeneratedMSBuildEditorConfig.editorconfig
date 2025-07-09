@@ -40,8 +40,16 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xSaWdodENvbnRlbnQucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
+[E:/project/OldHome/OldHome.Wasm/Components/TokenRefreshInterceptor.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xUb2tlblJlZnJlc2hJbnRlcmNlcHRvci5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
 [E:/project/OldHome/OldHome.Wasm/Layouts/BasicLayout.razor]
 build_metadata.AdditionalFiles.TargetPath = TGF5b3V0c1xCYXNpY0xheW91dC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/project/OldHome/OldHome.Wasm/Pages/User/Logout.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVXNlclxMb2dvdXQucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
 [E:/project/OldHome/OldHome.Wasm/Pages/_Imports.razor]

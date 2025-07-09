@@ -3,34 +3,70 @@
   "WorkspaceRootPath": "E:\\project\\OldHome\\OldHomeWeb\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{B86AC92A-85C6-577A-D753-47F1A2BEC9A7}|..\\OldHome.Wasm\\OldHome.Wasm.csproj|e:\\project\\oldhome\\oldhome.wasm\\appauthstateprovider.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8C02A7A2-7D61-C553-FD36-DD5D1ED05A5C}|..\\OldHome.API\\OldHome.API.csproj|e:\\project\\oldhome\\oldhome.api\\apis\\authapi.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B86AC92A-85C6-577A-D753-47F1A2BEC9A7}|..\\OldHome.Wasm\\OldHome.Wasm.csproj|e:\\project\\oldhome\\oldhome.wasm\\services\\apiclient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B86AC92A-85C6-577A-D753-47F1A2BEC9A7}|..\\OldHome.Wasm\\OldHome.Wasm.csproj|e:\\project\\oldhome\\oldhome.wasm\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8C02A7A2-7D61-C553-FD36-DD5D1ED05A5C}|..\\OldHome.API\\OldHome.API.csproj|e:\\project\\oldhome\\oldhome.api\\apis\\bedapi.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{B86AC92A-85C6-577A-D753-47F1A2BEC9A7}|..\\OldHome.Wasm\\OldHome.Wasm.csproj|e:\\project\\oldhome\\oldhome.wasm\\base\\baselistcomponent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{B86AC92A-85C6-577A-D753-47F1A2BEC9A7}|..\\OldHome.Wasm\\OldHome.Wasm.csproj|e:\\project\\oldhome\\oldhome.wasm\\pages\\organization\\orglist.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B86AC92A-85C6-577A-D753-47F1A2BEC9A7}|..\\OldHome.Wasm\\OldHome.Wasm.csproj|e:\\project\\oldhome\\oldhome.wasm\\base\\baselistcomponent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{B86AC92A-85C6-577A-D753-47F1A2BEC9A7}|..\\OldHome.Wasm\\OldHome.Wasm.csproj|e:\\project\\oldhome\\oldhome.wasm\\base\\basepagecomponent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8C02A7A2-7D61-C553-FD36-DD5D1ED05A5C}|..\\OldHome.API\\OldHome.API.csproj|e:\\project\\oldhome\\oldhome.api\\apis\\orgapi.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{F7568BFA-1693-F6D9-A8AA-5A8685560245}|..\\OldHome.ODT\\OldHome.DTO.csproj|e:\\project\\oldhome\\oldhome.odt\\org.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B86AC92A-85C6-577A-D753-47F1A2BEC9A7}|..\\OldHome.Wasm\\OldHome.Wasm.csproj|e:\\project\\oldhome\\oldhome.wasm\\pages\\user\\login\\login.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B86AC92A-85C6-577A-D753-47F1A2BEC9A7}|..\\OldHome.Wasm\\OldHome.Wasm.csproj|e:\\project\\oldhome\\oldhome.wasm\\appauthstateprovider.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B86AC92A-85C6-577A-D753-47F1A2BEC9A7}|..\\OldHome.Wasm\\OldHome.Wasm.csproj|e:\\project\\oldhome\\oldhome.wasm\\pages\\user\\logout.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B86AC92A-85C6-577A-D753-47F1A2BEC9A7}|..\\OldHome.Wasm\\OldHome.Wasm.csproj|e:\\project\\oldhome\\oldhome.wasm\\components\\redirecttologin.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B86AC92A-85C6-577A-D753-47F1A2BEC9A7}|..\\OldHome.Wasm\\OldHome.Wasm.csproj|e:\\project\\oldhome\\oldhome.wasm\\components\\tokenrefreshinterceptor.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B86AC92A-85C6-577A-D753-47F1A2BEC9A7}|..\\OldHome.Wasm\\OldHome.Wasm.csproj|e:\\project\\oldhome\\oldhome.wasm\\pages\\mainpage.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B86AC92A-85C6-577A-D753-47F1A2BEC9A7}|..\\OldHome.Wasm\\OldHome.Wasm.csproj|e:\\project\\oldhome\\oldhome.wasm\\components\\rightcontent.razor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B86AC92A-85C6-577A-D753-47F1A2BEC9A7}|..\\OldHome.Wasm\\OldHome.Wasm.csproj|e:\\project\\oldhome\\oldhome.wasm\\components\\rightcontent.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B86AC92A-85C6-577A-D753-47F1A2BEC9A7}|..\\OldHome.Wasm\\OldHome.Wasm.csproj|e:\\project\\oldhome\\oldhome.wasm\\resources\\i18n.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B86AC92A-85C6-577A-D753-47F1A2BEC9A7}|..\\OldHome.Wasm\\OldHome.Wasm.csproj|e:\\project\\oldhome\\oldhome.wasm\\wwwroot\\data\\menu.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B86AC92A-85C6-577A-D753-47F1A2BEC9A7}|..\\OldHome.Wasm\\OldHome.Wasm.csproj|e:\\project\\oldhome\\oldhome.wasm\\layouts\\basiclayout.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B86AC92A-85C6-577A-D753-47F1A2BEC9A7}|..\\OldHome.Wasm\\OldHome.Wasm.csproj|e:\\project\\oldhome\\oldhome.wasm\\pages\\mainpage.razor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B86AC92A-85C6-577A-D753-47F1A2BEC9A7}|..\\OldHome.Wasm\\OldHome.Wasm.csproj|e:\\project\\oldhome\\oldhome.wasm\\components\\orgselect.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B86AC92A-85C6-577A-D753-47F1A2BEC9A7}|..\\OldHome.Wasm\\OldHome.Wasm.csproj|e:\\project\\oldhome\\oldhome.wasm\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B86AC92A-85C6-577A-D753-47F1A2BEC9A7}|..\\OldHome.Wasm\\OldHome.Wasm.csproj|e:\\project\\oldhome\\oldhome.wasm\\_imports.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B86AC92A-85C6-577A-D753-47F1A2BEC9A7}|..\\OldHome.Wasm\\OldHome.Wasm.csproj|e:\\project\\oldhome\\oldhome.wasm\\services\\apiclient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{B86AC92A-85C6-577A-D753-47F1A2BEC9A7}|..\\OldHome.Wasm\\OldHome.Wasm.csproj|e:\\project\\oldhome\\oldhome.wasm\\app.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B86AC92A-85C6-577A-D753-47F1A2BEC9A7}|..\\OldHome.Wasm\\OldHome.Wasm.csproj|e:\\project\\oldhome\\oldhome.wasm\\_imports.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{8C02A7A2-7D61-C553-FD36-DD5D1ED05A5C}|..\\OldHome.API\\OldHome.API.csproj|e:\\project\\oldhome\\oldhome.api\\apis\\bedapi.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -40,7 +76,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 340,
-          "SelectedChildIndex": 10,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Bookmark",
@@ -56,46 +92,267 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "AuthApi.cs",
-              "DocumentMoniker": "E:\\project\\OldHome\\OldHome.API\\Apis\\AuthApi.cs",
-              "RelativeDocumentMoniker": "..\\OldHome.API\\Apis\\AuthApi.cs",
-              "ToolTip": "E:\\project\\OldHome\\OldHome.API\\Apis\\AuthApi.cs",
-              "RelativeToolTip": "..\\OldHome.API\\Apis\\AuthApi.cs",
-              "ViewState": "AgIAAA8AAAAAAAAAAAAAADkAAAAVAAAAAAAAAA==",
+              "DocumentIndex": 0,
+              "Title": "BaseListComponent.cs",
+              "DocumentMoniker": "E:\\project\\OldHome\\OldHome.Wasm\\Base\\BaseListComponent.cs",
+              "RelativeDocumentMoniker": "..\\OldHome.Wasm\\Base\\BaseListComponent.cs",
+              "ToolTip": "E:\\project\\OldHome\\OldHome.Wasm\\Base\\BaseListComponent.cs",
+              "RelativeToolTip": "..\\OldHome.Wasm\\Base\\BaseListComponent.cs",
+              "ViewState": "AgIAADIAAAAAAAAAAAAwwD4AAAAeAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-07T09:32:39.753Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Program.cs",
-              "DocumentMoniker": "E:\\project\\OldHome\\OldHome.Wasm\\Program.cs",
-              "RelativeDocumentMoniker": "..\\OldHome.Wasm\\Program.cs",
-              "ToolTip": "E:\\project\\OldHome\\OldHome.Wasm\\Program.cs",
-              "RelativeToolTip": "..\\OldHome.Wasm\\Program.cs",
-              "ViewState": "AgIAAB0AAAAAAAAAAAAjwDEAAABKAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-07T08:05:57.38Z",
+              "WhenOpened": "2025-07-08T08:10:18.241Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
+              "Title": "BasePageComponent.cs",
+              "DocumentMoniker": "E:\\project\\OldHome\\OldHome.Wasm\\Base\\BasePageComponent.cs",
+              "RelativeDocumentMoniker": "..\\OldHome.Wasm\\Base\\BasePageComponent.cs",
+              "ToolTip": "E:\\project\\OldHome\\OldHome.Wasm\\Base\\BasePageComponent.cs",
+              "RelativeToolTip": "..\\OldHome.Wasm\\Base\\BasePageComponent.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-08T08:11:06.889Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "RightContent.razor.cs",
+              "DocumentMoniker": "E:\\project\\OldHome\\OldHome.Wasm\\Components\\RightContent.razor.cs",
+              "RelativeDocumentMoniker": "..\\OldHome.Wasm\\Components\\RightContent.razor.cs",
+              "ToolTip": "E:\\project\\OldHome\\OldHome.Wasm\\Components\\RightContent.razor.cs",
+              "RelativeToolTip": "..\\OldHome.Wasm\\Components\\RightContent.razor.cs",
+              "ViewState": "AgIAAEAAAAAAAAAAAAAjwFkAAAA+AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-08T03:25:49.565Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "RightContent.razor",
+              "DocumentMoniker": "E:\\project\\OldHome\\OldHome.Wasm\\Components\\RightContent.razor",
+              "RelativeDocumentMoniker": "..\\OldHome.Wasm\\Components\\RightContent.razor",
+              "ToolTip": "E:\\project\\OldHome\\OldHome.Wasm\\Components\\RightContent.razor",
+              "RelativeToolTip": "..\\OldHome.Wasm\\Components\\RightContent.razor",
+              "ViewState": "AgIAABoAAAAAAAAAAAAjwC4AAAA4AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-07-08T03:20:51.78Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "OrgList.razor",
+              "DocumentMoniker": "E:\\project\\OldHome\\OldHome.Wasm\\Pages\\Organization\\OrgList.razor",
+              "RelativeDocumentMoniker": "..\\OldHome.Wasm\\Pages\\Organization\\OrgList.razor",
+              "ToolTip": "E:\\project\\OldHome\\OldHome.Wasm\\Pages\\Organization\\OrgList.razor",
+              "RelativeToolTip": "..\\OldHome.Wasm\\Pages\\Organization\\OrgList.razor",
+              "ViewState": "AgIAACUAAAAAAAAAAAAqwDAAAAA/AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-07-07T01:24:34.85Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Login.razor",
+              "DocumentMoniker": "E:\\project\\OldHome\\OldHome.Wasm\\Pages\\User\\Login\\Login.razor",
+              "RelativeDocumentMoniker": "..\\OldHome.Wasm\\Pages\\User\\Login\\Login.razor",
+              "ToolTip": "E:\\project\\OldHome\\OldHome.Wasm\\Pages\\User\\Login\\Login.razor",
+              "RelativeToolTip": "..\\OldHome.Wasm\\Pages\\User\\Login\\Login.razor",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAABpAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-07-08T06:57:29.231Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "TokenRefreshInterceptor.razor",
+              "DocumentMoniker": "E:\\project\\OldHome\\OldHome.Wasm\\Components\\TokenRefreshInterceptor.razor",
+              "RelativeDocumentMoniker": "..\\OldHome.Wasm\\Components\\TokenRefreshInterceptor.razor",
+              "ToolTip": "E:\\project\\OldHome\\OldHome.Wasm\\Components\\TokenRefreshInterceptor.razor",
+              "RelativeToolTip": "..\\OldHome.Wasm\\Components\\TokenRefreshInterceptor.razor",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADkAAAA7AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-07-08T02:08:34.503Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
               "Title": "ApiClient.cs",
               "DocumentMoniker": "E:\\project\\OldHome\\OldHome.Wasm\\Services\\ApiClient.cs",
               "RelativeDocumentMoniker": "..\\OldHome.Wasm\\Services\\ApiClient.cs",
               "ToolTip": "E:\\project\\OldHome\\OldHome.Wasm\\Services\\ApiClient.cs",
               "RelativeToolTip": "..\\OldHome.Wasm\\Services\\ApiClient.cs",
-              "ViewState": "AgIAAAUAAAAAAAAAAAAAAMAAAAANAAAAAAAAAA==",
+              "ViewState": "AgIAAC0AAAAAAAAAAAAAAFEAAAAdAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-07-07T07:32:16.447Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 3,
+              "Title": "Org.cs",
+              "DocumentMoniker": "E:\\project\\OldHome\\OldHome.ODT\\Org.cs",
+              "RelativeDocumentMoniker": "..\\OldHome.ODT\\Org.cs",
+              "ToolTip": "E:\\project\\OldHome\\OldHome.ODT\\Org.cs",
+              "RelativeToolTip": "..\\OldHome.ODT\\Org.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAqwCEAAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-08T07:23:10.491Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "Program.cs",
+              "DocumentMoniker": "E:\\project\\OldHome\\OldHome.Wasm\\Program.cs",
+              "RelativeDocumentMoniker": "..\\OldHome.Wasm\\Program.cs",
+              "ToolTip": "E:\\project\\OldHome\\OldHome.Wasm\\Program.cs",
+              "RelativeToolTip": "..\\OldHome.Wasm\\Program.cs",
+              "ViewState": "AgIAAB8AAAAAAAAAAAAqwDgAAAAlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-07T08:05:57.38Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "AppAuthStateProvider.cs",
+              "DocumentMoniker": "E:\\project\\OldHome\\OldHome.Wasm\\AppAuthStateProvider.cs",
+              "RelativeDocumentMoniker": "..\\OldHome.Wasm\\AppAuthStateProvider.cs",
+              "ToolTip": "E:\\project\\OldHome\\OldHome.Wasm\\AppAuthStateProvider.cs",
+              "RelativeToolTip": "..\\OldHome.Wasm\\AppAuthStateProvider.cs",
+              "ViewState": "AgIAAHoAAAAAAAAAAAAwwIsAAAATAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-07T01:19:20.504Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "menu.json",
+              "DocumentMoniker": "E:\\project\\OldHome\\OldHome.Wasm\\wwwroot\\data\\menu.json",
+              "RelativeDocumentMoniker": "..\\OldHome.Wasm\\wwwroot\\data\\menu.json",
+              "ToolTip": "E:\\project\\OldHome\\OldHome.Wasm\\wwwroot\\data\\menu.json",
+              "RelativeToolTip": "..\\OldHome.Wasm\\wwwroot\\data\\menu.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-07-08T03:28:42.676Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Logout.razor",
+              "DocumentMoniker": "E:\\project\\OldHome\\OldHome.Wasm\\Pages\\User\\Logout.razor",
+              "RelativeDocumentMoniker": "..\\OldHome.Wasm\\Pages\\User\\Logout.razor",
+              "ToolTip": "E:\\project\\OldHome\\OldHome.Wasm\\Pages\\User\\Logout.razor",
+              "RelativeToolTip": "..\\OldHome.Wasm\\Pages\\User\\Logout.razor",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAABFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-07-08T06:15:55.955Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "I18n.cs",
+              "DocumentMoniker": "E:\\project\\OldHome\\OldHome.Wasm\\Resources\\I18n.cs",
+              "RelativeDocumentMoniker": "..\\OldHome.Wasm\\Resources\\I18n.cs",
+              "ToolTip": "E:\\project\\OldHome\\OldHome.Wasm\\Resources\\I18n.cs",
+              "RelativeToolTip": "..\\OldHome.Wasm\\Resources\\I18n.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-08T03:29:47.446Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "RedirectToLogin.razor",
+              "DocumentMoniker": "E:\\project\\OldHome\\OldHome.Wasm\\Components\\RedirectToLogin.razor",
+              "RelativeDocumentMoniker": "..\\OldHome.Wasm\\Components\\RedirectToLogin.razor",
+              "ToolTip": "E:\\project\\OldHome\\OldHome.Wasm\\Components\\RedirectToLogin.razor",
+              "RelativeToolTip": "..\\OldHome.Wasm\\Components\\RedirectToLogin.razor",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-07-08T06:40:10.792Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "MainPage.razor",
+              "DocumentMoniker": "E:\\project\\OldHome\\OldHome.Wasm\\Pages\\MainPage.razor",
+              "RelativeDocumentMoniker": "..\\OldHome.Wasm\\Pages\\MainPage.razor",
+              "ToolTip": "E:\\project\\OldHome\\OldHome.Wasm\\Pages\\MainPage.razor",
+              "RelativeToolTip": "..\\OldHome.Wasm\\Pages\\MainPage.razor",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-07-08T03:13:11.263Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "BasicLayout.razor",
+              "DocumentMoniker": "E:\\project\\OldHome\\OldHome.Wasm\\Layouts\\BasicLayout.razor",
+              "RelativeDocumentMoniker": "..\\OldHome.Wasm\\Layouts\\BasicLayout.razor",
+              "ToolTip": "E:\\project\\OldHome\\OldHome.Wasm\\Layouts\\BasicLayout.razor",
+              "RelativeToolTip": "..\\OldHome.Wasm\\Layouts\\BasicLayout.razor",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-07-08T03:20:29.665Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "OrgSelect.razor",
+              "DocumentMoniker": "E:\\project\\OldHome\\OldHome.Wasm\\Components\\OrgSelect.razor",
+              "RelativeDocumentMoniker": "..\\OldHome.Wasm\\Components\\OrgSelect.razor",
+              "ToolTip": "E:\\project\\OldHome\\OldHome.Wasm\\Components\\OrgSelect.razor",
+              "RelativeToolTip": "..\\OldHome.Wasm\\Components\\OrgSelect.razor",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-07-08T03:12:35.587Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "MainPage.razor.cs",
+              "DocumentMoniker": "E:\\project\\OldHome\\OldHome.Wasm\\Pages\\MainPage.razor.cs",
+              "RelativeDocumentMoniker": "..\\OldHome.Wasm\\Pages\\MainPage.razor.cs",
+              "ToolTip": "E:\\project\\OldHome\\OldHome.Wasm\\Pages\\MainPage.razor.cs",
+              "RelativeToolTip": "..\\OldHome.Wasm\\Pages\\MainPage.razor.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-08T03:14:16.248Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "_Imports.razor",
+              "DocumentMoniker": "E:\\project\\OldHome\\OldHome.Wasm\\_Imports.razor",
+              "RelativeDocumentMoniker": "..\\OldHome.Wasm\\_Imports.razor",
+              "ToolTip": "E:\\project\\OldHome\\OldHome.Wasm\\_Imports.razor",
+              "RelativeToolTip": "..\\OldHome.Wasm\\_Imports.razor",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-07-07T01:19:03.912Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
               "Title": "BedApi.cs",
               "DocumentMoniker": "E:\\project\\OldHome\\OldHome.API\\Apis\\BedApi.cs",
               "RelativeDocumentMoniker": "..\\OldHome.API\\Apis\\BedApi.cs",
@@ -103,85 +360,19 @@
               "RelativeToolTip": "..\\OldHome.API\\Apis\\BedApi.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABwAAAAuAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-07T07:29:17.936Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-07T07:29:17.936Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "BaseListComponent.cs",
-              "DocumentMoniker": "E:\\project\\OldHome\\OldHome.Wasm\\Base\\BaseListComponent.cs",
-              "RelativeDocumentMoniker": "..\\OldHome.Wasm\\Base\\BaseListComponent.cs",
-              "ToolTip": "E:\\project\\OldHome\\OldHome.Wasm\\Base\\BaseListComponent.cs",
-              "RelativeToolTip": "..\\OldHome.Wasm\\Base\\BaseListComponent.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-07T02:58:43.73Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "OrgApi.cs",
-              "DocumentMoniker": "E:\\project\\OldHome\\OldHome.API\\Apis\\OrgApi.cs",
-              "RelativeDocumentMoniker": "..\\OldHome.API\\Apis\\OrgApi.cs",
-              "ToolTip": "E:\\project\\OldHome\\OldHome.API\\Apis\\OrgApi.cs",
-              "RelativeToolTip": "..\\OldHome.API\\Apis\\OrgApi.cs",
-              "ViewState": "AgIAAAEAAAAAAAAAAIAwwA4AAAAMAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-07T02:44:48.585Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "OrgList.razor",
-              "DocumentMoniker": "E:\\project\\OldHome\\OldHome.Wasm\\Pages\\Organization\\OrgList.razor",
-              "RelativeDocumentMoniker": "..\\OldHome.Wasm\\Pages\\Organization\\OrgList.razor",
-              "ToolTip": "E:\\project\\OldHome\\OldHome.Wasm\\Pages\\Organization\\OrgList.razor",
-              "RelativeToolTip": "..\\OldHome.Wasm\\Pages\\Organization\\OrgList.razor",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAABoAAAAiAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-07-07T01:24:34.85Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "AppAuthStateProvider.cs",
-              "DocumentMoniker": "E:\\project\\OldHome\\OldHome.Wasm\\AppAuthStateProvider.cs",
-              "RelativeDocumentMoniker": "..\\OldHome.Wasm\\AppAuthStateProvider.cs",
-              "ToolTip": "E:\\project\\OldHome\\OldHome.Wasm\\AppAuthStateProvider.cs",
-              "RelativeToolTip": "..\\OldHome.Wasm\\AppAuthStateProvider.cs",
-              "ViewState": "AgIAAIQAAAAAAAAAAAAAAJ4AAAAkAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-07T01:19:20.504Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 20,
               "Title": "App.razor",
               "DocumentMoniker": "E:\\project\\OldHome\\OldHome.Wasm\\App.razor",
               "RelativeDocumentMoniker": "..\\OldHome.Wasm\\App.razor",
               "ToolTip": "E:\\project\\OldHome\\OldHome.Wasm\\App.razor",
               "RelativeToolTip": "..\\OldHome.Wasm\\App.razor",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAYAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2025-07-07T01:19:05.166Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "_Imports.razor",
-              "DocumentMoniker": "E:\\project\\OldHome\\OldHome.Wasm\\_Imports.razor",
-              "RelativeDocumentMoniker": "..\\OldHome.Wasm\\_Imports.razor",
-              "ToolTip": "E:\\project\\OldHome\\OldHome.Wasm\\_Imports.razor",
-              "RelativeToolTip": "..\\OldHome.Wasm\\_Imports.razor",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-07-07T01:19:03.912Z",
               "EditorCaption": ""
             }
           ]

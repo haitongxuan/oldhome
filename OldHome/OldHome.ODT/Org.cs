@@ -26,10 +26,12 @@ namespace OldHome.DTO
     public class OrgDto : BaseDto
     {
         [Display(Name = "名称")]
+        [Required(ErrorMessage = "名称不能为空")]
         public string Name { get; set; } = string.Empty;
         [Display(Name = "地址")]
         public string Address { get; set; } = string.Empty;
         [Display(Name = "电话")]
+        [Required(ErrorMessage = "电话不能为空")]
         public string PhoneNum { get; set; } = string.Empty;
         [Display(Name = "是否总公司")]
         public bool IsHead { get; set; }

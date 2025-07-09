@@ -1,0 +1,115 @@
+﻿@namespace OldHome.Wasm.Components
+@implements IDisposable
+@inject AppAuthStateProvider AuthProvider
+@inject IUserSessionService UserSessionService
+@inject NavigationManager NavigationManager
+
+@code {
+    private System.Timers.Timer? _tokenCheckTimer;
+    private const int TOKEN_CHECK_INTERVAL_MINUTES = 5; // 每5分钟检查一次
+    private const int TOKEN_REFRESH_THRESHOLD_MINUTES = 10; // 距离过期10分钟时刷新
+
+    protected override void OnInitialized()
+    {
+        // 设置定时器定期检查Token状态
+        _tokenCheckTimer = new System.Timers.Timer(TOKEN_CHECK_INTERVAL_MINUTES * 60 * 1000);
+        _tokenCheckTimer.Elapsed += async (sender, e) => await CheckAndRefreshToken();
+        _tokenCheckTimer.Start();
+
+        // 监听会话过期事件
+        if (UserSessionService is UserSessionService userSession)
+        {
+            userSession.SessionExpired += OnSessionExpired;
+        }
+    }
+
+    private async Task CheckAndRefreshToken()
+    {
+        try
+        {
+            if (!UserSessionService.IsAuthenticated)
+                return;
+
+            // 解析当前Token获取过期时间
+            var token = UserSessionService.Token;
+            if (string.IsNullOrEmpty(token))
+                return;
+
+            var tokenParts = token.Split('.');
+            if (tokenParts.Length != 3)
+                return;
+
+            var payload = tokenParts[1];
+            var payloadJson = Base64UrlDecode(payload);
+            var claims = System.Text.Json.JsonSerializer.Deserialize<Dictionary<string, object>>(payloadJson);
+
+            if (claims != null && claims.TryGetValue("exp", out var expValue))
+            {
+                var exp = Convert.ToInt64(expValue.ToString());
+                var expirationTime = DateTimeOffset.FromUnixTimeSeconds(exp).UtcDateTime;
+                var timeUntilExpiration = expirationTime - DateTime.UtcNow;
+
+                // 如果Token即将过期，尝试刷新
+                if (timeUntilExpiration.TotalMinutes <= TOKEN_REFRESH_THRESHOLD_MINUTES)
+                {
+                    await InvokeAsync(async () =>
+                    {
+                        var refreshed = await AuthProvider.GetRefreshTokenAsync();
+                        if (string.IsNullOrEmpty(refreshed))
+                        {
+                            // 刷新失败，导航到登录页
+                            NavigationManager.NavigateTo("/user/login", forceLoad: true);
+                        }
+                    });
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Token check error: {ex.Message}");
+        }
+    }
+
+    private void OnSessionExpired(object? sender, EventArgs e)
+    {
+        InvokeAsync(() =>
+        {
+            NavigationManager.NavigateTo("/user/login", forceLoad: true);
+        });
+    }
+
+    private static string Base64UrlDecode(string input)
+    {
+        var output = input;
+        output = output.Replace('-', '+'); // 62nd char of encoding
+        output = output.Replace('_', '/'); // 63rd char of encoding
+
+        switch (output.Length % 4) // Pad with trailing '='s
+        {
+            case 0:
+                break; // No pad chars in this case
+            case 2:
+                output += "==";
+                break; // Two pad chars
+            case 3:
+                output += "=";
+                break; // One pad char
+            default:
+                throw new ArgumentOutOfRangeException(nameof(input), "Illegal base64url string!");
+        }
+
+        var converted = Convert.FromBase64String(output); // Standard base64 decoder
+        return System.Text.Encoding.UTF8.GetString(converted);
+    }
+
+    public void Dispose()
+    {
+        _tokenCheckTimer?.Stop();
+        _tokenCheckTimer?.Dispose();
+
+        if (UserSessionService is UserSessionService userSession)
+        {
+            userSession.SessionExpired -= OnSessionExpired;
+        }
+    }
+}

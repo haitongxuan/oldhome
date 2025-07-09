@@ -2,7 +2,7 @@
 
 namespace OldHome.Wasm.Base
 {
-    public class BaseFormComponent<T> : AntDomComponentBase
+    public abstract class BasePageComponent<T> : AntDomComponentBase
         where T : BaseDto
     {
     }

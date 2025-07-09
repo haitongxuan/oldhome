@@ -1,0 +1,12 @@
+﻿@page "/user/logout"
+@inject AppAuthStateProvider AppAuthStateProvider
+@inject NavigationManager NavigationManager
+
+@code {
+    protected override async Task OnInitializedAsync()
+    {
+        // 清除用户会话
+        await AppAuthStateProvider.LogoutAsync();
+        NavigationManager.NavigateTo("/user/login", forceLoad: true);
+    }
+}
